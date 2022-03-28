@@ -1,5 +1,5 @@
-# library(readxl)
 library(qualtRics)
+library(sjlabelled)
 library(tidyverse)
 library(summarytools)
 
@@ -12,9 +12,8 @@ raw_data_file <- paste0(
 
 raw_data <- read_survey(raw_data_file)
 
-# Just get 100% completed data + remove preview
+# SCREENING for those who...
 valid_data <- raw_data %>% 
-  # SCREENING for those who...
   # are not spam
   filter(Status != "Spam") %>% 
   # completed the survey
@@ -44,11 +43,82 @@ valid_data <- raw_data %>%
     Q2, Q3, Q6, Q8, Q10, Q12, Q15
   ))
 
+# create nice variable names
+nice_labels <- tibble(
+  variable = names(valid_data),
+  qualtrics = get_label(valid_data),
+  nice = c(
+    get_label(valid_data)[1:6],
+    "Gender",
+    "Age",
+    "ASD",
+    "Country of Residence (EN)",
+    "Country of Residence (SV)",
+    "Pleasantness Attention",
+    "Pleasantness Calming",
+    "Pleasantness Gratitude",
+    "Pleasantness Happiness",
+    "Pleasantness Love",
+    "Pleasantness Sadness",
+    "CommunicationFC Attention",
+    "CommunicationFC Attention DO",
+    "CommunicationFC Calming",
+    "CommunicationFC Calming DO",
+    "CommunicationFC Gratitude",
+    "CommunicationFC Gratitude DO",
+    "CommunicationFC Happiness",
+    "CommunicationFC Happiness DO",
+    "CommunicationFC Love",
+    "CommunicationFC Love DO",
+    "CommunicationFC Sadness",
+    "CommunicationFC Sadness DO",
+    "CommunicationFT Attention",
+    "CommunicationFT Calming",
+    "CommunicationFT Gratitude",
+    "CommunicationFT Happiness",
+    "CommunicationFT Love",
+    "CommunicationFT Sadness",
+    names(valid_data)[36:161],
+    "Pleasantness DO",
+    "Communication Condition ASD",
+    "CommunicationFC DO ASD",
+    "CommunicationFT DO ASD",
+    "Communication Condition Control",
+    "CommunicationFC DO Control",
+    "CommunicationFT DO Control"
+  )) %>% 
+  mutate(nice = str_replace(
+    string = nice,
+    pattern = "Q24",
+    replacement = "AQ"
+  )) %>% 
+  mutate(nice = str_replace(
+    string = nice,
+    pattern = "Q25",
+    replacement = "BAPQ"
+  )) %>% 
+  mutate(nice = str_replace(
+    string = nice,
+    pattern = "Q26",
+    replacement = "STQ"
+  )) %>% 
+  mutate(nice = str_replace(
+    string = nice,
+    pattern = "Q29",
+    replacement = "TAS"
+  ))
+
+names(valid_data) <- nice_labels$nice
+
 # summary table
 valid_data %>% 
+  select(-contains(" DO")) %>% 
   dfSummary() %>% view
 
-
+data_folder <- "Data"
+if (!dir.exists(data_folder)) {dir.create(data_folder)}
+write_csv(valid_data, paste0(data_folder,"/valid-online-data.csv"))
+write_csv(nice_labels, paste0(data_folder,"/nice_labels.csv"))
 
 # Create functions that replace value with 1 or 0
 replace1_2 <- function(x) {
