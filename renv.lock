@@ -436,6 +436,13 @@
       "Repository": "CRAN",
       "Hash": "99df65cfef20e525ed38c3d2577f7190"
     },
+    "insight": {
+      "Package": "insight",
+      "Version": "0.16.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "644277ecf3273b961046cdace55c39e9"
+    },
     "isoband": {
       "Package": "isoband",
       "Version": "0.2.4",
@@ -721,6 +728,13 @@
       "Repository": "CRAN",
       "Hash": "97def703420c8ab10d8f0e6c72101e02"
     },
+    "qualtRics": {
+      "Package": "qualtRics",
+      "Version": "3.1.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a95da7b0423269e1243b500b33e7d70f"
+    },
     "quantreg": {
       "Package": "quantreg",
       "Version": "5.86",
@@ -846,6 +860,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
+    },
+    "sjlabelled": {
+      "Package": "sjlabelled",
+      "Version": "1.1.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "60437c5938a8d6abb1ac3b530bab024e"
     },
     "sp": {
       "Package": "sp",
