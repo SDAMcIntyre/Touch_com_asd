@@ -14,6 +14,12 @@ extract_touches <- function(x) {
   tolower(output)
 }
 
+open_plot_window <- function(width = 7, height = 7, ...) {
+  if (.Platform$OS.type == "unix") {
+    quartz(width = width, height = height); plot(1:10)
+  }  else { windows(width = width, height = height) }
+}
+
 #### read in data ####
 valid_data <- read_csv("Data/private/online_valid-data.csv") 
 
@@ -36,7 +42,7 @@ recoded_data <- valid_data %>%
     `Duration (in hours)` = `Duration (in seconds)`/(60*60)
   ) %>% 
   
-  #### nice language response labels  #### 
+  ####. nice language response labels  #### 
   mutate(
     `User Language` = case_when(
       `User Language` == "EN" ~ "English",
@@ -136,10 +142,7 @@ recoded_data %>%
   mutate(`End Difference` = `Recorded Date` - `End Date`) %>% 
   ggplot(aes(x = `End Difference`)) + geom_histogram()
 
-figsize <- c(4.6,3.9)
-if (.Platform$OS.type == "unix") {
-  quartz(width = figsize[1], height = figsize[2]); plot(1:10)
-}  else { windows(width = figsize[1], height = figsize[2]) }
+open_plot_window(width = 4.6, height = 3.9)
 
 recoded_data %>% 
   ggplot(aes(x = `Recorded Date`)) + 
@@ -162,9 +165,7 @@ recoded_data %>%
 
 ####  demographics  #### 
 
-if (.Platform$OS.type == "unix") {
-  quartz(); plot(1:10)
-}  else { windows() }
+open_plot_window()
 
 recoded_data %>% 
   ggplot() +
