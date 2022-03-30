@@ -34,7 +34,9 @@ valid_data <- raw_data %>%
   filter(Q12 == "No") %>% 
   # can see the video
   filter(Q15 == "Yes") %>% 
-  # remove variables used for screening
+  # answered the question about ASD
+  filter(!is.na(Q20)) %>% 
+  # remove variables used for screening (except ASD)
   select(-c(
     Status,
     Progress,
