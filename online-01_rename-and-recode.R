@@ -81,7 +81,7 @@ nice_labels <- tibble(
     "CommunicationFT Love",
     "CommunicationFT Sadness",
     names(valid_data)[36:161],
-    "Pleasantness DO",
+    "Pleasantness Display Order",
     "Communication Condition ASD",
     "CommunicationFC DO ASD",
     "CommunicationFT DO ASD",
@@ -111,6 +111,66 @@ nice_labels <- tibble(
   ))
 
 names(valid_data) <- nice_labels$nice
+
+valid_data %>% 
+  
+  # nice language response labels
+  mutate(
+    `User Language` = case_when(
+      `User Language` == "EN" ~ "English",
+      `User Language` == "SV" ~ "Swedish"
+    )
+    ) %>% 
+  
+  # nice country of residence names
+  mutate(
+    `Country of Residence` = coalesce(
+      `Country of Residence (EN)`, 
+      `Country of Residence (SV)`
+    )) %>% 
+  select(-c(`Country of Residence (EN)`, `Country of Residence (SV)`)) %>% 
+  mutate(
+    `Country of Residence` = case_when(
+      `Country of Residence` == "Sverige" ~ "Sweden",
+      `Country of Residence` == "United Kingdom of Great Britain and Northern Ireland" ~ "UK",
+      `Country of Residence` == "United States of America" ~ "USA",
+      TRUE ~ `Country of Residence`
+    )) %>% 
+  
+  # make group variable from ASD question
+  mutate(
+    group = case_when(
+      ASD == "Yes" ~ "ASD",
+      ASD == "No" ~ "Control"
+    ) 
+  ) %>% 
+  select(-c(ASD)) %>% 
+  
+  # make variable for which task they were assigned
+  mutate(
+    `Communication Task` = coalesce(
+      `Communication Condition ASD`,
+      `Communication Condition Control`
+    )) %>% 
+  select(-starts_with("Communication Condition")) %>% 
+  mutate(`Communication Task` = case_when(
+    str_detect(`Communication Task`, "FL_(40|29)") ~ "Forced Choice", 
+    str_detect(`Communication Task`, "FL_(36|30)") ~ "Free Text" 
+  )) %>% 
+  
+  # make single variable for display order (qualtrics gives separate variables for group and Task)
+  mutate(
+    `Communication Display Order` = coalesce(
+      `CommunicationFC DO ASD`,
+      `CommunicationFT DO ASD`,
+      `CommunicationFC DO Control`,
+      `CommunicationFT DO Control`
+    )) %>% 
+  select(-matches("Communication.{2} DO .+")) %>% View()
+
+
+# "Pleasantness DO",
+
 
 # summary table
 valid_data %>% 
