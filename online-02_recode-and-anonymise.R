@@ -57,12 +57,36 @@ sum_BAPQ <- function(x, reversed = FALSE) {
   }  
 }
 
+sum_STQ <- function(x, reversed = FALSE) {
+  recoded_scores <- case_when(
+    x == "not at all" ~ 0,
+    x == "slightly" ~ 1,
+    x == "moderately" ~ 2,
+    x == "very" ~ 3,
+    x == "extremely" ~ 4
+  )
+  
+  if (reversed) {
+    return(sum(6-recoded_scores))
+  } else {
+    return(sum(recoded_scores))
+  }
+}
+
 to_regex_AQ <- function(x) {
   to_regex(paste0("^AQ_",x,"$"))
 }
 
 to_regex_BAPQ <- function(x) {
   to_regex(paste0("^BAPQ_",x,"$"))
+}
+
+qvars_to_regex <- function(x, q_prefix) {
+  to_regex(paste0(
+    "^", q_prefix,
+    "_",
+    x, "$"
+  ))
 }
 
 #### global variables ####
@@ -75,6 +99,9 @@ BAPQ_VARS_REGULAR <- setdiff(1:36, BAPQ_VARS_REVERSED)
 BAPQ_VARS_ALOOF <- c(1, 5, 9, 12, 16, 18, 23, 25, 27, 28, 31, 36)
 BAPQ_VARS_PRAGLANG <- c(2, 4, 7, 10, 11, 14, 17, 20, 21, 29, 32, 34)
 BAPQ_VARS_RIGID <- c(3, 6, 8, 13, 15, 19, 22, 24, 26, 30, 33, 35)
+
+STQ_VARS_REVERSED <- c(1,4,6,9,11,12,14,15,18,20)
+STQ_VARS_REGULAR  <- setdiff(1:20, STQ_VARS_REVERSED)
 
 #### read in data ####
 valid_data <- read_csv("Data/private/online_valid-data.csv") 
@@ -192,9 +219,6 @@ recoded_data_comm <- recoded_data_indep %>%
 
 ####.. AQ ####
 
-recoded_data_comm %>% 
-  select(matches(to_regex_AQ(AQ_VARS_REGULAR)))
-
 recoded_data_aq <- recoded_data_comm %>% 
   rowwise() %>% 
   mutate(
@@ -287,11 +311,27 @@ recoded_data_bapq <- recoded_data_aq %>%
   select(-matches("^BAPQ_[0-9]+$")) # remove raw BAPQ responses for added privacy
 
 
-# function for reversing scores on STQ
-reversedSTQ <- function(x) {
-  x=6-x
-}
+####.. STQ ####
 
+recoded_data_stq <- recoded_data_bapq %>% 
+  rowwise() %>% 
+  mutate(
+    STQ_n_missing = sum(is.na(c_across(starts_with("STQ")))),
+    
+    STQ_total = sum_STQ(
+      c_across(matches(qvars_to_regex(STQ_VARS_REGULAR, "STQ"))),
+      reversed = FALSE
+    ) +
+      sum_STQ(
+        c_across(matches(qvars_to_regex(STQ_VARS_REVERSED, "STQ"))),
+        reversed = TRUE
+      )
+  ) %>% 
+  select(-matches("^STQ_[0-9]+$")) # remove raw STQ responses for added privacy
+
+# check missing responses
+recoded_data_stq %>% 
+  group_by(group,STQ_n_missing) %>% tally()
 
 
 ####  survey date / time data  #### 
