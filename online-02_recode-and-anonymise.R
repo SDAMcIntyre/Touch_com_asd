@@ -25,13 +25,56 @@ open_plot_window <- function(width = 7, height = 7, ...) {
   }  else { windows(width = width, height = height) }
 }
 
-count_pattern <- function(x, pattern) {
-  sum(if_else(
-    condition = str_detect(x, pattern),
-    true = 1,
-    false = 0
-  ))
+sum_AQ <- function(x, reversed = FALSE) {
+  recoded_scores <- case_when(
+    x == "definitely agree" ~ 1,
+    x == "slightly agree" ~ 1,
+    x == "slightly disagree" ~ 0,
+    x == "definitely disagree" ~ 0
+  )
+  
+  if (reversed) {
+    return(sum(1-recoded_scores))
+  } else {
+    return(sum(recoded_scores))
+  }
 }
+
+sum_BAPQ <- function(x, reversed = FALSE) {
+  recoded_scores <- case_when(
+    x == "Very rarely" ~ 1,
+    x == "Rarely" ~ 2,
+    x == "Occasionally" ~ 3,
+    x == "Somewhat often" ~ 4,
+    x == "Often" ~ 5,
+    x == "Very often" ~ 6
+  )
+  
+  if (reversed) {
+    return(sum(7-recoded_scores))
+  } else {
+    return(sum(recoded_scores))
+  }  
+}
+
+to_regex_AQ <- function(x) {
+  to_regex(paste0("^AQ_",x,"$"))
+}
+
+to_regex_BAPQ <- function(x) {
+  to_regex(paste0("^BAPQ_",x,"$"))
+}
+
+#### global variables ####
+
+AQ_VARS_REGULAR <- c(2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46)
+AQ_VARS_REVERSED <- c(1,3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50)
+
+BAPQ_VARS_REVERSED <- c(1, 3, 7, 9, 12, 15, 16, 19, 21, 23, 25, 28, 30, 34, 36)
+BAPQ_VARS_REGULAR <- setdiff(1:36, BAPQ_VARS_REVERSED)
+BAPQ_VARS_ALOOF <- c(1, 5, 9, 12, 16, 18, 23, 25, 27, 28, 31, 36)
+BAPQ_VARS_PRAGLANG <- c(2, 4, 7, 10, 11, 14, 17, 20, 21, 29, 32, 34)
+BAPQ_VARS_RIGID <- c(3, 6, 8, 13, 15, 19, 22, 24, 26, 30, 33, 35)
 
 #### read in data ####
 valid_data <- read_csv("Data/private/online_valid-data.csv") 
@@ -149,24 +192,21 @@ recoded_data_comm <- recoded_data_indep %>%
 
 ####.. AQ ####
 
-AQ_score_agree <- c(2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46)
-AQ_agree_regex <- to_regex(paste0("^AQ_",AQ_score_agree,"$"))
-
-AQ_score_disagree <- c(1,3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50)
-AQ_disagree_regex <- to_regex(paste0("^AQ_",AQ_score_disagree,"$"))
-
+recoded_data_comm %>% 
+  select(matches(to_regex_AQ(AQ_VARS_REGULAR)))
 
 recoded_data_aq <- recoded_data_comm %>% 
   rowwise() %>% 
   mutate(
     AQ_n_missing = sum(is.na(c_across(starts_with("AQ_")))),
-    AQ_total = count_pattern(
-      c_across(matches(AQ_agree_regex)),
-      " agree"
+    
+    AQ_total = sum_AQ(
+      c_across(matches(to_regex_AQ(AQ_VARS_REGULAR))),
+      reversed = FALSE
     ) +
-      count_pattern(
-        c_across(matches(AQ_disagree_regex)),
-        " disagree"
+      sum_AQ(
+        c_across(matches(to_regex_AQ(AQ_VARS_REVERSED))),
+        reversed = TRUE
       )
   ) %>% 
   select(-matches("^AQ_[0-9]+$")) # remove raw AQ responses for added privacy
@@ -174,40 +214,8 @@ recoded_data_aq <- recoded_data_comm %>%
 # check missing responses
 recoded_data_aq %>% 
   group_by(group,AQ_n_missing) %>% tally()
-  
 
-AQ_score_agree <- c(2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46)
-AQ_agree_regex <- to_regex(paste0("^AQ_",AQ_score_agree,"$"))
-
-AQ_score_disagree <- c(1,3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50)
-AQ_disagree_regex <- to_regex(paste0("^AQ_",AQ_score_disagree,"$"))
-
-sum_BAPQ <- function(x, reversed = FALSE) {
-  recoded_scores <- case_when(
-    x == "Very rarely" ~ 1,
-    x == "Rarely" ~ 2,
-    x == "Occasionally" ~ 3,
-    x == "Somewhat often" ~ 4,
-    x == "Often" ~ 5,
-    x == "Very often" ~ 6
-  )
-  
-  if (reversed) {
-    return(sum(7-recoded_scores))
-  } else {
-    return(sum(recoded_scores))
-    }  
-}
-
-to_regex_BAPQ <- function(x) {
-  to_regex(paste0("^BAPQ_",x,"$"))
-}
-
-BAPQ_score_reversed <- c(1, 3, 7, 9, 12, 15, 16, 19, 21, 23, 25, 28, 30, 34, 36)
-BAPQ_score_regular <- setdiff(1:36, BAPQ_score_reversed)
-BAPQ_score_Aloof <- c(1, 5, 9, 12, 16, 18, 23, 25, 27, 28, 31, 36)
-BAPQ_score_PragLang <- c(2, 4, 7, 10, 11, 14, 17, 20, 21, 29, 32, 34)
-BAPQ_score_Rigid <- c(3, 6, 8, 13, 15, 19, 22, 24, 26, 30, 33, 35)
+####.. BAPQ ####
 
 recoded_data_bapq <- recoded_data_aq %>% 
   rowwise() %>% 
@@ -217,13 +225,13 @@ recoded_data_bapq <- recoded_data_aq %>%
     # total
     BAPQ_total = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_score_regular))
+        matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
         ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_score_reversed))
+          matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
           ),
         reversed = TRUE
       ),
@@ -231,15 +239,15 @@ recoded_data_bapq <- recoded_data_aq %>%
     # subscale aloof
     BAPQ_sub_Aloof = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_score_Aloof)) &
-          matches(to_regex_BAPQ(BAPQ_score_regular))
+        matches(to_regex_BAPQ(BAPQ_VARS_ALOOF)) &
+          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_score_Aloof)) &
-            matches(to_regex_BAPQ(BAPQ_score_reversed))
+          matches(to_regex_BAPQ(BAPQ_VARS_ALOOF)) &
+            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
         ),
         reversed = TRUE
       ),
@@ -247,15 +255,15 @@ recoded_data_bapq <- recoded_data_aq %>%
     #subscale pragmatic language
     BAPQ_sub_PragLang = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_score_PragLang)) &
-          matches(to_regex_BAPQ(BAPQ_score_regular))
+        matches(to_regex_BAPQ(BAPQ_VARS_PRAGLANG)) &
+          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_score_PragLang)) &
-            matches(to_regex_BAPQ(BAPQ_score_reversed))
+          matches(to_regex_BAPQ(BAPQ_VARS_PRAGLANG)) &
+            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
         ),
         reversed = TRUE
       ),
@@ -263,15 +271,15 @@ recoded_data_bapq <- recoded_data_aq %>%
     # subscale rigid
     BAPQ_sub_Rigid = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_score_Rigid)) &
-          matches(to_regex_BAPQ(BAPQ_score_regular))
+        matches(to_regex_BAPQ(BAPQ_VARS_RIGID)) &
+          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_score_Rigid)) &
-            matches(to_regex_BAPQ(BAPQ_score_reversed))
+          matches(to_regex_BAPQ(BAPQ_VARS_RIGID)) &
+            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
         ),
         reversed = TRUE
       )          
