@@ -73,14 +73,6 @@ sum_STQ <- function(x, reversed = FALSE) {
   }
 }
 
-to_regex_AQ <- function(x) {
-  to_regex(paste0("^AQ_",x,"$"))
-}
-
-to_regex_BAPQ <- function(x) {
-  to_regex(paste0("^BAPQ_",x,"$"))
-}
-
 qvars_to_regex <- function(x, q_prefix) {
   to_regex(paste0(
     "^", q_prefix,
@@ -192,8 +184,8 @@ recoded_data_indep <- recoded_data_demog %>%
   select(-starts_with("Communication Condition")) %>% 
   mutate(
     `Communication Task` = case_when(
-      str_detect(`Communication Task`, "FL_(40|29)") ~ "Forced Choice", 
-      str_detect(`Communication Task`, "FL_(36|30)") ~ "Free Text"
+      str_detect(`Communication Task`, "FL_(40|29)") ~ "forced choice", 
+      str_detect(`Communication Task`, "FL_(36|30)") ~ "free text"
       )
     ) %>% 
   
@@ -222,14 +214,14 @@ recoded_data_comm <- recoded_data_indep %>%
 recoded_data_aq <- recoded_data_comm %>% 
   rowwise() %>% 
   mutate(
-    AQ_n_missing = sum(is.na(c_across(starts_with("AQ_")))),
+    AQ_n_missing = sum(is.na(c_across(starts_with("AQ")))),
     
     AQ_total = sum_AQ(
-      c_across(matches(to_regex_AQ(AQ_VARS_REGULAR))),
+      c_across(matches(qvars_to_regex(AQ_VARS_REGULAR, "AQ"))),
       reversed = FALSE
     ) +
       sum_AQ(
-        c_across(matches(to_regex_AQ(AQ_VARS_REVERSED))),
+        c_across(matches(qvars_to_regex(AQ_VARS_REVERSED, "AQ"))),
         reversed = TRUE
       )
   ) %>% 
@@ -244,18 +236,18 @@ recoded_data_aq %>%
 recoded_data_bapq <- recoded_data_aq %>% 
   rowwise() %>% 
   mutate(
-    BAPQ_n_missing = sum(is.na(c_across(starts_with("BAPQ_")))),
+    BAPQ_n_missing = sum(is.na(c_across(starts_with("BAPQ")))),
     
     # total
     BAPQ_total = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
+        matches(qvars_to_regex(BAPQ_VARS_REGULAR,"BAPQ"))
         ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
+          matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
           ),
         reversed = TRUE
       ),
@@ -263,15 +255,15 @@ recoded_data_bapq <- recoded_data_aq %>%
     # subscale aloof
     BAPQ_sub_Aloof = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_VARS_ALOOF)) &
-          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
+        matches(qvars_to_regex(BAPQ_VARS_ALOOF,"BAPQ")) &
+          matches(qvars_to_regex(BAPQ_VARS_REGULAR,"BAPQ"))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_VARS_ALOOF)) &
-            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
+          matches(qvars_to_regex(BAPQ_VARS_ALOOF,"BAPQ")) &
+            matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
         ),
         reversed = TRUE
       ),
@@ -279,15 +271,15 @@ recoded_data_bapq <- recoded_data_aq %>%
     #subscale pragmatic language
     BAPQ_sub_PragLang = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_VARS_PRAGLANG)) &
-          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
+        matches(qvars_to_regex(BAPQ_VARS_PRAGLANG,"BAPQ")) &
+          matches(qvars_to_regex(BAPQ_VARS_REGULAR,"BAPQ"))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_VARS_PRAGLANG)) &
-            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
+          matches(qvars_to_regex(BAPQ_VARS_PRAGLANG,"BAPQ")) &
+            matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
         ),
         reversed = TRUE
       ),
@@ -295,21 +287,24 @@ recoded_data_bapq <- recoded_data_aq %>%
     # subscale rigid
     BAPQ_sub_Rigid = sum_BAPQ(
       c_across(
-        matches(to_regex_BAPQ(BAPQ_VARS_RIGID)) &
-          matches(to_regex_BAPQ(BAPQ_VARS_REGULAR))
+        matches(qvars_to_regex(BAPQ_VARS_RIGID,"BAPQ")) &
+          matches(qvars_to_regex(BAPQ_VARS_REGULAR,"BAPQ"))
       ),
       reversed = FALSE
     ) +
       sum_BAPQ(
         c_across(
-          matches(to_regex_BAPQ(BAPQ_VARS_RIGID)) &
-            matches(to_regex_BAPQ(BAPQ_VARS_REVERSED))
+          matches(qvars_to_regex(BAPQ_VARS_RIGID,"BAPQ")) &
+            matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
         ),
         reversed = TRUE
       )          
   ) %>% 
   select(-matches("^BAPQ_[0-9]+$")) # remove raw BAPQ responses for added privacy
 
+# check missing responses
+recoded_data_bapq %>% 
+  group_by(group,BAPQ_n_missing) %>% tally()
 
 ####.. STQ ####
 
