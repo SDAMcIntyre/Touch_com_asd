@@ -2,9 +2,14 @@ library(tidyverse)
 library(summarytools)
 
 #### functions ####
+
+to_regex <- function(x) {
+  paste0('(', paste(x, collapse = ')|('), ')')
+}
+
 extract_touches <- function(x) {
   x_labels <- c("ATTENTION", "CALMING", "GRATITUDE", "HAPPINESS", "LOVE", "SADNESS", "something else")
-  x_regex <- paste0('(', paste(x_labels, collapse = ')|('), ')')
+  x_regex <- to_regex(x_labels)
   extracted <- str_extract(x, x_regex)
   output <- str_replace(
     extracted, 
@@ -20,14 +25,23 @@ open_plot_window <- function(width = 7, height = 7, ...) {
   }  else { windows(width = width, height = height) }
 }
 
+count_pattern <- function(x, pattern) {
+  sum(if_else(
+    condition = str_detect(x, pattern),
+    true = 1,
+    false = 0
+  ))
+}
+
 #### read in data ####
 valid_data <- read_csv("Data/private/online_valid-data.csv") 
 
 #### recode data   #### 
 
-recoded_data <- valid_data %>% 
+####. survey variables   #### 
+recoded_data_survey <- valid_data %>% 
   
-  ####. remove variables used for screening (except ASD) ####
+  # remove screening variables (except ASD)
   select(-c(
     `Response Type`,
     Progress,
@@ -36,13 +50,16 @@ recoded_data <- valid_data %>%
     starts_with("Screen")
   )) %>% 
   
-  ####. add minutes/hours duration data   #### 
+  # add minutes/hours duration data 
   mutate(
     `Duration (in minutes)` = `Duration (in seconds)`/60,
     `Duration (in hours)` = `Duration (in seconds)`/(60*60)
-  ) %>% 
+  )
+
+####. demographics variables   #### 
+recoded_data_demog <- recoded_data_survey %>% 
   
-  ####. nice language response labels  #### 
+  # nice language response labels
   mutate(
     `User Language` = case_when(
       `User Language` == "EN" ~ "English",
@@ -50,7 +67,7 @@ recoded_data <- valid_data %>%
       )
     ) %>% 
   
-  ####. nice country of residence names  #### 
+  # nice country of residence names
   mutate(
     `Country of Residence` = coalesce(
       `Country of Residence (EN)`, 
@@ -67,7 +84,26 @@ recoded_data <- valid_data %>%
       )
     ) %>% 
   
-  ####. make group variable from ASD question  #### 
+  # collapse age into bins
+mutate(
+  `Age Group` = case_when(
+    between(Age, 16, 20) ~ '16 - 20',
+    between(Age, 21, 25) ~ '20 - 25',
+    between(Age, 26, 30) ~ '26 - 30',
+    between(Age, 31, 35) ~ '31 - 35',
+    between(Age, 36, 40) ~ '36 - 40'
+  ),
+  `Age Cohort` = case_when(
+    between(Age, 16, 17) ~ "Youth (16 - 17)",
+    between(Age, 18, 40) ~ "Adult (18 - 40)"
+  )
+) %>% 
+  select(-c(Age)) # remove exact age for improved privacy
+
+####. main independent variables   #### 
+recoded_data_indep <- recoded_data_demog %>% 
+  
+  # make group variable from ASD question
   mutate(
     group = case_when(
       ASD == "Yes" ~ "ASD",
@@ -76,7 +112,7 @@ recoded_data <- valid_data %>%
   ) %>% 
   select(-c(ASD)) %>% 
   
-  ####. make task variable for which comm task they were assigned  #### 
+  # make task variable for which comm task they were assigned
   mutate(
     `Communication Task` = coalesce(
       `Communication Condition ASD`,
@@ -91,40 +127,69 @@ recoded_data <- valid_data %>%
       )
     ) %>% 
   
-  ####. make single variable for display order (qualtrics gives separate variables for group and Task)  #### 
+  # make single variable for display order (qualtrics gives separate variables for group and Task
   mutate(
-    `Communication Display Order` = coalesce(
+    `Communication DO` = coalesce(
       `CommunicationFC DO ASD`,
       `CommunicationFT DO ASD`,
       `CommunicationFC DO Control`,
       `CommunicationFT DO Control`
       )
     ) %>% 
-  select(-matches("Communication.{2} DO .+")) %>% 
-  
-  ####. collapse age into bins   #### 
-  mutate(
-    `Age Group` = case_when(
-      between(Age, 16, 20) ~ '16 - 20',
-      between(Age, 21, 25) ~ '20 - 25',
-      between(Age, 26, 30) ~ '26 - 30',
-      between(Age, 31, 35) ~ '31 - 35',
-      between(Age, 36, 40) ~ '36 - 40'
-    ),
-    `Age Cohort` = case_when(
-      between(Age, 16, 17) ~ "Youth (16 - 17)",
-      between(Age, 18, 40) ~ "Adult (18 - 40)"
-    )
-      ) %>% 
-  # select(-c(Age)) %>% # remove exact age for improved privacy
+  select(-matches("Communication.{2} DO .+")) 
 
-  ####. recode communication forced choice responses ####
+####. main dependent variables ####
+
+####.. communication forced choice responses ####
+recoded_data_comm <- recoded_data_indep %>% 
+  mutate(across(
+    .cols = matches("CommunicationFC .+") & !ends_with('DO'),
+    .fns = extract_touches
+    )) 
+
+####.. AQ ####
+
+AQ_score_agree <- c(2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46)
+AQ_agree_regex <- to_regex(paste0("^AQ_",AQ_score_agree,"$"))
+
+AQ_score_disagree <- c(1,3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50)
+AQ_disagree_regex <- to_regex(paste0("^AQ_",AQ_score_disagree,"$"))
+
+
+recoded_data_aq <- recoded_data_comm %>% 
+  rowwise() %>% 
   mutate(
-    across(
-      .cols = matches("CommunicationFC .+") & !ends_with('DO'),
-      .fns = extract_touches
-    )
-  ) 
+    AQ_n_missing = sum(is.na(c_across(starts_with("AQ_")))),
+    AQ_total = count_pattern(
+      c_across(matches(AQ_agree_regex)),
+      " agree"
+    ) +
+      count_pattern(
+        c_across(matches(AQ_disagree_regex)),
+        " disagree"
+      )
+  ) %>% 
+  select(-matches("^AQ_[0-9]+$")) # remove raw AQ responses for added privacy
+
+# check missing responses
+recoded_data_aq %>% 
+  group_by(group,AQ_n_missing) %>% tally()
+  
+  
+
+
+
+# function for reversing scores on BAPQ
+reversedBAPQ <- function(x) {
+  x=7-x
+}
+
+# function for reversing scores on STQ
+reversedSTQ <- function(x) {
+  x=6-x
+}
+
+
 
 ####  survey date / time data  #### 
 
