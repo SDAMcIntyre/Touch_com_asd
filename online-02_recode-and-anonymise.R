@@ -175,14 +175,109 @@ recoded_data_aq <- recoded_data_comm %>%
 recoded_data_aq %>% 
   group_by(group,AQ_n_missing) %>% tally()
   
+
+AQ_score_agree <- c(2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46)
+AQ_agree_regex <- to_regex(paste0("^AQ_",AQ_score_agree,"$"))
+
+AQ_score_disagree <- c(1,3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50)
+AQ_disagree_regex <- to_regex(paste0("^AQ_",AQ_score_disagree,"$"))
+
+sum_BAPQ <- function(x, reversed = FALSE) {
+  recoded_scores <- case_when(
+    x == "Very rarely" ~ 1,
+    x == "Rarely" ~ 2,
+    x == "Occasionally" ~ 3,
+    x == "Somewhat often" ~ 4,
+    x == "Often" ~ 5,
+    x == "Very often" ~ 6
+  )
   
-
-
-
-# function for reversing scores on BAPQ
-reversedBAPQ <- function(x) {
-  x=7-x
+  if (reversed) {
+    return(sum(7-recoded_scores))
+  } else {
+    return(sum(recoded_scores))
+    }  
 }
+
+to_regex_BAPQ <- function(x) {
+  to_regex(paste0("^BAPQ_",x,"$"))
+}
+
+BAPQ_score_reversed <- c(1, 3, 7, 9, 12, 15, 16, 19, 21, 23, 25, 28, 30, 34, 36)
+BAPQ_score_regular <- setdiff(1:36, BAPQ_score_reversed)
+BAPQ_score_Aloof <- c(1, 5, 9, 12, 16, 18, 23, 25, 27, 28, 31, 36)
+BAPQ_score_PragLang <- c(2, 4, 7, 10, 11, 14, 17, 20, 21, 29, 32, 34)
+BAPQ_score_Rigid <- c(3, 6, 8, 13, 15, 19, 22, 24, 26, 30, 33, 35)
+
+recoded_data_bapq <- recoded_data_aq %>% 
+  rowwise() %>% 
+  mutate(
+    BAPQ_n_missing = sum(is.na(c_across(starts_with("BAPQ_")))),
+    
+    # total
+    BAPQ_total = sum_BAPQ(
+      c_across(
+        matches(to_regex_BAPQ(BAPQ_score_regular))
+        ),
+      reversed = FALSE
+    ) +
+      sum_BAPQ(
+        c_across(
+          matches(to_regex_BAPQ(BAPQ_score_reversed))
+          ),
+        reversed = TRUE
+      ),
+    
+    # subscale aloof
+    BAPQ_sub_Aloof = sum_BAPQ(
+      c_across(
+        matches(to_regex_BAPQ(BAPQ_score_Aloof)) &
+          matches(to_regex_BAPQ(BAPQ_score_regular))
+      ),
+      reversed = FALSE
+    ) +
+      sum_BAPQ(
+        c_across(
+          matches(to_regex_BAPQ(BAPQ_score_Aloof)) &
+            matches(to_regex_BAPQ(BAPQ_score_reversed))
+        ),
+        reversed = TRUE
+      ),
+    
+    #subscale pragmatic language
+    BAPQ_sub_PragLang = sum_BAPQ(
+      c_across(
+        matches(to_regex_BAPQ(BAPQ_score_PragLang)) &
+          matches(to_regex_BAPQ(BAPQ_score_regular))
+      ),
+      reversed = FALSE
+    ) +
+      sum_BAPQ(
+        c_across(
+          matches(to_regex_BAPQ(BAPQ_score_PragLang)) &
+            matches(to_regex_BAPQ(BAPQ_score_reversed))
+        ),
+        reversed = TRUE
+      ),
+    
+    # subscale rigid
+    BAPQ_sub_Rigid = sum_BAPQ(
+      c_across(
+        matches(to_regex_BAPQ(BAPQ_score_Rigid)) &
+          matches(to_regex_BAPQ(BAPQ_score_regular))
+      ),
+      reversed = FALSE
+    ) +
+      sum_BAPQ(
+        c_across(
+          matches(to_regex_BAPQ(BAPQ_score_Rigid)) &
+            matches(to_regex_BAPQ(BAPQ_score_reversed))
+        ),
+        reversed = TRUE
+      )          
+  ) %>% 
+  select(-matches("^BAPQ_[0-9]+$")) # remove raw BAPQ responses for added privacy
+
 
 # function for reversing scores on STQ
 reversedSTQ <- function(x) {
