@@ -67,7 +67,7 @@ sum_STQ <- function(x, reversed = FALSE) {
   )
   
   if (reversed) {
-    return(sum(6-recoded_scores))
+    return(sum(4-recoded_scores))
   } else {
     return(sum(recoded_scores))
   }
@@ -122,8 +122,8 @@ valid_data <- read_csv("Data/private/online_valid-data.csv")
 
 #### recode data   #### 
 
-####. survey variables   #### 
-recoded_data_survey <- valid_data %>% 
+####. qualtrics variables   #### 
+recoded_data_qualtrics <- valid_data %>% 
   
   # remove screening variables (except ASD)
   select(-c(
@@ -141,11 +141,11 @@ recoded_data_survey <- valid_data %>%
   )
 
 ####. demographics variables   #### 
-recoded_data_demog <- recoded_data_survey %>% 
+recoded_data_demog <- recoded_data_qualtrics %>% 
   
   # nice language response labels
   mutate(
-    `User Language` = case_when(
+    Language = case_when(
       `User Language` == "EN" ~ "English",
       `User Language` == "SV" ~ "Swedish"
       )
@@ -420,6 +420,18 @@ recoded_data_tas <- recoded_data_stq %>%
 
 recoded_data_tas %>% 
   group_by(group, TAS_n_missing) %>% tally()
+
+#### missing questionnaire responses ####
+data_folder <- "Data/"
+if (!dir.exists(data_folder)) {dir.create(data_folder)}
+recoded_data_tas %>% 
+  select(`Response ID`, group, `User Language`, `Country of Residence`, contains("n_missing")) %>% 
+  rowwise() %>% 
+  mutate(total_n_missing = sum(c_across(contains("n_missing")))) %>% 
+  filter(total_n_missing > 0) %>%
+  select(-total_n_missing) %>% 
+  arrange(group, -across(contains("n_missing"))) %>% 
+  write_csv(paste0(data_folder, "online_missing_questionnaire_responses.csv"))
 
 ####  survey date / time data  #### 
 
