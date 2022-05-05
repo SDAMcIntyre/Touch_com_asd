@@ -79,7 +79,7 @@ recoded_data_demog <- valid_data %>%
 mutate(
   `Age Group` = case_when(
     between(Age, 16, 20) ~ '16 - 20',
-    between(Age, 21, 25) ~ '20 - 25',
+    between(Age, 21, 25) ~ '21 - 25',
     between(Age, 26, 30) ~ '26 - 30',
     between(Age, 31, 35) ~ '31 - 35',
     between(Age, 36, 40) ~ '36 - 40'
