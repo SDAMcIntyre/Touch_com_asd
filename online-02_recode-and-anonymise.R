@@ -1,5 +1,4 @@
 library(tidyverse)
-library(summarytools)
 
 # source all .R files in the Rfunctions directory
 sapply(list.files("Rfunctions", full.names = TRUE), source)
@@ -193,6 +192,7 @@ data_demog <- valid_data %>%
     PID,
     Language,
     `Country of Residence`,
+    Gender,
     `Age Group`,
     `Age Cohort`
   )
