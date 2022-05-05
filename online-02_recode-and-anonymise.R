@@ -32,23 +32,24 @@ valid_data <- read_csv("Data/private/online_valid-data.csv")
 ####. qualtrics variables   #### 
 recoded_data_qualtrics <- valid_data %>% 
   
-  # remove screening variables (except ASD)
-  select(-c(
-    `Response Type`,
-    Progress,
-    `Distribution Channel`,
-    Finished,
-    starts_with("Screen")
-  )) %>% 
-  
   # add minutes/hours duration data 
   mutate(
-    `Duration (in minutes)` = `Duration (in seconds)`/60,
-    `Duration (in hours)` = `Duration (in seconds)`/(60*60)
-  )
+    `Duration (minutes)` = `Duration (in seconds)`/60,
+    `Duration (hours)` = `Duration (in seconds)`/(60*60)
+  ) %>% 
+  
+  # keep qualtrics variables
+  select(c(
+    PID,
+    `Start Date`,
+    `End Date`,
+    `Recorded Date`,
+    `Duration (minutes)`,
+    `Duration (hours)`
+    ))
 
 ####. demographics variables   #### 
-recoded_data_demog <- recoded_data_qualtrics %>% 
+recoded_data_demog <- valid_data %>% 
   
   # nice language response labels
   mutate(
@@ -65,7 +66,6 @@ recoded_data_demog <- recoded_data_qualtrics %>%
       `Country of Residence (SV)`
       )
     ) %>% 
-  select(-c(`Country of Residence (EN)`, `Country of Residence (SV)`)) %>% 
   mutate(
     `Country of Residence` = case_when(
       `Country of Residence` == "Sverige" ~ "Sweden",
@@ -89,10 +89,18 @@ mutate(
     between(Age, 18, 40) ~ "Adult (18 - 40)"
   )
 ) %>% 
-  select(-c(Age)) # remove exact age for improved privacy
+  
+  # keep demographics variables
+  select(
+    PID,
+    Language,
+    `Country of Residence`,
+    `Age Group`,
+    `Age Cohort`
+  )
 
 ####. main independent variables   #### 
-recoded_data_indep <- recoded_data_demog %>% 
+recoded_data_indep <- valid_data %>% 
   
   # make group variable from ASD question
   mutate(
@@ -101,8 +109,7 @@ recoded_data_indep <- recoded_data_demog %>%
       ASD == "No" ~ "Control"
     ) 
   ) %>% 
-  select(-c(ASD)) %>% 
-  
+
   # make task variable for which comm task they were assigned
   mutate(
     `Communication Task` = coalesce(
@@ -118,29 +125,46 @@ recoded_data_indep <- recoded_data_demog %>%
       )
     ) %>% 
   
-  # make single variable for display order (qualtrics gives separate variables for group and Task
+  # keep independent variables
+  select(c(
+    PID,
+    group,
+    `Communication Task`
+  ))
+
+
+####. main dependent variables ####
+
+####.. communication forced choice responses ####
+recoded_data_comm <- valid_data %>% 
+  
+  # make single variable for display order (qualtrics gives separate variables for group and Task)
   mutate(
     `Communication DO` = coalesce(
       `CommunicationFC DO ASD`,
       `CommunicationFT DO ASD`,
       `CommunicationFC DO Control`,
       `CommunicationFT DO Control`
-      )
-    ) %>% 
-  select(-matches("Communication.{2} DO .+")) 
-
-####. main dependent variables ####
-
-####.. communication forced choice responses ####
-recoded_data_comm <- recoded_data_indep %>% 
+    )
+  ) %>% 
+  
+  # re-name FC responses
   mutate(across(
-    .cols = matches("CommunicationFC .+") & !ends_with('DO'),
+    .cols = matches("CommunicationFC .+") & !contains('DO'),
     .fns = extract_touches
-    )) 
+    )) %>% 
+  
+  # keep comm variables
+  select(
+    PID, 
+    matches("CommunicationF. .+") & !contains('DO'),
+    `Communication DO`
+    ) 
+
 
 ####.. AQ ####
 
-recoded_data_aq <- recoded_data_comm %>% 
+recoded_data_aq <- valid_data %>% 
   rowwise() %>% 
   mutate(
     AQ_n_missing = sum(is.na(c_across(starts_with("AQ")))),
@@ -148,21 +172,24 @@ recoded_data_aq <- recoded_data_comm %>%
     AQ_total = sum_AQ(
       c_across(matches(qvars_to_regex(AQ_VARS_REGULAR, "AQ"))),
       reversed = FALSE
-    ) +
-      sum_AQ(
-        c_across(matches(qvars_to_regex(AQ_VARS_REVERSED, "AQ"))),
-        reversed = TRUE
+    ) + sum_AQ(
+      c_across(matches(qvars_to_regex(AQ_VARS_REVERSED, "AQ"))),
+      reversed = TRUE
       )
   ) %>% 
-  select(-matches("^AQ_[0-9]+$")) # remove raw AQ responses for added privacy
+  select(
+    PID, 
+    AQ_total,
+    AQ_n_missing
+  )
 
 # check missing responses
-recoded_data_aq %>% 
+full_join(recoded_data_indep, recoded_data_aq) %>% 
   group_by(group,AQ_n_missing) %>% tally()
 
 ####.. BAPQ ####
 
-recoded_data_bapq <- recoded_data_aq %>% 
+recoded_data_bapq <- valid_data %>% 
   rowwise() %>% 
   mutate(
     BAPQ_n_missing = sum(is.na(c_across(starts_with("BAPQ")))),
@@ -173,12 +200,11 @@ recoded_data_bapq <- recoded_data_aq %>%
         matches(qvars_to_regex(BAPQ_VARS_REGULAR,"BAPQ"))
         ),
       reversed = FALSE
-    ) +
-      sum_BAPQ(
-        c_across(
-          matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
-          ),
-        reversed = TRUE
+    ) + sum_BAPQ(
+      c_across(
+        matches(qvars_to_regex(BAPQ_VARS_REVERSED,"BAPQ"))
+        ),
+      reversed = TRUE
       ),
     
     # subscale aloof
@@ -229,15 +255,22 @@ recoded_data_bapq <- recoded_data_aq %>%
         reversed = TRUE
       )          
   ) %>% 
-  select(-matches("^BAPQ_[0-9]+$")) # remove raw BAPQ responses for added privacy
+  select(
+    PID,
+    BAPQ_total,
+    BAPQ_sub_Aloof,
+    BAPQ_sub_PragLang,
+    BAPQ_sub_Rigid,
+    BAPQ_n_missing
+  )
 
 # check missing responses
-recoded_data_bapq %>% 
+full_join(recoded_data_indep, recoded_data_bapq) %>% 
   group_by(group,BAPQ_n_missing) %>% tally()
 
 ####.. STQ ####
 
-recoded_data_stq <- recoded_data_bapq %>% 
+recoded_data_stq <- valid_data %>% 
   rowwise() %>% 
   mutate(
     STQ_n_missing = sum(is.na(c_across(starts_with("STQ")))),
@@ -251,15 +284,19 @@ recoded_data_stq <- recoded_data_bapq %>%
         reversed = TRUE
       )
   ) %>% 
-  select(-matches("^STQ_[0-9]+$")) # remove raw STQ responses for added privacy
+  select(
+    PID,
+    STQ_total,
+    STQ_n_missing
+  )
 
 # check missing responses
-recoded_data_stq %>% 
+full_join(recoded_data_indep, recoded_data_stq) %>% 
   group_by(group,STQ_n_missing) %>% tally()
 
 ####.. TAS ####
 
-recoded_data_tas <- recoded_data_stq %>% 
+recoded_data_tas <- valid_data %>% 
   rowwise() %>% 
   mutate(
     TAS_n_missing = sum(is.na(c_across(starts_with("TAS")))),
@@ -323,9 +360,16 @@ recoded_data_tas <- recoded_data_stq %>%
       )
     
   ) %>% 
-  select(-matches("^TAS_[0-9]+$")) # remove raw TAS responses for added privacy
+  select(
+    PID,
+    TAS_total,
+    TAS_sub_IdFeelings,
+    TAS_sub_DescFeelings,
+    TAS_sub_ExtThinking,
+    TAS_n_missing
+  ) 
 
-recoded_data_tas %>% 
+full_join(recoded_data_indep, recoded_data_tas) %>% 
   group_by(group, TAS_n_missing) %>% tally()
 
 #### missing questionnaire responses ####
