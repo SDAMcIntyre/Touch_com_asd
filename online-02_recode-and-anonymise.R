@@ -372,6 +372,19 @@ recoded_data_tas <- valid_data %>%
 full_join(recoded_data_indep, recoded_data_tas) %>% 
   group_by(group, TAS_n_missing) %>% tally()
 
+#### save individual data (demographics and questionnaires) ####
+
+recoded_data_indep %>% 
+  full_join(recoded_data_qualtrics) %>% 
+  full_join(recoded_data_demog) %>% 
+  full_join(recoded_data_aq) %>% 
+  full_join(recoded_data_bapq) %>% 
+  full_join(recoded_data_stq) %>% 
+  full_join(recoded_data_tas) %>% 
+  write_path_csv("Data/primary/", "online_individual_data.csv")
+
+
+
 #### missing questionnaire responses ####
 data_folder <- "Data/"
 if (!dir.exists(data_folder)) {dir.create(data_folder)}
