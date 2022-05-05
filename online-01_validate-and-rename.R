@@ -41,7 +41,9 @@ data_labels <- tibble(
   var_name = names(valid_data),
   var_label = get_label(valid_data),
   var_nice_name = c(
-    get_label(valid_data)[1:10],
+    get_label(valid_data)[1:7],
+    'PID',
+    get_label(valid_data)[9:10],
     paste0("Screen", seq(1:7)),
     "Gender",
     "Age",
