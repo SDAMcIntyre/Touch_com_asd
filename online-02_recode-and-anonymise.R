@@ -1,6 +1,8 @@
 library(tidyverse)
 library(summarytools)
 
+# source all .R files in the Rfunctions directory
+sapply(list.files("Rfunctions", full.names = TRUE), source)
 
 #### global variables ####
 
