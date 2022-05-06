@@ -113,7 +113,7 @@ valid_data %>%
   dfSummary() %>% view
 
 
-data_folder <- "Data/"
+data_folder <- "Data/reports"
 if (!dir.exists(data_folder)) {dir.create(data_folder)}
 write_csv(data_labels, paste0(data_folder,"/online_variable-labels.csv"))
 
