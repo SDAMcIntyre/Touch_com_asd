@@ -26,6 +26,8 @@ TAS_VARS_EXTTHINKING <- c(5, 8, 10, 15, 16, 18, 19, 20)
 #### read in data ####
 valid_data <- read_csv("Data/private/online_valid-data.csv") 
 
+save_folder <- "Data/primary/"
+
 #### recode data   #### 
 
 ####. independent variables   #### 
@@ -72,33 +74,9 @@ data_comm_trial_order <- valid_data %>%
       `CommunicationFT DO ASD`,
       `CommunicationFC DO Control`,
       `CommunicationFT DO Control`
-    ) %>% str_remove_all("[a-z]")
-  ) %>% 
-  # get the trial numbers from order of presentation
-  select(PID,`Comm Display Order`) %>% 
-  separate(
-    `Comm Display Order`,
-    into = paste0("o",1:6),
-    sep = "\\|"
-  ) %>% 
-  pivot_longer(
-    cols = starts_with("o"),
-    names_to = "trial",
-    names_prefix = "o",
-    names_transform = list(trial = parse_integer),
-    values_to = "cued"
-  ) %>% 
-  mutate(
-    cued = case_when(
-      cued == "1" ~ "attention",
-      cued == "2" ~ "calming",
-      cued == "3" ~ "gratitude",
-      cued == "4" ~ "happiness",
-      cued == "5" ~ "love",
-      cued == "6" ~ "sadness"
-    )
-  )
-  
+    ) 
+  )  %>% extract_trial_numbers_from_order("Comm Display Order")
+
 
 data_comm <- valid_data %>% 
   
@@ -125,6 +103,33 @@ data_comm <- valid_data %>%
   
   # remove NAs due to not being in the condition (FC/FT)
   na.omit()
+
+####. pleasantness data   #### 
+
+data_pleas_trial_order <- valid_data %>% 
+  extract_trial_numbers_from_order("Pleasantness DO")
+
+data_pleas <- valid_data %>% 
+  
+  # keep pleasantness variables
+  select(
+    PID, 
+    matches("Pleasantness ") & !contains('DO')
+  )  %>% 
+  
+  # put into tidy format like live study
+  pivot_longer(
+    cols = matches("Pleasantness "),
+    names_to = "cued",
+    names_prefix = "Pleasantness ",
+    names_transform = list(cued = tolower),
+    values_to = "response"
+  ) %>% 
+  
+  #re-scale VAS ratings to match live experiment
+  mutate(
+    response = response/5 - 10
+  ) 
 
 ####. qualtrics variables   #### 
 data_qualtrics <- valid_data %>% 
@@ -399,7 +404,14 @@ data_tas <- valid_data %>%
 data_indep %>% 
   full_join(data_comm_trial_order) %>% 
   full_join(data_comm) %>% 
-  write_path_csv("Data/primary/", "online_comm_recoded.csv")
+  write_path_csv(save_folder, "online_comm_recoded.csv")
+
+####. pleasantness data ####
+
+data_indep %>% 
+  full_join(data_pleas_trial_order) %>% 
+  full_join(data_pleas) %>% 
+  write_path_csv(save_folder, "online_pleas_recoded.csv")
 
 ####. individual data (demographics and questionnaires) ####
 
@@ -410,5 +422,5 @@ data_indep %>%
   full_join(data_bapq) %>% 
   full_join(data_stq) %>% 
   full_join(data_tas) %>% 
-  write_path_csv("Data/primary/", "online_individual_recoded.csv")
+  write_path_csv(save_folder, "online_individual_recoded.csv")
 
