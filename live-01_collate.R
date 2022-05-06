@@ -2,26 +2,44 @@ library(readr)
 library(dplyr)
 library(stringr)
 
-raw.data.folder <- '~/Library/CloudStorage/OneDrive - Linköpings universitet/projects - in progress/Touch Comm ASD/Data/'
+# source all .R files in the Rfunctions directory
+sapply(list.files("Rfunctions", full.names = TRUE), source)
 
-collate_data <- function(folder, pattern) {
-  folder %>% 
-    list.files(pattern = pattern, full.names = TRUE, recursive = TRUE) %>% 
-    read_csv(id = 'path', col_types = cols()) %>% 
-    mutate(
-      group = str_extract(path, '(ASD - )|(Controls - )') %>% str_replace_all('( - )|s', ''),
-      PID = str_extract(path,'(asd[0-9]+)|(sub[0-9]+)') %>% as.factor() %>% as.numeric()
-    ) %>% 
-    select(-path)
-}
+raw_data_folder <- '~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data'
+save_folder <- 'Data/primary/'
 
-if ( !dir.exists('data') ) { dir.create('data') }
-if ( !dir.exists('data/primary') ) { dir.create('data/primary') }
+collated_comm_data <- raw_data_folder %>% 
+  collate_live_data('comm.*data\\.csv') 
 
-raw.data.folder %>% 
-  collate_data('comm.*data\\.csv') %>% View
-  write_csv('data/primary/live-comm_collated.csv')
+# expect 60 trials per participant, check for discrepancies
+collated_comm_data %>% 
+  group_by(path) %>% 
+  tally %>% 
+  filter(n != 60)
 
-raw.data.folder %>% 
-  collate_data('pleas.*data\\.csv') %>% 
-  write_csv('data/primary/live-pleas_collated.csv')
+collated_comm_data %>% 
+  group_by(PID) %>% 
+  tally %>% 
+  filter(n != 60)
+
+collated_comm_data %>% 
+  select(-path) %>%
+  write_path_csv(save_folder,'live-comm_collated.csv')
+
+collated_pleas_data <- raw_data_folder %>% 
+  collate_live_data('pleas.*data\\.csv') 
+
+# expect 6 trials per participant, check for discrepancies
+collated_pleas_data %>% 
+  group_by(path) %>% 
+  tally %>% 
+  filter(n != 6)
+
+collated_pleas_data %>% 
+  group_by(PID) %>% 
+  tally %>% 
+  filter(n != 6)
+
+collated_pleas_data %>% 
+  select(-path) %>%
+  write_path_csv(save_folder,'live-pleas_collated.csv')
