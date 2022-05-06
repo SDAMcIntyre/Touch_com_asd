@@ -193,10 +193,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "2.4.0",
+      "Version": "3.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "be982c9bcbfbe9e59c0225b0ed37d47e"
+      "Hash": "23abf173c2b783dcc43379ab9bba00ee"
     },
     "clipr": {
       "Package": "clipr",
@@ -368,10 +368,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.4.2",
+      "Version": "1.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6efd734b14c6471cfe443345f3e35e29"
+      "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e"
     },
     "googledrive": {
       "Package": "googledrive",
@@ -758,10 +758,10 @@
     },
     "readr": {
       "Package": "readr",
-      "Version": "2.0.2",
+      "Version": "2.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "7cb2c3ecfbc2c6786221d2c0c1f6ed68"
+      "Hash": "9c59de1357dc209868b5feb5c9f0fe2f"
     },
     "readxl": {
       "Package": "readxl",
@@ -982,10 +982,10 @@
     },
     "vroom": {
       "Package": "vroom",
-      "Version": "1.5.5",
+      "Version": "1.5.7",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9c3b3a3f947c7936cea7485349247e5b"
+      "Hash": "976507b5a105bc3bdf6a5a5f29e0684f"
     },
     "withr": {
       "Package": "withr",
