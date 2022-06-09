@@ -1,17 +1,3 @@
-library(readr)
-library(dplyr)
-
-#### functions ####
-
-tally_by <- function(.data, ...) {
-  byVars <- enquos(..., .named = TRUE)
-  xformula <- reformulate(termlabels = c(names(byVars)))
-  .data %>%
-    xtabs(formula = xformula) %>%
-    as_tibble() %>%
-    arrange(...)
-}
-
 calculate_performance_metrics <- function(.data, item, response, ...) {
   .data %>% 
     # count up responses for all combos of item and response
@@ -37,12 +23,3 @@ calculate_performance_metrics <- function(.data, item, response, ...) {
            F1chance = 2*( (Present/Total) / ((Present/Total)+1) ) # always give same answer
     )
 }
-
-if ( !dir.exists('data') ) { dir.create('data') }
-if ( !dir.exists('data/processed') ) { dir.create('data/processed') }
-
-read_csv('data/primary/live-comm_collated.csv', col_types = cols()) %>% 
-  group_by(group) %>% 
-  do(calculate_performance_metrics(., cued, response, PID)) %>% 
-  write_csv('data/processed/live-comm_performance.csv')
-
