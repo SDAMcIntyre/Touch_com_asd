@@ -3,7 +3,9 @@ library(sjlabelled)
 library(tidyverse)
 library(summarytools)
 
-raw_data_folder <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/online survey/"
+# raw_data_folder <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/online survey/"
+raw_data_folder <- 'C:/Users/flaes75/Linköpings universitet\Sarah McIntyre - Touch Comm ASD/Data/online survey'
+                        
 
 raw_data_file <- paste0(
   raw_data_folder,
