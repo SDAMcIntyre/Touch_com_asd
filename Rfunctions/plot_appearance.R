@@ -1,3 +1,5 @@
+library(ggplot2)
+
 # order to display in plots
 orderedCues <- c('attention','love','happiness','calming','sadness','gratitude')
 
