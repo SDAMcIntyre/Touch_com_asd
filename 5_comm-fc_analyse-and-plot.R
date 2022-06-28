@@ -128,7 +128,7 @@ AAAB
 AAAC
 '
 
-quartz(width = 10.5, height = 5.7); plot(1:10)
+open_plot_window(width = 10.5, height = 5.7); plot(1:10)
 compare.plot + confmat.live.ASD + confmat.live.Control +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.compare) 
@@ -139,7 +139,7 @@ design.confmat.ind = '
 AB
 '
 
-quartz(width = 11.3, height = 6.5); plot(1:10)
+open_plot_window(width = 11.3, height = 6.5); plot(1:10)
 confmat.live.ASD.ind +labs(title = 'ASD') + 
   confmat.live.Control.ind +labs(title = 'Control') +
   plot_annotation(tag_levels = 'A') +
