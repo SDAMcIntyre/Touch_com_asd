@@ -22,6 +22,8 @@ online_comm_data <- read_csv('Data/primary/online_comm_recoded.csv') %>%
 
 comm_data <- full_join(live_comm_data, online_comm_data)
 
+trial.1data <- comm_data %>% filter(trial <=6)
+
 #### read performance metrics ####
 
 live_performance_data <- read_csv('Data/processed/live-comm_performance.csv', col_types = cols()) %>% 
