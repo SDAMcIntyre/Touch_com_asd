@@ -26,7 +26,7 @@ trial.1data <- comm_data %>% filter(trial <=6)
 
 #### read performance metrics ####
 
-live_performance_data <- read_csv('Data/processed/live-comm_performance.csv', col_types = cols()) %>% 
+live_performance_data <- read_csv('Data/processed/live-comm_performance-indiv.csv', col_types = cols()) %>% 
   mutate(cued = factor(cued, levels = orderedCues))
 
 #### mixed effects models ####
@@ -81,7 +81,7 @@ emmeans(mm,  ~  group + cued, type = 'response') %>%
   scale_fill_manual(values = c(colour.ASD, colour.Control)) +
   scale_x_discrete(label = str_trunc(str_to_title(orderedCues),3,'right','')) +
   scale_y_continuous(limits = c(0,1)) +
-  labs(x = NULL, y = 'Performance F1', colour = NULL, fill = NULL) +
+  labs(x = NULL, y = 'Agreement Score', colour = NULL, fill = NULL) +
   theme_light(base_size = 14) + theme_x45deg + theme_insidelegend(0.85,0.85) +
   annotate("text", x = 1.5, y = 0.25, label = 'italic(chance)', parse = TRUE, colour = 'darkgrey') -> compare.plot
 
@@ -123,7 +123,7 @@ live_comm_data %>%
 
 #### combine figures ####
 
-if ( !dir.exists('figures') ) { dir.create('figures') }
+if ( !dir.exists('Figures') ) { dir.create('Figures') }
 
 design.compare = '
 AAAB
@@ -134,8 +134,8 @@ open_plot_window(width = 10.5, height = 5.7); plot(1:10)
 compare.plot + confmat.live.ASD + confmat.live.Control +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.compare) 
-ggsave('figures/Compare_ASD-vs-Control.svg')
-ggsave('figures/Compare_ASD-vs-Control.pdf')
+ggsave('Figures/Compare_ASD-vs-Control.svg')
+ggsave('Figures/Compare_ASD-vs-Control.pdf')
 
 design.confmat.ind = '
 AB
@@ -147,5 +147,5 @@ confmat.live.ASD.ind +labs(title = 'ASD') +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.confmat.ind) 
 
-ggsave('figures/live-comm_confmat-individual.svg')
-ggsave('figures/live-comm_confmat-individual.pdf')
+ggsave('Figures/live-comm_confmat-individual.svg')
+ggsave('Figures/live-comm_confmat-individual.pdf')

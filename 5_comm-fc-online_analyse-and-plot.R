@@ -7,7 +7,6 @@ library(emmeans)
 library(psych)
 library(patchwork)
 library(parallel)
-install.packages("svglite")
 library(svglite)
 
 # source all .R files in the Rfunctions directory
@@ -64,8 +63,8 @@ Ns <- online_comm_data %>%
   group_by(group) %>% 
   tally() 
 
-N.ASD <- Ns %>% filter(group == 'ASD') %>% pull(n)
-N.Control <- Ns %>% filter(group == 'Control') %>% pull(n)
+N.ASD <- Ns %>% filter(group == 'ASD') %>% pull(n)/6
+N.Control <- Ns %>% filter(group == 'Control') %>% pull(n)/6
 
 emmeans(glm1,  ~  group + cued, type = 'response') %>%
   as_tibble() %>% 
@@ -86,7 +85,7 @@ emmeans(glm1,  ~  group + cued, type = 'response') %>%
   scale_fill_manual(values = c(colour.ASD, colour.Control)) +
   scale_x_discrete(label = str_trunc(str_to_title(orderedCues),3,'right','')) +
   scale_y_continuous(limits = c(0,1)) +
-  labs(x = NULL, y = 'Performance F1', colour = NULL, fill = NULL) +
+  labs(x = NULL, y = 'Agreement Score', colour = NULL, fill = NULL) +
   theme_light(base_size = 14) + theme_x45deg + theme_insidelegend(0.85,0.85) +
   annotate("text", x = 1.5, y = 0.25, label = 'italic(chance)', parse = TRUE, colour = 'darkgrey') -> compare.plot
 
@@ -108,7 +107,7 @@ online_comm_data %>%
 
 #### combine figures with patchwork ####
 
-if ( !dir.exists('figures') ) { dir.create('figures') }
+if ( !dir.exists('Figures') ) { dir.create('Figures') }
 
 design.compare = '
 AAAB
@@ -120,8 +119,8 @@ compare.plot + confmat.online.ASD + confmat.online.Control +
   plot_annotation(tag_levels = 'A',
                   title= "Online Viewed Touch") +
   plot_layout(design = design.compare) 
-ggsave('figures/Compare_online-ASD-vs-Control.svg')
-ggsave('figures/Compare_online-ASD-vs-Control.pdf')
+ggsave('Figures/Compare_online-ASD-vs-Control.svg')
+ggsave('Figures/Compare_online-ASD-vs-Control.pdf')
 
 
 
