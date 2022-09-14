@@ -15,15 +15,6 @@ sapply(list.files("Rfunctions", full.names = TRUE), source)
 live_comm_data <- read_csv('Data/primary/live-comm_collated.csv', col_types = cols()) %>% 
   mutate(experiment = "felt touch")
 
-online_comm_data <- read_csv('Data/primary/online_comm_recoded.csv') %>% 
-  filter(task == 'forced choice') %>% 
-  select(-task) %>% 
-  mutate(experiment = "viewed touch")
-
-comm_data <- full_join(live_comm_data, online_comm_data)
-
-trial.1data <- comm_data %>% filter(trial <=6)
-
 #### read performance metrics ####
 
 live_performance_data <- read_csv('Data/processed/live-comm_performance-indiv.csv', col_types = cols()) %>% 
@@ -46,7 +37,7 @@ anova(mm)
 emmeans(mm, ~ cued, type = 'response')
 emmeans(mm,  ~  group, type = 'response')
 (emm <- emmeans(mm,  ~  group + cued))
-plot(emm, comparisons = TRUE, adjust = 'holm', by = 'group') # quick look
+#plot(emm, comparisons = TRUE, adjust = 'holm', by = 'group') # quick look
 
 # report
 pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
@@ -81,7 +72,7 @@ emmeans(mm,  ~  group + cued, type = 'response') %>%
   scale_fill_manual(values = c(colour.ASD, colour.Control)) +
   scale_x_discrete(label = str_trunc(str_to_title(orderedCues),3,'right','')) +
   scale_y_continuous(limits = c(0,1)) +
-  labs(x = NULL, y = 'Agreement Score', colour = NULL, fill = NULL) +
+  labs(x = NULL, y = 'Agreement Score (F1)', colour = NULL, fill = NULL) +
   theme_light(base_size = 14) + theme_x45deg + theme_insidelegend(0.85,0.85) +
   annotate("text", x = 1.5, y = 0.25, label = 'italic(chance)', parse = TRUE, colour = 'darkgrey') -> compare.plot
 
@@ -134,8 +125,8 @@ open_plot_window(width = 10.5, height = 5.7); plot(1:10)
 compare.plot + confmat.live.ASD + confmat.live.Control +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.compare) 
-ggsave('Figures/Compare_ASD-vs-Control.svg')
-ggsave('Figures/Compare_ASD-vs-Control.pdf')
+ggsave('Figures/comm-fc-live_Compare_ASD-vs-Control.svg')
+ggsave('Figures/comm-fc-live_Compare_ASD-vs-Control.pdf')
 
 design.confmat.ind = '
 AB
@@ -147,5 +138,5 @@ confmat.live.ASD.ind +labs(title = 'ASD') +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.confmat.ind) 
 
-ggsave('Figures/live-comm_confmat-individual.svg')
-ggsave('Figures/live-comm_confmat-individual.pdf')
+ggsave('Figures/comm-fc-live_confmat-individual.svg')
+ggsave('Figures/comm-fc-live_confmat-individual.pdf')
