@@ -11,5 +11,5 @@ confusion_matrix_plot <- function(df, grad.colour, grad.limit = c(0,100), ylabel
     scale_y_discrete(label = str_trunc(str_to_title(rev(ylabels)),abr,'right','')) +
     theme_classic() + theme_x45deg + theme_confmat_legend + 
     theme_nofacetbox + theme(axis.line = element_blank()) +
-    labs(x = 'Cued word', y = 'Receiver response')
+    labs(x = 'Touch expression', y = 'Assigned meaning')
 }
