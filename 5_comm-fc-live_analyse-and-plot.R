@@ -7,6 +7,7 @@ library(emmeans)
 library(psych)
 library(patchwork)
 library(parallel)
+library(formattable)
 
 # source all .R files in the Rfunctions directory
 sapply(list.files("Rfunctions", full.names = TRUE), source)
@@ -20,29 +21,52 @@ live_comm_data <- read_csv('Data/primary/live-comm_collated.csv', col_types = co
 live_performance_data <- read_csv('Data/processed/live-comm_performance-indiv.csv', col_types = cols()) %>% 
   mutate(cued = factor(cued, levels = orderedCues))
 
-#### mixed effects models ####
+#### mixed effects model ####
 set_sum_contrasts()
 theme_set(theme_light())
 
 mm <- mixed(F1 ~ group*cued + (1|PID),
             data = live_performance_data, 
             method = 'LRT',
-            control = glmerControl(optimizer = "bobyqa",optCtrl=list(maxfun=2e9)),
             family = binomial, weights=live_performance_data$Total )
-summary(mm)
 
-# report
-anova(mm)
+mm.pb <- mixed(F1 ~ group*cued + (1|PID),
+            data = live_performance_data, 
+            method = 'PB',
+            family = binomial, weights=live_performance_data$Total )
 
-emmeans(mm, ~ cued, type = 'response')
-emmeans(mm,  ~  group, type = 'response')
-(emm <- emmeans(mm,  ~  group + cued))
-#plot(emm, comparisons = TRUE, adjust = 'holm', by = 'group') # quick look
+#summary(mm)
+#anova(mm)
 
-# report
-pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
+#### effect of group ####
+emmeans(mm, ~ group , type = "response")
+anova(mm)[1,]
+
+#### effect of cue ####
+anova(mm)[2,]
+# order of agreement (for presentation purposes)
 emmeans(mm, ~ cued) %>% as_tibble() %>% arrange(-emmean) %>% pull(cued)
 
+#### group/cue interaction ####
+anova(mm)[3,]
+pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
+
+
+#### vs. chance ####
+
+( vs.chance <- emmeans(mm, ~ group + cued) %>% 
+        as_tibble() %>% 
+    mutate(
+      emmean.p = logistic(emmean),
+      chance = live_performance_data$F1chance[1],
+      z.vs.chance = (emmean - logit(chance))/(emmean*SE),
+      p.vs.chance = pt(abs(z.vs.chance), df = df, lower.tail = FALSE),
+      p.holm = p.adjust(p.vs.chance, method = 'holm'),
+      sig = if_else(p.holm < 0.05, "*", "")
+      ) )
+
+# supplementary table
+formattable(vs.chance, digits = 2, format = "f")
 
 ### figure compare ####
 
