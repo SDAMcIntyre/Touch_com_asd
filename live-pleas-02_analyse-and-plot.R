@@ -4,11 +4,12 @@ library(dplyr)
 library(Hmisc)
 library(stringr)
 
-source('tc-asd_source.R')
+# source all .R files in the Rfunctions directory
+sapply(list.files("Rfunctions", full.names = TRUE), source)
 
 live.pleas.data <- read_csv('data/primary/live-pleas_collated.csv', col_types = cols())
 
-if ( !dir.exists('figures') ) { dir.create('figures') }
+if ( !dir.exists('Figures') ) { dir.create('Figures') }
 
 theme_set(theme_light()) 
 
@@ -29,5 +30,5 @@ live.pleas.data %>%
   theme_x45deg + 
   labs(y = 'Pleasantness rating (VAS)', x = NULL)
 
-ggsave('figures/live-pleas_ASD-vs-Control-ratings.svg')
-ggsave('figures/live-pleas_ASD-vs-Control-ratings.pdf')
+ggsave('Figures/live-pleas_ASD-vs-Control-ratings.svg')
+ggsave('Figures/live-pleas_ASD-vs-Control-ratings.pdf')
