@@ -13,8 +13,7 @@ library(formattable)
 sapply(list.files("Rfunctions", full.names = TRUE), source)
 
 #### read data ####
-live_comm_data <- read_csv('Data/primary/live-comm_collated.csv', col_types = cols()) %>% 
-  mutate(experiment = "felt touch")
+live_comm_data <- read_csv('Data/primary/live-comm_collated.csv', col_types = cols()) 
 
 #### read performance metrics ####
 
@@ -25,32 +24,32 @@ live_performance_data <- read_csv('Data/processed/live-comm_performance-indiv.cs
 set_sum_contrasts()
 theme_set(theme_light())
 
-mm <- mixed(F1 ~ group*cued + (1|PID),
-            data = live_performance_data, 
-            method = 'LRT',
-            family = binomial, weights=live_performance_data$Total )
+# slow to run, so load from earlier
+load("Data/processed/comm-fc-live_mixed-model-pb.RData")
 
-mm.pb <- mixed(F1 ~ group*cued + (1|PID),
-            data = live_performance_data, 
-            method = 'PB',
-            family = binomial, weights=live_performance_data$Total )
-
-#summary(mm)
-#anova(mm)
+# cl <- makeCluster(rep("localhost", detectCores()))
+# set.seed(1409)
+# mm <- mixed(
+#   F1 ~ group*cued + (1|PID),
+#   data = live_performance_data, 
+#   method = 'PB',
+#   args_test = list(nsim = 1000, cl = cl),
+#   family = binomial, 
+#   weights=live_performance_data$Total 
+#   )
+# save(mm, file = "Data/processed/comm-fc-live_mixed-model-pb.RData")
 
 #### effect of group ####
 emmeans(mm, ~ group , type = "response")
 anova(mm)[1,]
 
-#### effect of cue ####
+#### effect of expression ####
 anova(mm)[2,]
 # order of agreement (for presentation purposes)
 emmeans(mm, ~ cued) %>% as_tibble() %>% arrange(-emmean) %>% pull(cued)
 
 #### group/cue interaction ####
 anova(mm)[3,]
-pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
-
 
 #### vs. chance ####
 
@@ -67,6 +66,11 @@ pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
 
 # supplementary table
 formattable(vs.chance, digits = 2, format = "f")
+
+#### pairwise control vs ASD by cue
+emm <- emmeans(mm, ~ group + cued)
+pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
+
 
 ### figure compare ####
 
