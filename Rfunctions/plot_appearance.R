@@ -20,3 +20,12 @@ theme_confmat_legend <- theme(legend.margin=margin(0,0,0,0),
 
 theme_nofacetbox <- theme(strip.background = element_blank(), 
                           strip.text = element_text(colour = 'black'))
+
+
+# theme_basic <- theme_bw() +theme(panel.border = element_blank(), axis.line = element_line(colour = 'black'))
+# 
+# theme_nolegend <- theme(legend.position = "none")
+# 
+# theme_bwstrip <- theme(strip.background = element_rect(fill = 'white',colour = 'grey',size = 1), 
+#                        strip.text = element_text(colour = 'black'))
+# 

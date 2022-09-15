@@ -85,7 +85,7 @@ emmeans(glm1,  ~  group + cued, type = 'response') %>%
   scale_fill_manual(values = c(colour.ASD, colour.Control)) +
   scale_x_discrete(label = str_trunc(str_to_title(orderedCues),3,'right','')) +
   scale_y_continuous(limits = c(0,1)) +
-  labs(x = NULL, y = 'Agreement Score', colour = NULL, fill = NULL) +
+  labs(x = NULL, y = 'Agreement Score (F1)', colour = NULL, fill = NULL) +
   theme_light(base_size = 14) + theme_x45deg + theme_insidelegend(0.85,0.85) +
   annotate("text", x = 1.5, y = 0.25, label = 'italic(chance)', parse = TRUE, colour = 'darkgrey') -> compare.plot
 
