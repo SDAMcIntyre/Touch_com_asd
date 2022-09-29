@@ -12,6 +12,16 @@ save_folder <- 'Data/primary/'
 collated_comm_data <- raw_data_folder %>% 
   collate_live_data('comm.*data\\.csv') 
 
+# get dates for each PID for paper data validation
+collated_comm_data %>% mutate(
+  date = str_extract(path,'202[0-2]-[0-9]{2}-[0-9]{2}')
+) %>% 
+  group_by(PID,date) %>% 
+  tally() %>% 
+  arrange(PID, date) %>% 
+  select(-n) %>% 
+  write_path_csv("Data/reports/","PIDs_with_dates.csv")
+
 # expect 60 trials per participant, check for discrepancies
 collated_comm_data %>% 
   group_by(path) %>% 
