@@ -240,6 +240,13 @@
       "Repository": "CRAN",
       "Hash": "5edbbabab6ce0bf7900a74fd4358628e"
     },
+    "codetools": {
+      "Package": "codetools",
+      "Version": "0.2-18",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "019388fc48e48b3da0d3a76ff94608a8"
+    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.0-3",
