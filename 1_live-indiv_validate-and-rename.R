@@ -2,7 +2,7 @@ library(readxl)
 library(dplyr)
 library(readr)
 
-raw_data_folder <- "/Users/sarmc72/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data"
+raw_data_folder <- "/Users/sarmc72/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/in-person"
 
 live_individual_data <- read_excel(
   paste0(raw_data_folder,"/Quetionnairedata_2022-09-29.xlsx"), 
@@ -20,7 +20,7 @@ live_individual_data <- read_excel(
       range = "A1:E36"
     ) %>% 
       mutate(
-        group = "AASD"
+        group = "ASD"
       )
     
   ) %>% 
