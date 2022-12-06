@@ -9,7 +9,7 @@ raw_data_folder <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/proje
 
 raw_data_file <- paste0(
   raw_data_folder,
-  'Communication with social touch in Autism spectrum disorder_March 28, 2022_14.50.csv'
+  'Qualtrics Touch-Comm-ASD online survey March 28, 2022_14.50.csv'
 )
 
 raw_data <- read_survey(raw_data_file)

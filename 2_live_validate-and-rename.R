@@ -34,7 +34,7 @@ pleas_task <- read_task_filenames(RAW_DATA_FOLDER, 'pleas.*data\\.csv') %>%
   select(-n) 
 
 # read notes about the experiment
-notes <- read_tsv(paste0(RAW_DATA_FOLDER, "in person/missing-data-notes.txt"))
+notes <- read_tsv(paste0(RAW_DATA_FOLDER, "missing-data-notes.txt"))
 
 # save a report giving an overview of the data set
 
@@ -54,29 +54,17 @@ full_join(computer_tasks, scanned) %>%
   arrange(PID) %>% 
   write_path_csv("Data/reports/", "live_data-validation.csv")
 
-# reading from the spreadsheet (manually entered from paper surveys)
+# read data manually entered from paper surveys
 
-live_individual_data <- read_excel(
-  paste0(RAW_DATA_FOLDER,"/in person/Quetionnairedata_2022-09-29.xlsx"), 
-  sheet = "Control_Familjerelationer",
-  range = "A1:E36"
-  ) %>% 
-  mutate(
-    group = "Control"
-  ) %>% 
-  rbind(
+live_individual_data <- read_csv(paste0(RAW_DATA_FOLDER, "demographic-data_entered-and-checked.csv")) %>% 
+  full_join(read_csv(paste0(RAW_DATA_FOLDER, "AQ_entered-and-checked.csv"))) %>% 
+  full_join(read_csv(paste0(RAW_DATA_FOLDER, "BAPQ_entered-and-checked.csv"))) %>% 
+  full_join(read_csv(paste0(RAW_DATA_FOLDER, "STQ_entered-and-checked.csv"))) %>% 
+  full_join(read_csv(paste0(RAW_DATA_FOLDER, "TAS_entered-and-checked.csv"))) %>% 
+  full_join(read_csv(paste0(RAW_DATA_FOLDER, "medication-family_entered-and-checked.csv"))) %>% 
+  rename("group" = Group)
 
-    read_excel(
-      paste0(RAW_DATA_FOLDER,"/in person/Quetionnairedata_2022-09-29.xlsx"), 
-      sheet = "ASD_Familjerelationer",
-      range = "A1:E36"
-    ) %>% 
-      mutate(
-        group = "ASD"
-      )
-    
-  ) %>% 
-  select(c("PID", "Age", "Gender", "group"))
+## ADD VALIDATION HERE ##
 
 private_data_folder <- "Data/private"
 if (!dir.exists(private_data_folder)) {dir.create(private_data_folder)}
