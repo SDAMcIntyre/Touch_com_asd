@@ -9,6 +9,7 @@ sapply(list.files("Rfunctions", full.names = TRUE), source)
 
 RAW_DATA_FOLDER <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/"
 
+# read metadata from scanned questionnaire files
 scanned <- read_scanned_filenames(RAW_DATA_FOLDER, "\\.pdf") %>% 
   mutate(status = "scanned") %>% 
   pivot_wider(
@@ -18,23 +19,25 @@ scanned <- read_scanned_filenames(RAW_DATA_FOLDER, "\\.pdf") %>%
   ) %>% 
   select(-group)
 
+# read metadata from the communication task
 comm_task <- read_task_filenames(RAW_DATA_FOLDER, 'comm.*data\\.csv') %>% 
   group_by(PID,date_computer) %>% 
   tally() %>% 
-  arrange(PID, date_computer) %>% 
   mutate(comm_task = "completed") %>% 
   select(-n) 
 
+# read metadata from the pleasantness task
 pleas_task <- read_task_filenames(RAW_DATA_FOLDER, 'pleas.*data\\.csv') %>% 
   group_by(PID,date_computer) %>% 
   tally() %>% 
-  arrange(PID, date_computer) %>% 
   mutate(pleas_task = "completed") %>% 
   select(-n) 
 
+# read notes about the experiment
 notes <- read_tsv(paste0(RAW_DATA_FOLDER, "in person/missing-data-notes.txt"))
 
-# get dates for each PID for paper data validation
+# save a report giving an overview of the data set
+
 computer_tasks <- full_join(comm_task, pleas_task) 
 
 full_join(computer_tasks, scanned) %>% 
