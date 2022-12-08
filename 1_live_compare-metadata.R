@@ -54,19 +54,4 @@ full_join(computer_tasks, scanned) %>%
   arrange(PID) %>% 
   write_path_csv("Data/reports/", "live_data-validation.csv")
 
-# read data manually entered from paper surveys
-
-live_individual_data <- read_csv(paste0(RAW_DATA_FOLDER, "demographic-data_entered-and-checked.csv")) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "AQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "BAPQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "STQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "TAS_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "medication-family_entered-and-checked.csv"))) %>% 
-  rename("group" = Group)
-
-## ADD VALIDATION HERE ##
-
-private_data_folder <- "Data/private"
-if (!dir.exists(private_data_folder)) {dir.create(private_data_folder)}
-write_csv(live_individual_data, paste0(private_data_folder,"/live_valid-individual-data.csv"))
 
