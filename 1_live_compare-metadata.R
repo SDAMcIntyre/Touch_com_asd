@@ -14,6 +14,8 @@ RAW_DATA_FOLDER <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/proj
 # output paths ####
 REPORTS_FOLDER <- "Data/reports/"
 
+# ===== MAIN ===== 
+
 # read metadata from scanned questionnaire files ####
 scanned <- read_scanned_filenames(RAW_DATA_FOLDER, "\\.pdf") %>% 
   mutate(status = "scanned") %>% 
@@ -57,4 +59,4 @@ full_join(computer_tasks, scanned) %>%
   ) %>% 
   select(c("PID", starts_with("date"), everything())) %>% 
   arrange(PID) %>% 
-  write_path_csv(REPORTS_FOLDER, "live_data-validation.csv")
+  write_path_csv(REPORTS_FOLDER, "live_metadata-comparison.csv")
