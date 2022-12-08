@@ -1,20 +1,30 @@
+# load libraries  ####
 library(qualtRics)
 library(sjlabelled)
 library(tidyverse)
 library(summarytools)
 
-raw_data_folder <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/online survey/"
-#raw_data_folder <- 'C:/Users/flaes75/Linköpings universitet\Sarah McIntyre - Touch Comm ASD/Data/online survey'
-                        
+# source all .R files in the Rfunctions directory ####
+sapply(list.files("Rfunctions", full.names = TRUE), source)
 
+# input path ####
+RAW_DATA_FOLDER <- "~/Library/CloudStorage/OneDrive-Linköpingsuniversitet/projects - in progress/Touch Comm ASD/Data/"
+
+# output paths ####
+REPORTS_FOLDER <- "Data/reports/"
+PRIVATE_DATA_FOLDER <- "Data/private/"
+
+# ===== MAIN ===== 
+
+# read in raw survey data exported from qualtrics ####
 raw_data_file <- paste0(
-  raw_data_folder,
+  RAW_DATA_FOLDER,
   'Qualtrics Touch-Comm-ASD online survey March 28, 2022_14.50.csv'
 )
 
 raw_data <- read_survey(raw_data_file)
 
-# SCREENING for those who...
+# SCREENING for those who... ####
 valid_data <- raw_data %>% 
   # are not spam
   filter(Status != "Spam") %>% 
@@ -39,6 +49,7 @@ valid_data <- raw_data %>%
   # answered the question about ASD
   filter(!is.na(Q20)) 
 
+# define new variable names ####
 data_labels <- tibble(
   var_name = names(valid_data),
   var_label = get_label(valid_data),
@@ -106,20 +117,16 @@ data_labels <- tibble(
     replacement = "TAS"
   ))
 
+# save a report of how the variable names were changed ####
+write_path_csv(data_labels, REPORTS_FOLDER, "online_variable-labels.csv")
+
+# apply the new names to the data ####
 names(valid_data) <- data_labels$var_nice_name
 
-
-# summary table
+# summary table ####
 valid_data %>% 
   select(-matches(" DO")) %>% # don't show display order variables
   dfSummary() %>% view
 
-
-data_folder <- "Data/reports"
-if (!dir.exists(data_folder)) {dir.create(data_folder)}
-write_csv(data_labels, paste0(data_folder,"/online_variable-labels.csv"))
-
-private_data_folder <- "Data/private"
-if (!dir.exists(private_data_folder)) {dir.create(private_data_folder)}
-write_csv(valid_data, paste0(private_data_folder,"/online_valid-data.csv"))
-
+# save the data ####
+write_path_csv(valid_data, PRIVATE_DATA_FOLDER,"online_valid-data.csv")
