@@ -2,6 +2,7 @@
 library(readr)
 library(dplyr)
 library(stringr)
+library(tidyr)
 
 # source all .R files in the Rfunctions directory ####
 sapply(list.files("Rfunctions", full.names = TRUE), source)
@@ -56,12 +57,22 @@ pleas_data %>%
 
 # read data manually entered from paper surveys ####
 
+aq_data <- read_csv(paste0(RAW_DATA_FOLDER, "AQ_entered-and-checked.csv"))
+bapq_data <- read_csv(paste0(RAW_DATA_FOLDER, "BAPQ_entered-and-checked.csv"))
+stq_data <- read_csv(paste0(RAW_DATA_FOLDER, "STQ_entered-and-checked.csv"))
+tas_data <- read_csv(paste0(RAW_DATA_FOLDER, "TAS_entered-and-checked.csv"))
+
+# check for typos from data entry
+check_validity_AQ(aq_data)
+check_validity_BAPQ(bapq_data)
+check_validity_STQ(stq_data)
+check_validity_TAS(tas_data)
+
 indiv_data <- read_csv(paste0(RAW_DATA_FOLDER, "demographic-data_entered-and-checked.csv")) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "AQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "BAPQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "STQ_entered-and-checked.csv"))) %>% 
-  full_join(read_csv(paste0(RAW_DATA_FOLDER, "TAS_entered-and-checked.csv"))) %>% 
-  rename("group" = Group)
+  full_join(aq_data) %>% 
+  full_join(bapq_data) %>% 
+  full_join(stq_data) %>% 
+  full_join(tas_data) 
 
 # read in separately, as it contains lots of potentially identifying info
 med_fam_data <- read_csv(paste0(RAW_DATA_FOLDER, "medication-family_entered-and-checked.csv"))
