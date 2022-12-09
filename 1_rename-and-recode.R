@@ -17,10 +17,19 @@ PROCESSED_DATA_FOLDER <- "Data/processed/"
 
 # ===== MAIN ===== 
 
-# read in the primary online data file ####
-online_data <- read_csv(paste0(PRIMARY_DATA_FOLDER, "online_valid-anon-data.csv"))
+# read in  primary data files ####
+online_data <- read_csv(paste0(PRIMARY_DATA_FOLDER, "online_valid-anon-data.csv")) 
+live_data_indiv <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_valid-anon-indiv-data.csv")) %>% 
+  mutate(experiment = "felt touch")
+live_data_comm <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_comm-data.csv")) %>% 
+  mutate(
+    experiment = "felt touch",
+    task = "forced choice"
+    )
+live_data_pleas <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_pleas-data.csv")) %>% 
+  mutate(experiment = "felt touch")
 
-# rename online data #### 
+# RENAME ONLINE DATA #### 
 
 #. define and apply new variable names ####
 new_var_names <- get_nice_var_names(online_data, q_idx = 36:161)
@@ -28,27 +37,30 @@ names(online_data) <- new_var_names
 
 #. update the variable name report to show how names were changed ####
 read_csv(paste0(REPORTS_FOLDER, "online_qualtrics-variable-names.csv")) %>% 
-  mutate(nice_names = new_var_names) %>% 
+  mutate(nice_name = new_var_names) %>% 
   write_path_csv(REPORTS_FOLDER, "online_qualtrics-variable-names.csv")
+
+online_data <- online_data %>% 
+  mutate(experiment = "viewed touch")
 
 #. summary table ####
 online_data %>% 
   select(-matches(" DO")) %>% # don't show display order variables
   dfSummary() %>% view
 
-
-# recode online data #### 
+# RECODE ONLINE DATA #### 
 
 ####. independent variables   #### 
-data_indep <- online_data %>% 
+
+online_data_indep <- online_data %>% 
   
   # make group variable from ASD question
   mutate(
     group = case_when(
       ASD == "Yes" ~ "ASD",
       ASD == "No" ~ "Control"
-    ) 
-  ) %>% 
+    )
+    ) %>% 
   
   # make task variable for which comm task they were assigned
   mutate(
@@ -67,6 +79,7 @@ data_indep <- online_data %>%
   
   # keep independent variables
   select(c(
+    experiment,
     PID,
     group,
     task
@@ -75,7 +88,7 @@ data_indep <- online_data %>%
 
 ####. communication data ####
 
-data_comm_trial_order <- online_data %>% 
+online_data_comm_trial_order <- online_data %>% 
   # make single variable for display order (qualtrics gives separate variables for group and Task)
   mutate(
     `Comm Display Order` = coalesce(
@@ -87,7 +100,7 @@ data_comm_trial_order <- online_data %>%
   )  %>% extract_trial_numbers_from_order("Comm Display Order")
 
 
-data_comm <- online_data %>% 
+online_data_comm <- online_data %>% 
   
   # re-name FC responses
   mutate(across(
@@ -111,14 +124,17 @@ data_comm <- online_data %>%
   ) %>% 
   
   # remove NAs due to not being in the condition (FC/FT)
-  na.omit()
+  na.omit() %>% 
+  
+  # combine with trial order
+  full_join(online_data_comm_trial_order)
 
 ####. pleasantness data   #### 
 
-data_pleas_trial_order <- online_data %>% 
+online_data_pleas_trial_order <- online_data %>% 
   extract_trial_numbers_from_order("Pleasantness DO")
 
-data_pleas <- online_data %>% 
+online_data_pleas <- online_data %>% 
   
   # keep pleasantness variables
   select(
@@ -138,10 +154,13 @@ data_pleas <- online_data %>%
   #re-scale VAS ratings to match live experiment
   mutate(
     response = response/5 - 10
-  ) 
+  ) %>% 
+  
+  # combine with trial order
+  full_join(online_data_pleas_trial_order)
 
 ####. qualtrics variables   #### 
-data_qualtrics <- online_data %>% 
+online_data_qualtrics <- online_data %>% 
   
   # add minutes/hours duration data 
   mutate(
@@ -160,7 +179,7 @@ data_qualtrics <- online_data %>%
   ))
 
 ####. demographics variables   #### 
-data_demog <- online_data %>% 
+online_data_demog <- online_data %>% 
   
   # nice language response labels
   mutate(
@@ -196,8 +215,33 @@ data_demog <- online_data %>%
     `Age Cohort`
   )
 
+# SEPARATE LIVE DATA ####
+
+#. independent variables ####
+live_data_indep <- live_data_indiv %>% 
+  select(
+    experiment,
+    PID,
+    group,
+    Experimenter
+    )
+
+#. demographics variables ####
+live_data_demog <- live_data_indiv %>% 
+  mutate(`Country of Residence` = "Sweden") %>% 
+  select(
+  PID,
+  Language,
+  `Country of Residence`,
+  Gender,
+  `Age Group`,
+  `Age Cohort`
+)
+
+# BOTH - RECODE QUESTIONNAIRE DATA ####
+
 ####. AQ ####
-data_aq <- online_data %>% 
+online_data_aq <- online_data %>% 
   recode_AQ() %>% 
   select(
     PID, 
@@ -205,9 +249,28 @@ data_aq <- online_data %>%
     AQ_n_missing
   )
 
+live_data_aq <- live_data_indiv %>% 
+  recode_AQ() %>% 
+  select(
+    PID, 
+    AQ_total,
+    AQ_n_missing
+  ) 
+
 ####. BAPQ ####
 
-data_bapq <- online_data %>% 
+online_data_bapq <- online_data %>% 
+  recode_BAPQ() %>% 
+  select(
+    PID,
+    BAPQ_total,
+    BAPQ_sub_Aloof,
+    BAPQ_sub_PragLang,
+    BAPQ_sub_Rigid,
+    BAPQ_n_missing
+  )
+
+live_data_bapq <- live_data_indiv %>% 
   recode_BAPQ() %>% 
   select(
     PID,
@@ -220,7 +283,15 @@ data_bapq <- online_data %>%
 
 ####. STQ ####
 
-data_stq <- online_data %>% 
+online_data_stq <- online_data %>% 
+  recode_STQ() %>% 
+  select(
+    PID,
+    STQ_total,
+    STQ_n_missing
+  )
+
+live_data_stq <- live_data_indiv %>% 
   recode_STQ() %>% 
   select(
     PID,
@@ -230,7 +301,7 @@ data_stq <- online_data %>%
 
 ####. TAS ####
 
-data_tas <- online_data %>% 
+online_data_tas <- online_data %>% 
   recode_TAS() %>% 
   select(
     PID,
@@ -241,14 +312,26 @@ data_tas <- online_data %>%
     TAS_n_missing
   ) 
 
-#### save data ####
+live_data_tas <- live_data_indiv %>% 
+  recode_TAS() %>% 
+  select(
+    PID,
+    TAS_total,
+    TAS_sub_IdFeelings,
+    TAS_sub_DescFeelings,
+    TAS_sub_ExtThinking,
+    TAS_n_missing
+  ) 
+
+#### COMBINE AND SAVE DATA ####
 
 ####. communication data ####
 
-data_indep %>% 
-  full_join(data_comm_trial_order) %>% 
-  full_join(data_comm) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "online_comm-data.csv")
+full_join(
+  right_join(live_data_indep, live_data_comm), 
+  full_join(online_data_indep, online_data_comm)
+  ) %>% 
+  write_path_csv(PROCESSED_DATA_FOLDER, "comm-data.csv")
 
 ####. pleasantness data ####
 
@@ -258,6 +341,12 @@ data_indep %>%
   write_path_csv(PROCESSED_DATA_FOLDER, "online_pleas-data.csv")
 
 ####. individual data (demographics and questionnaires) ####
+
+full_join(live_data_indep, online_data_indep)
+full_join(live_data_demog, online_data_demog)
+
+full_join(online_data_aq, live_data_aq)
+
 
 data_indep %>% 
   full_join(data_qualtrics) %>% 
