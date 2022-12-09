@@ -1,0 +1,1075 @@
+PID,group,task,trial,cued,response
+R_24N4TAb1v84O4mJ,Control,forced choice,1,calming,calming
+R_24N4TAb1v84O4mJ,Control,forced choice,2,gratitude,attention
+R_24N4TAb1v84O4mJ,Control,forced choice,3,happiness,other
+R_24N4TAb1v84O4mJ,Control,forced choice,4,attention,attention
+R_24N4TAb1v84O4mJ,Control,forced choice,5,sadness,sadness
+R_24N4TAb1v84O4mJ,Control,forced choice,6,love,love
+R_agEidu5kKdBHXzP,Control,forced choice,1,love,love
+R_agEidu5kKdBHXzP,Control,forced choice,2,sadness,calming
+R_agEidu5kKdBHXzP,Control,forced choice,3,calming,calming
+R_agEidu5kKdBHXzP,Control,forced choice,4,gratitude,happiness
+R_agEidu5kKdBHXzP,Control,forced choice,5,attention,attention
+R_agEidu5kKdBHXzP,Control,forced choice,6,happiness,happiness
+R_2e43td9W8t8Phxo,Control,free text,1,love,intimacy
+R_2e43td9W8t8Phxo,Control,free text,2,attention,i have a question for you
+R_2e43td9W8t8Phxo,Control,free text,3,calming,calm down
+R_2e43td9W8t8Phxo,Control,free text,4,happiness,i am bored
+R_2e43td9W8t8Phxo,Control,free text,5,gratitude,I am here for you
+R_2e43td9W8t8Phxo,Control,free text,6,sadness,calm down
+R_1q8J7FX32lAGeVQ,Control,forced choice,1,attention,attention
+R_1q8J7FX32lAGeVQ,Control,forced choice,2,sadness,calming
+R_1q8J7FX32lAGeVQ,Control,forced choice,3,calming,love
+R_1q8J7FX32lAGeVQ,Control,forced choice,4,happiness,other
+R_1q8J7FX32lAGeVQ,Control,forced choice,5,gratitude,gratitude
+R_1q8J7FX32lAGeVQ,Control,forced choice,6,love,love
+R_1IosNgyTq608wYm,Control,free text,1,calming,Comforting
+R_1IosNgyTq608wYm,Control,free text,2,attention,Get attention
+R_1IosNgyTq608wYm,Control,free text,3,gratitude,Gently get attention
+R_1IosNgyTq608wYm,Control,free text,4,sadness,Support
+R_1IosNgyTq608wYm,Control,free text,5,love,Affection
+R_1IosNgyTq608wYm,Control,free text,6,happiness,Playfulness
+R_broozSLuKleJ1tf,Control,free text,1,attention,trying to get their attention
+R_broozSLuKleJ1tf,Control,free text,2,happiness,trying to annoy them
+R_broozSLuKleJ1tf,Control,free text,3,love,intimacy
+R_broozSLuKleJ1tf,Control,free text,4,sadness,trying to console them
+R_broozSLuKleJ1tf,Control,free text,5,calming,trying to console them
+R_broozSLuKleJ1tf,Control,free text,6,gratitude,trying to console them
+R_2CUtZ3ltMFlwEDP,Control,forced choice,1,happiness,happiness
+R_2CUtZ3ltMFlwEDP,Control,forced choice,2,love,love
+R_2CUtZ3ltMFlwEDP,Control,forced choice,3,gratitude,calming
+R_2CUtZ3ltMFlwEDP,Control,forced choice,4,attention,attention
+R_2CUtZ3ltMFlwEDP,Control,forced choice,5,sadness,gratitude
+R_2CUtZ3ltMFlwEDP,Control,forced choice,6,calming,calming
+R_1GUiqGeOuIw0pYh,Control,free text,1,attention,De vill ha min uppmärksamhet
+R_1GUiqGeOuIw0pYh,Control,free text,2,happiness,Lekfullhet
+R_1GUiqGeOuIw0pYh,Control,free text,3,calming,"Tröst, omtanke"
+R_1GUiqGeOuIw0pYh,Control,free text,4,sadness,Stöd eller allvar
+R_1GUiqGeOuIw0pYh,Control,free text,5,gratitude,De vill lugna mig eller visa att jag gjort något bra
+R_1GUiqGeOuIw0pYh,Control,free text,6,love,"Ömhet, kärlek"
+R_3fIhaWY3B2rFRId,Control,forced choice,1,calming,calming
+R_3fIhaWY3B2rFRId,Control,forced choice,2,gratitude,sadness
+R_3fIhaWY3B2rFRId,Control,forced choice,3,happiness,happiness
+R_3fIhaWY3B2rFRId,Control,forced choice,4,love,love
+R_3fIhaWY3B2rFRId,Control,forced choice,5,attention,attention
+R_3fIhaWY3B2rFRId,Control,forced choice,6,sadness,gratitude
+R_3PLjJOV1OSVcWfI,Control,free text,1,gratitude,Oklart. Påkalla uppmärksamhet men onödigt mycket isf.
+R_3PLjJOV1OSVcWfI,Control,free text,2,happiness,Ingen aning. Ser lite stressande ut
+R_3PLjJOV1OSVcWfI,Control,free text,3,attention,Påkalla uppmärksamhet.
+R_3PLjJOV1OSVcWfI,Control,free text,4,calming,Skulle kunna vara ett försök att inge lugn men det är för mycket kraft i strykningen.
+R_3PLjJOV1OSVcWfI,Control,free text,5,love,Ömhetskänslor.
+R_3PLjJOV1OSVcWfI,Control,free text,6,sadness,Få personen att sluta med det den gör och lugna ned sig.
+R_2VrreUdN8eRPacz,Control,forced choice,1,attention,attention
+R_2VrreUdN8eRPacz,Control,forced choice,2,sadness,calming
+R_2VrreUdN8eRPacz,Control,forced choice,3,calming,other
+R_2VrreUdN8eRPacz,Control,forced choice,4,happiness,other
+R_2VrreUdN8eRPacz,Control,forced choice,5,love,calming
+R_2VrreUdN8eRPacz,Control,forced choice,6,gratitude,calming
+R_aaASaEt6842KNTH,Control,free text,1,love,Ömhet
+R_aaASaEt6842KNTH,Control,free text,2,gratitude,Tröst
+R_aaASaEt6842KNTH,Control,free text,3,calming,"Ömhet, vänskap"
+R_aaASaEt6842KNTH,Control,free text,4,attention,"""Se mig!"""
+R_aaASaEt6842KNTH,Control,free text,5,happiness,Bara störa
+R_aaASaEt6842KNTH,Control,free text,6,sadness,Vänskap
+R_25Xdue1yhmQfEjV,Control,forced choice,1,calming,calming
+R_25Xdue1yhmQfEjV,Control,forced choice,2,happiness,happiness
+R_25Xdue1yhmQfEjV,Control,forced choice,3,sadness,gratitude
+R_25Xdue1yhmQfEjV,Control,forced choice,4,love,love
+R_25Xdue1yhmQfEjV,Control,forced choice,5,gratitude,attention
+R_25Xdue1yhmQfEjV,Control,forced choice,6,attention,attention
+R_2qdvdN5YJ14Tn9K,Control,free text,1,attention,Personen hade en fråga
+R_2qdvdN5YJ14Tn9K,Control,free text,2,love,Ömhet eller lust
+R_2qdvdN5YJ14Tn9K,Control,free text,3,calming,Vet ej
+R_2qdvdN5YJ14Tn9K,Control,free text,4,gratitude,Vet ej
+R_2qdvdN5YJ14Tn9K,Control,free text,5,happiness,Lekfullhet
+R_2qdvdN5YJ14Tn9K,Control,free text,6,sadness,Tröst eller dominans
+R_2D1YvT03qjOndV4,ASD,free text,1,attention,"Hade ”knackingen” enbart varit två snabba ”slag” hade det tolkats som ”Ursäkta, jag vill säga något” Eller ”Kan du flytta på dig” Men eftersom det var så väldigt långdraget & på olika ställen, uppfattar jag det bara som väldigt onaturligt och konstigt."
+R_2D1YvT03qjOndV4,ASD,free text,2,love,Kärleksfullt / sensuellt/ om det är någon man älskar. Trakasserier/ Creepy varning om det är någon man inte står nära.
+R_2D1YvT03qjOndV4,ASD,free text,3,happiness,Lekfull/ Skoja
+R_2D1YvT03qjOndV4,ASD,free text,4,gratitude,"Ingenting, Hade halva gesterna varit enbart är det vanligt. ”Jag vill säga något” Och sista rörelsen hårdare tag = Jag finns här, när någon är på dödsbädd eller sjuk, eller är ledsen brukar man se detta."
+R_2D1YvT03qjOndV4,ASD,free text,5,calming,Närhet/ Relation
+R_2D1YvT03qjOndV4,ASD,free text,6,sadness,"Onaturligt att byta plats så ofta haha, Hade en stannat så, är det vanligt att se och göra för att visa stöd. Någon som berättar något jobbigt, eller som är sjuk."
+R_1ewmME8WozIgME0,Control,forced choice,1,sadness,sadness
+R_1ewmME8WozIgME0,Control,forced choice,2,gratitude,gratitude
+R_1ewmME8WozIgME0,Control,forced choice,3,calming,calming
+R_1ewmME8WozIgME0,Control,forced choice,4,attention,attention
+R_1ewmME8WozIgME0,Control,forced choice,5,love,calming
+R_1ewmME8WozIgME0,Control,forced choice,6,happiness,happiness
+R_2uqXgtVDqCONjnm,Control,free text,1,sadness,Trygghet.
+R_2uqXgtVDqCONjnm,Control,free text,2,happiness,Få uppmärksamhet. Busa.
+R_2uqXgtVDqCONjnm,Control,free text,3,love,Ömhet. Kärlek.
+R_2uqXgtVDqCONjnm,Control,free text,4,gratitude,Tröst.
+R_2uqXgtVDqCONjnm,Control,free text,5,calming,Lugnande.
+R_2uqXgtVDqCONjnm,Control,free text,6,attention,Få uppmärksamhet.
+R_2zUaezQatmtsuCY,Control,forced choice,1,gratitude,calming
+R_2zUaezQatmtsuCY,Control,forced choice,2,attention,attention
+R_2zUaezQatmtsuCY,Control,forced choice,3,sadness,sadness
+R_2zUaezQatmtsuCY,Control,forced choice,4,love,love
+R_2zUaezQatmtsuCY,Control,forced choice,5,calming,calming
+R_2zUaezQatmtsuCY,Control,forced choice,6,happiness,happiness
+R_3gRYzUIgOmIE2jQ,Control,forced choice,1,sadness,gratitude
+R_3gRYzUIgOmIE2jQ,Control,forced choice,2,gratitude,attention
+R_3gRYzUIgOmIE2jQ,Control,forced choice,3,love,love
+R_3gRYzUIgOmIE2jQ,Control,forced choice,4,attention,attention
+R_3gRYzUIgOmIE2jQ,Control,forced choice,5,calming,calming
+R_3gRYzUIgOmIE2jQ,Control,forced choice,6,happiness,happiness
+R_31avFr0tKll9q3o,Control,free text,1,love,"Omtanke, kärlek"
+R_31avFr0tKll9q3o,Control,free text,2,calming,"Tröstande, eller sövande"
+R_31avFr0tKll9q3o,Control,free text,3,gratitude,Att de vill ha uppmärksamhet
+R_31avFr0tKll9q3o,Control,free text,4,happiness,"Att den vill ha uppmärksamhet fast på ett jobbigare sätt, kanske ""kom igen nu går vi"" eller liknande"
+R_31avFr0tKll9q3o,Control,free text,5,sadness,"Att hen finns här för mig, att hen lyssnar, empati, omtanke"
+R_31avFr0tKll9q3o,Control,free text,6,attention,"Att hen vill ha min uppmärksamhet, att jag ska vakna"
+R_1dnnrVtroIJgPkG,Control,forced choice,1,sadness,calming
+R_1dnnrVtroIJgPkG,Control,forced choice,2,gratitude,attention
+R_1dnnrVtroIJgPkG,Control,forced choice,3,attention,attention
+R_1dnnrVtroIJgPkG,Control,forced choice,4,happiness,happiness
+R_1dnnrVtroIJgPkG,Control,forced choice,5,calming,calming
+R_1dnnrVtroIJgPkG,Control,forced choice,6,love,love
+R_1hGMwLafqjQTLAU,Control,forced choice,1,sadness,calming
+R_1hGMwLafqjQTLAU,Control,forced choice,2,gratitude,attention
+R_1hGMwLafqjQTLAU,Control,forced choice,3,calming,love
+R_1hGMwLafqjQTLAU,Control,forced choice,4,happiness,happiness
+R_1hGMwLafqjQTLAU,Control,forced choice,5,love,gratitude
+R_1hGMwLafqjQTLAU,Control,forced choice,6,attention,other
+R_32Qra3slix0GqbO,ASD,free text,1,love,"Närhet, kärlek, kanske flörtighet"
+R_32Qra3slix0GqbO,ASD,free text,2,attention,De vill ha någons uppmärksamhet
+R_32Qra3slix0GqbO,ASD,free text,3,sadness,"Sympati, tröst"
+R_32Qra3slix0GqbO,ASD,free text,4,gratitude,Sympati? Eller kanske uppmärksamhet + vänta
+R_32Qra3slix0GqbO,ASD,free text,5,happiness,Lekfullhet (kittlas)
+R_32Qra3slix0GqbO,ASD,free text,6,calming,"Kärlek, lugnande, tröst? Känns ovanligt att beröra en människa så här (som att klappa ett djur)"
+R_1jjpg9r9k0iqkcm,Control,forced choice,1,calming,calming
+R_1jjpg9r9k0iqkcm,Control,forced choice,2,gratitude,gratitude
+R_1jjpg9r9k0iqkcm,Control,forced choice,3,love,love
+R_1jjpg9r9k0iqkcm,Control,forced choice,4,sadness,love
+R_1jjpg9r9k0iqkcm,Control,forced choice,5,attention,attention
+R_1jjpg9r9k0iqkcm,Control,forced choice,6,happiness,happiness
+R_2QS8IsuFvzCaWrU,Control,free text,1,calming,Comforting
+R_2QS8IsuFvzCaWrU,Control,free text,2,happiness,Happiness
+R_2QS8IsuFvzCaWrU,Control,free text,3,attention,Attention
+R_2QS8IsuFvzCaWrU,Control,free text,4,gratitude,Care
+R_2QS8IsuFvzCaWrU,Control,free text,5,sadness,Care
+R_2QS8IsuFvzCaWrU,Control,free text,6,love,Romance
+R_1mxiadzuprVYVSX,Control,free text,1,attention,They want to say something
+R_1mxiadzuprVYVSX,Control,free text,2,gratitude,Reassurance
+R_1mxiadzuprVYVSX,Control,free text,3,sadness,Safety
+R_1mxiadzuprVYVSX,Control,free text,4,happiness,Playfullness
+R_1mxiadzuprVYVSX,Control,free text,5,love,Affection
+R_1mxiadzuprVYVSX,Control,free text,6,calming,Affection
+R_OONzo8eHKpJPAUV,Control,forced choice,1,happiness,other
+R_OONzo8eHKpJPAUV,Control,forced choice,2,gratitude,calming
+R_OONzo8eHKpJPAUV,Control,forced choice,3,love,love
+R_OONzo8eHKpJPAUV,Control,forced choice,4,attention,attention
+R_OONzo8eHKpJPAUV,Control,forced choice,5,calming,calming
+R_OONzo8eHKpJPAUV,Control,forced choice,6,sadness,calming
+R_1DqIkv4J3Z1L3K1,Control,forced choice,1,calming,calming
+R_1DqIkv4J3Z1L3K1,Control,forced choice,2,love,attention
+R_1DqIkv4J3Z1L3K1,Control,forced choice,3,sadness,love
+R_1DqIkv4J3Z1L3K1,Control,forced choice,4,attention,attention
+R_1DqIkv4J3Z1L3K1,Control,forced choice,5,gratitude,calming
+R_1DqIkv4J3Z1L3K1,Control,forced choice,6,happiness,calming
+R_3lRdUEMf8yALvBw,Control,forced choice,1,attention,attention
+R_3lRdUEMf8yALvBw,Control,forced choice,2,calming,calming
+R_3lRdUEMf8yALvBw,Control,forced choice,3,happiness,other
+R_3lRdUEMf8yALvBw,Control,forced choice,4,gratitude,attention
+R_3lRdUEMf8yALvBw,Control,forced choice,5,love,love
+R_3lRdUEMf8yALvBw,Control,forced choice,6,sadness,calming
+R_1kNWYOa3RmkDW5y,Control,free text,1,happiness,Playful interaction
+R_1kNWYOa3RmkDW5y,Control,free text,2,attention,Seeking contact
+R_1kNWYOa3RmkDW5y,Control,free text,3,gratitude,Waking someone up (from sleep)
+R_1kNWYOa3RmkDW5y,Control,free text,4,calming,Calmness
+R_1kNWYOa3RmkDW5y,Control,free text,5,sadness,Stay still/calm
+R_1kNWYOa3RmkDW5y,Control,free text,6,love,Affection
+R_1r7lOuYz13e9Hr9,ASD,forced choice,1,gratitude,attention
+R_1r7lOuYz13e9Hr9,ASD,forced choice,2,attention,attention
+R_1r7lOuYz13e9Hr9,ASD,forced choice,3,love,love
+R_1r7lOuYz13e9Hr9,ASD,forced choice,4,calming,calming
+R_1r7lOuYz13e9Hr9,ASD,forced choice,5,sadness,gratitude
+R_1r7lOuYz13e9Hr9,ASD,forced choice,6,happiness,happiness
+R_3HTeYjNni2cvCba,Control,forced choice,1,happiness,other
+R_3HTeYjNni2cvCba,Control,forced choice,2,sadness,calming
+R_3HTeYjNni2cvCba,Control,forced choice,3,attention,attention
+R_3HTeYjNni2cvCba,Control,forced choice,4,calming,love
+R_3HTeYjNni2cvCba,Control,forced choice,5,gratitude,calming
+R_3HTeYjNni2cvCba,Control,forced choice,6,love,love
+R_3pgTCv3r7I6JCpr,ASD,free text,1,sadness,Lugna ner eller hindra/hålla fast
+R_3pgTCv3r7I6JCpr,ASD,free text,2,gratitude,"Påkalla uppmärksamhet eller säga till (""hördudu"")"
+R_3pgTCv3r7I6JCpr,ASD,free text,3,happiness,Retas
+R_3pgTCv3r7I6JCpr,ASD,free text,4,love,"Vet ej, ser ut som om hen ritar något"
+R_3pgTCv3r7I6JCpr,ASD,free text,5,attention,Påkalla uppmärksamhet
+R_3pgTCv3r7I6JCpr,ASD,free text,6,calming,"Ser ut som när man klappar en katt, så kanske visa att man tycker om"
+R_1DouL81ZMekZEkY,Control,free text,1,sadness,"""Hold on"""
+R_1DouL81ZMekZEkY,Control,free text,2,love,"""I want to pleasure you"" ""I enjoy you"""
+R_1DouL81ZMekZEkY,Control,free text,3,gratitude,"""I need your attention, NOW"""
+R_1DouL81ZMekZEkY,Control,free text,4,calming,"""calm down"""
+R_1DouL81ZMekZEkY,Control,free text,5,happiness,"""I feel playful"""
+R_1DouL81ZMekZEkY,Control,free text,6,attention,"""hello?"" ""excuse me"""
+R_22y8SVVqPPS1FQG,ASD,forced choice,1,happiness,happiness
+R_22y8SVVqPPS1FQG,ASD,forced choice,2,calming,calming
+R_22y8SVVqPPS1FQG,ASD,forced choice,3,love,love
+R_22y8SVVqPPS1FQG,ASD,forced choice,4,gratitude,gratitude
+R_22y8SVVqPPS1FQG,ASD,forced choice,5,sadness,gratitude
+R_22y8SVVqPPS1FQG,ASD,forced choice,6,attention,attention
+R_21oioL7dd1QiHOM,Control,free text,1,love,Vill ha närhet
+R_21oioL7dd1QiHOM,Control,free text,2,happiness,Busighet!
+R_21oioL7dd1QiHOM,Control,free text,3,gratitude,Vill pocka på uppmärksamhet. Något händer.
+R_21oioL7dd1QiHOM,Control,free text,4,attention,Vill även här ha uppmärksamhet. Tex ställa en fråga.
+R_21oioL7dd1QiHOM,Control,free text,5,calming,Vill lugna.
+R_21oioL7dd1QiHOM,Control,free text,6,sadness,Vill markera på ett bestämmande sätt.
+R_Z80JY38v5PmAiTT,Control,forced choice,1,attention,attention
+R_Z80JY38v5PmAiTT,Control,forced choice,2,gratitude,calming
+R_Z80JY38v5PmAiTT,Control,forced choice,3,sadness,calming
+R_Z80JY38v5PmAiTT,Control,forced choice,4,calming,love
+R_Z80JY38v5PmAiTT,Control,forced choice,5,happiness,happiness
+R_Z80JY38v5PmAiTT,Control,forced choice,6,love,calming
+R_3dSS4ytVKDFZZy5,ASD,free text,1,happiness,Playfulness
+R_3dSS4ytVKDFZZy5,ASD,free text,2,gratitude,Look at me
+R_3dSS4ytVKDFZZy5,ASD,free text,3,calming,Affection
+R_3dSS4ytVKDFZZy5,ASD,free text,4,attention,Pay attention
+R_3dSS4ytVKDFZZy5,ASD,free text,5,sadness,Sympathy
+R_3dSS4ytVKDFZZy5,ASD,free text,6,love,Affection
+R_2RaW02UzcG3C414,Control,forced choice,1,sadness,calming
+R_2RaW02UzcG3C414,Control,forced choice,2,love,love
+R_2RaW02UzcG3C414,Control,forced choice,3,happiness,other
+R_2RaW02UzcG3C414,Control,forced choice,4,gratitude,attention
+R_2RaW02UzcG3C414,Control,forced choice,5,attention,attention
+R_2RaW02UzcG3C414,Control,forced choice,6,calming,calming
+R_2z8vg0qg9KhJh4K,Control,free text,1,gratitude,Jag vet inte. Jag har aldrig varit med om sådan beröring.
+R_2z8vg0qg9KhJh4K,Control,free text,2,attention,Påkalla uppmärksamhet
+R_2z8vg0qg9KhJh4K,Control,free text,3,happiness,Att man vill busa/skoja
+R_2z8vg0qg9KhJh4K,Control,free text,4,sadness,Makt
+R_2z8vg0qg9KhJh4K,Control,free text,5,calming,Jag kan inte tolka den här heller riktigt.
+R_2z8vg0qg9KhJh4K,Control,free text,6,love,"Affektion, lust"
+R_uwiMg4zk3C1sYhP,Control,free text,1,sadness,pressure points
+R_uwiMg4zk3C1sYhP,Control,free text,2,gratitude,trying to get someone's attention
+R_uwiMg4zk3C1sYhP,Control,free text,3,love,caress
+R_uwiMg4zk3C1sYhP,Control,free text,4,attention,trying to get someone's attention or sending a message of some sort
+R_uwiMg4zk3C1sYhP,Control,free text,5,calming,calming a person
+R_uwiMg4zk3C1sYhP,Control,free text,6,happiness,stimulating a person's arm
+R_3ix6a1hKaxDQmqg,Control,free text,1,love,Kontakt och omsorg
+R_3ix6a1hKaxDQmqg,Control,free text,2,happiness,Lekfullhet
+R_3ix6a1hKaxDQmqg,Control,free text,3,attention,jag vill ha din uppmärksamhet
+R_3ix6a1hKaxDQmqg,Control,free text,4,calming,Va i kontakt med hela din kropp - grunda dig.
+R_3ix6a1hKaxDQmqg,Control,free text,5,gratitude,"Du, jag är här."
+R_3ix6a1hKaxDQmqg,Control,free text,6,sadness,Det kommer bli bra.
+R_3pn9XlqLdBUnj0k,ASD,forced choice,1,love,love
+R_3pn9XlqLdBUnj0k,ASD,forced choice,2,gratitude,sadness
+R_3pn9XlqLdBUnj0k,ASD,forced choice,3,sadness,gratitude
+R_3pn9XlqLdBUnj0k,ASD,forced choice,4,attention,attention
+R_3pn9XlqLdBUnj0k,ASD,forced choice,5,happiness,attention
+R_3pn9XlqLdBUnj0k,ASD,forced choice,6,calming,calming
+R_2Vg9LqZOG0zrezV,Control,forced choice,1,happiness,other
+R_2Vg9LqZOG0zrezV,Control,forced choice,2,sadness,gratitude
+R_2Vg9LqZOG0zrezV,Control,forced choice,3,calming,calming
+R_2Vg9LqZOG0zrezV,Control,forced choice,4,attention,attention
+R_2Vg9LqZOG0zrezV,Control,forced choice,5,love,love
+R_2Vg9LqZOG0zrezV,Control,forced choice,6,gratitude,attention
+R_3gLBosCxkvTuDna,Control,free text,1,happiness,"Playfulness, possibly restlessness, wanting attention"
+R_3gLBosCxkvTuDna,Control,free text,2,sadness,"Steadying, comfort, solidarity"
+R_3gLBosCxkvTuDna,Control,free text,3,gratitude,No clue
+R_3gLBosCxkvTuDna,Control,free text,4,love,"Love, affection"
+R_3gLBosCxkvTuDna,Control,free text,5,attention,Trying to get someones attention
+R_3gLBosCxkvTuDna,Control,free text,6,calming,"Comfort, solace"
+R_1LHXBwOw14qmSvR,Control,free text,1,attention,"""du jag behöver din uppmärksamhet"""
+R_1LHXBwOw14qmSvR,Control,free text,2,love,jag är attraherad av dig
+R_1LHXBwOw14qmSvR,Control,free text,3,sadness,jag finns här / emotionellt stöd
+R_1LHXBwOw14qmSvR,Control,free text,4,happiness,retsam kommunikation
+R_1LHXBwOw14qmSvR,Control,free text,5,calming,jag tycker om dig
+R_1LHXBwOw14qmSvR,Control,free text,6,gratitude,"""du, ursäkta, jag skulle behöva din uppmärksamhet"""
+R_2PpnGmv28xDEyhK,Control,forced choice,1,calming,calming
+R_2PpnGmv28xDEyhK,Control,forced choice,2,love,love
+R_2PpnGmv28xDEyhK,Control,forced choice,3,sadness,calming
+R_2PpnGmv28xDEyhK,Control,forced choice,4,attention,attention
+R_2PpnGmv28xDEyhK,Control,forced choice,5,gratitude,other
+R_2PpnGmv28xDEyhK,Control,forced choice,6,happiness,other
+R_1Nbu8yVueuPlP36,Control,free text,1,sadness,Ta det lugnt nu
+R_1Nbu8yVueuPlP36,Control,free text,2,gratitude,Vakna
+R_1Nbu8yVueuPlP36,Control,free text,3,calming,Allt är ok/kommer bli ok
+R_1Nbu8yVueuPlP36,Control,free text,4,attention,Är du vaken?
+R_1Nbu8yVueuPlP36,Control,free text,5,love,Att personen tycker om mig (vänskapligt eller sexuellt)
+R_1Nbu8yVueuPlP36,Control,free text,6,happiness,Busighet
+R_2U2XfiKMkWOW8u5,Control,forced choice,1,gratitude,other
+R_2U2XfiKMkWOW8u5,Control,forced choice,2,attention,attention
+R_2U2XfiKMkWOW8u5,Control,forced choice,3,love,love
+R_2U2XfiKMkWOW8u5,Control,forced choice,4,calming,other
+R_2U2XfiKMkWOW8u5,Control,forced choice,5,sadness,calming
+R_2U2XfiKMkWOW8u5,Control,forced choice,6,happiness,other
+R_29ackBUB6hK7HmH,Control,forced choice,1,sadness,calming
+R_29ackBUB6hK7HmH,Control,forced choice,2,happiness,happiness
+R_29ackBUB6hK7HmH,Control,forced choice,3,gratitude,calming
+R_29ackBUB6hK7HmH,Control,forced choice,4,attention,attention
+R_29ackBUB6hK7HmH,Control,forced choice,5,calming,calming
+R_29ackBUB6hK7HmH,Control,forced choice,6,love,love
+R_VRo3iReNG6cVDzz,ASD,free text,1,attention,Jag tror att dom försöker få uppmärksamhet
+R_VRo3iReNG6cVDzz,ASD,free text,2,love,"Kärlek, omtanke, att dom bryr sig."
+R_VRo3iReNG6cVDzz,ASD,free text,3,calming,Ingen aning.
+R_VRo3iReNG6cVDzz,ASD,free text,4,happiness,"Något lekfullt, busigt kanske även irriterande."
+R_VRo3iReNG6cVDzz,ASD,free text,5,sadness,"Värme, omtanke, glädje, kärlek"
+R_VRo3iReNG6cVDzz,ASD,free text,6,gratitude,"Nervärderande omtanke. ""såja lilla pojken"" till en vuxen man, unigefär."
+R_CakEu2wsirKt1Xb,Control,free text,1,attention,Påkalla uppmärksamhet.
+R_CakEu2wsirKt1Xb,Control,free text,2,sadness,Äganderätt.
+R_CakEu2wsirKt1Xb,Control,free text,3,gratitude,Tröst.
+R_CakEu2wsirKt1Xb,Control,free text,4,happiness,Glädje
+R_CakEu2wsirKt1Xb,Control,free text,5,calming,Motvilja
+R_CakEu2wsirKt1Xb,Control,free text,6,love,Längtan
+R_0ulITAMrFU92pEt,ASD,forced choice,1,gratitude,sadness
+R_0ulITAMrFU92pEt,ASD,forced choice,2,sadness,attention
+R_0ulITAMrFU92pEt,ASD,forced choice,3,happiness,other
+R_0ulITAMrFU92pEt,ASD,forced choice,4,calming,calming
+R_0ulITAMrFU92pEt,ASD,forced choice,5,attention,attention
+R_0ulITAMrFU92pEt,ASD,forced choice,6,love,love
+R_eJUoqZ20XPkMKaJ,Control,forced choice,1,love,love
+R_eJUoqZ20XPkMKaJ,Control,forced choice,2,sadness,calming
+R_eJUoqZ20XPkMKaJ,Control,forced choice,3,attention,attention
+R_eJUoqZ20XPkMKaJ,Control,forced choice,4,gratitude,other
+R_eJUoqZ20XPkMKaJ,Control,forced choice,5,calming,calming
+R_eJUoqZ20XPkMKaJ,Control,forced choice,6,happiness,other
+R_12fISp10CMwgFwt,Control,forced choice,1,love,love
+R_12fISp10CMwgFwt,Control,forced choice,2,gratitude,attention
+R_12fISp10CMwgFwt,Control,forced choice,3,sadness,calming
+R_12fISp10CMwgFwt,Control,forced choice,4,happiness,attention
+R_12fISp10CMwgFwt,Control,forced choice,5,attention,attention
+R_12fISp10CMwgFwt,Control,forced choice,6,calming,calming
+R_2tu3htDnO44cb65,Control,free text,1,sadness,"Hey, pay me attention.... I am  talking to you."
+R_2tu3htDnO44cb65,Control,free text,2,love,I feel affection for you
+R_2tu3htDnO44cb65,Control,free text,3,gratitude,"hey, I am here. It will be fine, you are doing great."
+R_2tu3htDnO44cb65,Control,free text,4,attention,"Hey, do you hear me? I am talking with you."
+R_2tu3htDnO44cb65,Control,free text,5,happiness,"Friendly mocking, tickling."
+R_2tu3htDnO44cb65,Control,free text,6,calming,i feel affection for you.
+R_2gIsbawvs1x7zDX,Control,forced choice,1,calming,calming
+R_2gIsbawvs1x7zDX,Control,forced choice,2,happiness,other
+R_2gIsbawvs1x7zDX,Control,forced choice,3,attention,attention
+R_2gIsbawvs1x7zDX,Control,forced choice,4,love,calming
+R_2gIsbawvs1x7zDX,Control,forced choice,5,gratitude,other
+R_2gIsbawvs1x7zDX,Control,forced choice,6,sadness,sadness
+R_bpZKSycK13TLHwJ,Control,free text,1,calming,Tröst
+R_bpZKSycK13TLHwJ,Control,free text,2,sadness,Stöd
+R_bpZKSycK13TLHwJ,Control,free text,3,happiness,Lekfullhet
+R_bpZKSycK13TLHwJ,Control,free text,4,gratitude,"Tröst till mindre nära, lugna dig"
+R_bpZKSycK13TLHwJ,Control,free text,5,love,"Kärlek, önskemål om att vara nära"
+R_bpZKSycK13TLHwJ,Control,free text,6,attention,Söker uppmärksamhet
+R_3HitAhOgoOyQ8iN,Control,forced choice,1,calming,calming
+R_3HitAhOgoOyQ8iN,Control,forced choice,2,sadness,other
+R_3HitAhOgoOyQ8iN,Control,forced choice,3,happiness,happiness
+R_3HitAhOgoOyQ8iN,Control,forced choice,4,gratitude,attention
+R_3HitAhOgoOyQ8iN,Control,forced choice,5,love,love
+R_3HitAhOgoOyQ8iN,Control,forced choice,6,attention,attention
+R_21j0rTJlKsZyaKL,Control,free text,1,sadness,"Stanna, dominans"
+R_21j0rTJlKsZyaKL,Control,free text,2,love,Flirtig
+R_21j0rTJlKsZyaKL,Control,free text,3,calming,Flirtig eller stöttning
+R_21j0rTJlKsZyaKL,Control,free text,4,attention,Få uppmärksamhet
+R_21j0rTJlKsZyaKL,Control,free text,5,happiness,Det är är bara allmänt konstigt att göra
+R_21j0rTJlKsZyaKL,Control,free text,6,gratitude,Stötta personen
+R_2CrIYD6MZV848bT,Control,forced choice,1,sadness,calming
+R_2CrIYD6MZV848bT,Control,forced choice,2,love,love
+R_2CrIYD6MZV848bT,Control,forced choice,3,gratitude,attention
+R_2CrIYD6MZV848bT,Control,forced choice,4,attention,other
+R_2CrIYD6MZV848bT,Control,forced choice,5,calming,gratitude
+R_2CrIYD6MZV848bT,Control,forced choice,6,happiness,happiness
+R_DuyOlK8uSrEzTW1,ASD,free text,1,sadness,vet inte
+R_DuyOlK8uSrEzTW1,ASD,free text,2,gratitude,vet inte
+R_DuyOlK8uSrEzTW1,ASD,free text,3,attention,påkalla uppmärksamhet
+R_DuyOlK8uSrEzTW1,ASD,free text,4,love,tillgivenhet
+R_DuyOlK8uSrEzTW1,ASD,free text,5,happiness,vet inte
+R_DuyOlK8uSrEzTW1,ASD,free text,6,calming,vet inte
+R_2Btb86a0sGyB0Hl,Control,free text,1,attention,They were asking for my attention in something a bit urgent.
+R_2Btb86a0sGyB0Hl,Control,free text,2,calming,"Stillness, calm."
+R_2Btb86a0sGyB0Hl,Control,free text,3,love,"Intimacy, an intimate touch of either relaxation or sexual initiation."
+R_2Btb86a0sGyB0Hl,Control,free text,4,happiness,"To induce stress, perhaps in a playful manner."
+R_2Btb86a0sGyB0Hl,Control,free text,5,gratitude,"I perceived this as a try at a soothing touch, failing miserably."
+R_2Btb86a0sGyB0Hl,Control,free text,6,sadness,"Steadfastness. I would have felt calm by this touch, and grounding."
+R_vrwpqt1h2QWdNsJ,Control,forced choice,1,gratitude,happiness
+R_vrwpqt1h2QWdNsJ,Control,forced choice,2,happiness,other
+R_vrwpqt1h2QWdNsJ,Control,forced choice,3,attention,attention
+R_vrwpqt1h2QWdNsJ,Control,forced choice,4,love,love
+R_vrwpqt1h2QWdNsJ,Control,forced choice,5,sadness,other
+R_vrwpqt1h2QWdNsJ,Control,forced choice,6,calming,other
+R_2q44JuXjBZJvVtI,ASD,forced choice,1,love,love
+R_2q44JuXjBZJvVtI,ASD,forced choice,2,sadness,other
+R_2q44JuXjBZJvVtI,ASD,forced choice,3,gratitude,calming
+R_2q44JuXjBZJvVtI,ASD,forced choice,4,happiness,happiness
+R_2q44JuXjBZJvVtI,ASD,forced choice,5,calming,calming
+R_2q44JuXjBZJvVtI,ASD,forced choice,6,attention,attention
+R_wXh0YTjsGDmVoVb,ASD,free text,1,love,Du är fin
+R_wXh0YTjsGDmVoVb,ASD,free text,2,happiness,Jag är glad och lekfull
+R_wXh0YTjsGDmVoVb,ASD,free text,3,gratitude,Hjälp!
+R_wXh0YTjsGDmVoVb,ASD,free text,4,attention,Jag vill ha din uppmärksamhet
+R_wXh0YTjsGDmVoVb,ASD,free text,5,sadness,"Stop, sluta med vad du gör"
+R_wXh0YTjsGDmVoVb,ASD,free text,6,calming,Det kommer att bli bra
+R_2dHfj7dAs0fzddK,Control,free text,1,love,"Ömhet, intimitet"
+R_2dHfj7dAs0fzddK,Control,free text,2,gratitude,"Ser bara jättekonstigt ut. Ser ut som när en läkare ska kolla ömhet eller reflexer. Klappar och en kläm skulle kunna vara att uttrycka stöd, men det ser alldeles för konstlat ut för det."
+R_2dHfj7dAs0fzddK,Control,free text,3,attention,Diskret meddela nåt
+R_2dHfj7dAs0fzddK,Control,free text,4,sadness,Stöd
+R_2dHfj7dAs0fzddK,Control,free text,5,happiness,massage
+R_2dHfj7dAs0fzddK,Control,free text,6,calming,relation
+R_2ClzDR05jZBcSyf,Control,forced choice,1,attention,attention
+R_2ClzDR05jZBcSyf,Control,forced choice,2,happiness,other
+R_2ClzDR05jZBcSyf,Control,forced choice,3,love,calming
+R_2ClzDR05jZBcSyf,Control,forced choice,4,sadness,calming
+R_2ClzDR05jZBcSyf,Control,forced choice,5,calming,other
+R_2ClzDR05jZBcSyf,Control,forced choice,6,gratitude,attention
+R_3lKzOtQNJgt8RCp,ASD,free text,1,sadness,smärta
+R_3lKzOtQNJgt8RCp,ASD,free text,2,love,kärlek
+R_3lKzOtQNJgt8RCp,ASD,free text,3,happiness,retande
+R_3lKzOtQNJgt8RCp,ASD,free text,4,gratitude,jag vill något
+R_3lKzOtQNJgt8RCp,ASD,free text,5,attention,lever du
+R_3lKzOtQNJgt8RCp,ASD,free text,6,calming,mysande
+R_ue4cYZ0KxfG9spX,Control,free text,1,attention,Uppmärksamhet
+R_ue4cYZ0KxfG9spX,Control,free text,2,calming,Jag äger dig
+R_ue4cYZ0KxfG9spX,Control,free text,3,sadness,Ofrivillig massage till mig
+R_ue4cYZ0KxfG9spX,Control,free text,4,gratitude,Jag retar dig med flit och jag har makten
+R_ue4cYZ0KxfG9spX,Control,free text,5,love,Retas för att försökå få mig sexuellt upphetsad
+R_ue4cYZ0KxfG9spX,Control,free text,6,happiness,"Jag har tråkigt, sluta mdd det du gör och underhåll mig"
+R_21uIb37lY5Fwtfc,ASD,forced choice,1,sadness,calming
+R_21uIb37lY5Fwtfc,ASD,forced choice,2,happiness,attention
+R_21uIb37lY5Fwtfc,ASD,forced choice,3,attention,attention
+R_21uIb37lY5Fwtfc,ASD,forced choice,4,calming,calming
+R_21uIb37lY5Fwtfc,ASD,forced choice,5,love,love
+R_21uIb37lY5Fwtfc,ASD,forced choice,6,gratitude,calming
+R_2ypUDtUxDdt1eGg,Control,forced choice,1,gratitude,other
+R_2ypUDtUxDdt1eGg,Control,forced choice,2,happiness,other
+R_2ypUDtUxDdt1eGg,Control,forced choice,3,sadness,other
+R_2ypUDtUxDdt1eGg,Control,forced choice,4,love,love
+R_2ypUDtUxDdt1eGg,Control,forced choice,5,calming,other
+R_2ypUDtUxDdt1eGg,Control,forced choice,6,attention,attention
+R_2zeye9XVamQcnYX,Control,free text,1,happiness,Någon melodi
+R_2zeye9XVamQcnYX,Control,free text,2,love,Tycker om
+R_2zeye9XVamQcnYX,Control,free text,3,attention,Fråga om det gör ont
+R_2zeye9XVamQcnYX,Control,free text,4,calming,Lugn
+R_2zeye9XVamQcnYX,Control,free text,5,gratitude,Såja/tröst
+R_2zeye9XVamQcnYX,Control,free text,6,sadness,Tröst/trygghet
+R_2S2oHwoBXqHkejj,ASD,free text,1,sadness,Lugna dig
+R_2S2oHwoBXqHkejj,ASD,free text,2,love,Ömhet
+R_2S2oHwoBXqHkejj,ASD,free text,3,happiness,Lekfull
+R_2S2oHwoBXqHkejj,ASD,free text,4,calming,Tröst
+R_2S2oHwoBXqHkejj,ASD,free text,5,attention,Uppmärksamhet
+R_2S2oHwoBXqHkejj,ASD,free text,6,gratitude,Jag finns här
+R_2CwUdUbXSvdMV9F,Control,forced choice,1,attention,attention
+R_2CwUdUbXSvdMV9F,Control,forced choice,2,sadness,calming
+R_2CwUdUbXSvdMV9F,Control,forced choice,3,gratitude,attention
+R_2CwUdUbXSvdMV9F,Control,forced choice,4,calming,other
+R_2CwUdUbXSvdMV9F,Control,forced choice,5,happiness,happiness
+R_2CwUdUbXSvdMV9F,Control,forced choice,6,love,love
+R_12PZ3fRvApBemXj,Control,forced choice,1,attention,attention
+R_12PZ3fRvApBemXj,Control,forced choice,2,love,love
+R_12PZ3fRvApBemXj,Control,forced choice,3,happiness,happiness
+R_12PZ3fRvApBemXj,Control,forced choice,4,gratitude,calming
+R_12PZ3fRvApBemXj,Control,forced choice,5,sadness,gratitude
+R_12PZ3fRvApBemXj,Control,forced choice,6,calming,other
+R_3CPjNWWTYyeUfUQ,Control,free text,1,gratitude,"Be om uppmärksamhet, varna"
+R_3CPjNWWTYyeUfUQ,Control,free text,2,calming,Lugna ner eller trösta
+R_3CPjNWWTYyeUfUQ,Control,free text,3,attention,Be om uppmärksamhet eller retas
+R_3CPjNWWTYyeUfUQ,Control,free text,4,sadness,"Lugna ner, trösta eller känna efter personens puls eller kroppstemperatur"
+R_3CPjNWWTYyeUfUQ,Control,free text,5,happiness,"Kärleksfullhet, leksamhet, kanske retas."
+R_3CPjNWWTYyeUfUQ,Control,free text,6,love,"Kärleksfullhet, ömhet, åtrå"
+R_3HuEN0MZTrCa7Rj,Control,forced choice,1,calming,calming
+R_3HuEN0MZTrCa7Rj,Control,forced choice,2,love,love
+R_3HuEN0MZTrCa7Rj,Control,forced choice,3,sadness,attention
+R_3HuEN0MZTrCa7Rj,Control,forced choice,4,attention,attention
+R_3HuEN0MZTrCa7Rj,Control,forced choice,5,happiness,happiness
+R_3HuEN0MZTrCa7Rj,Control,forced choice,6,gratitude,sadness
+R_2dWvDauPFTp9ytu,Control,free text,1,love,kärlek?
+R_2dWvDauPFTp9ytu,Control,free text,2,attention,Uppmärksamhet
+R_2dWvDauPFTp9ytu,Control,free text,3,sadness,"""Jag gillar dig"""
+R_2dWvDauPFTp9ytu,Control,free text,4,happiness,"""jag är störig men gillar dig"""
+R_2dWvDauPFTp9ytu,Control,free text,5,gratitude,"""Duktig"""
+R_2dWvDauPFTp9ytu,Control,free text,6,calming,Borsta bort smuts? Jag önskar din arm var en katt?
+R_2THHedY0eKGKTcM,Control,forced choice,1,happiness,attention
+R_2THHedY0eKGKTcM,Control,forced choice,2,sadness,sadness
+R_2THHedY0eKGKTcM,Control,forced choice,3,love,love
+R_2THHedY0eKGKTcM,Control,forced choice,4,gratitude,calming
+R_2THHedY0eKGKTcM,Control,forced choice,5,calming,calming
+R_2THHedY0eKGKTcM,Control,forced choice,6,attention,attention
+R_2xDizOor3w10EXu,Control,free text,1,happiness,lek
+R_2xDizOor3w10EXu,Control,free text,2,gratitude,cynisk tröst
+R_2xDizOor3w10EXu,Control,free text,3,attention,näcka/ uppmärksamhet
+R_2xDizOor3w10EXu,Control,free text,4,sadness,medlidande eller dominans
+R_2xDizOor3w10EXu,Control,free text,5,calming,tröst
+R_2xDizOor3w10EXu,Control,free text,6,love,kärlek
+R_3KUcoc1L4zGUBHN,Control,forced choice,1,gratitude,other
+R_3KUcoc1L4zGUBHN,Control,forced choice,2,sadness,gratitude
+R_3KUcoc1L4zGUBHN,Control,forced choice,3,love,love
+R_3KUcoc1L4zGUBHN,Control,forced choice,4,happiness,attention
+R_3KUcoc1L4zGUBHN,Control,forced choice,5,calming,calming
+R_3KUcoc1L4zGUBHN,Control,forced choice,6,attention,attention
+R_vSH3NwzmJivuid3,ASD,forced choice,1,love,love
+R_vSH3NwzmJivuid3,ASD,forced choice,2,gratitude,other
+R_vSH3NwzmJivuid3,ASD,forced choice,3,attention,attention
+R_vSH3NwzmJivuid3,ASD,forced choice,4,calming,calming
+R_vSH3NwzmJivuid3,ASD,forced choice,5,sadness,calming
+R_vSH3NwzmJivuid3,ASD,forced choice,6,happiness,happiness
+R_2zCHckOxfeZXIDO,Control,free text,1,attention,Hen vilö få uppmärksamhet
+R_2zCHckOxfeZXIDO,Control,free text,2,love,De försöker lugna mig eller visa tillgivenhet
+R_2zCHckOxfeZXIDO,Control,free text,3,gratitude,De försöker få min uppmärksamhet
+R_2zCHckOxfeZXIDO,Control,free text,4,calming,De visar tillgivenhet
+R_2zCHckOxfeZXIDO,Control,free text,5,happiness,De leker eller retas med mig
+R_2zCHckOxfeZXIDO,Control,free text,6,sadness,Att de finns där för mig
+R_wM2cSGe8QtCkjct,Control,free text,1,calming,Lugn
+R_wM2cSGe8QtCkjct,Control,free text,2,sadness,Sympati
+R_wM2cSGe8QtCkjct,Control,free text,3,love,Ömhet
+R_wM2cSGe8QtCkjct,Control,free text,4,gratitude,Att något är ok
+R_wM2cSGe8QtCkjct,Control,free text,5,happiness,Melodi
+R_wM2cSGe8QtCkjct,Control,free text,6,attention,Söker uppmärksamhet
+R_1E1hgLCsWPNdlG8,Control,forced choice,1,calming,calming
+R_1E1hgLCsWPNdlG8,Control,forced choice,2,sadness,other
+R_1E1hgLCsWPNdlG8,Control,forced choice,3,attention,attention
+R_1E1hgLCsWPNdlG8,Control,forced choice,4,love,love
+R_1E1hgLCsWPNdlG8,Control,forced choice,5,happiness,other
+R_1E1hgLCsWPNdlG8,Control,forced choice,6,gratitude,sadness
+R_3hsciovcqHyz7Vc,Control,forced choice,1,love,love
+R_3hsciovcqHyz7Vc,Control,forced choice,2,sadness,sadness
+R_3hsciovcqHyz7Vc,Control,forced choice,3,happiness,happiness
+R_3hsciovcqHyz7Vc,Control,forced choice,4,gratitude,calming
+R_3hsciovcqHyz7Vc,Control,forced choice,5,attention,attention
+R_3hsciovcqHyz7Vc,Control,forced choice,6,calming,calming
+R_0MSjHjrXqGqbQn7,Control,free text,1,attention,.
+R_0MSjHjrXqGqbQn7,Control,free text,2,sadness,Stanna
+R_0MSjHjrXqGqbQn7,Control,free text,3,gratitude,Vet ej
+R_0MSjHjrXqGqbQn7,Control,free text,4,love,Vet ej
+R_0MSjHjrXqGqbQn7,Control,free text,5,calming,Klappa
+R_0MSjHjrXqGqbQn7,Control,free text,6,happiness,Vet ej
+R_2CEcEfV1HUsheRJ,ASD,forced choice,1,gratitude,sadness
+R_2CEcEfV1HUsheRJ,ASD,forced choice,2,sadness,calming
+R_2CEcEfV1HUsheRJ,ASD,forced choice,3,happiness,happiness
+R_2CEcEfV1HUsheRJ,ASD,forced choice,4,attention,attention
+R_2CEcEfV1HUsheRJ,ASD,forced choice,5,calming,calming
+R_2CEcEfV1HUsheRJ,ASD,forced choice,6,love,love
+R_OOvavv4lZZZ87DP,Control,forced choice,1,calming,calming
+R_OOvavv4lZZZ87DP,Control,forced choice,2,sadness,gratitude
+R_OOvavv4lZZZ87DP,Control,forced choice,3,attention,attention
+R_OOvavv4lZZZ87DP,Control,forced choice,4,happiness,attention
+R_OOvavv4lZZZ87DP,Control,forced choice,5,gratitude,other
+R_OOvavv4lZZZ87DP,Control,forced choice,6,love,love
+R_11ZzJT4kXwtiqcN,Control,free text,1,happiness,"feeling of raindrops? Alternatively ""I'm bored"""
+R_11ZzJT4kXwtiqcN,Control,free text,2,calming,Care and affection
+R_11ZzJT4kXwtiqcN,Control,free text,3,attention,"""I want your attention"""
+R_11ZzJT4kXwtiqcN,Control,free text,4,gratitude,"There, there"
+R_11ZzJT4kXwtiqcN,Control,free text,5,sadness,"Care / ""it's okay"""
+R_11ZzJT4kXwtiqcN,Control,free text,6,love,"""I'm annoying AF and you will be tickled"""
+R_3CHR7gv0IOivBct,Control,free text,1,calming,"Omtanke, närhet."
+R_3CHR7gv0IOivBct,Control,free text,2,gratitude,Lekfull? Konstig beröring.
+R_3CHR7gv0IOivBct,Control,free text,3,sadness,"Tröst, eftetryck."
+R_3CHR7gv0IOivBct,Control,free text,4,love,Oklart. Uttråkad? Närmanden?
+R_3CHR7gv0IOivBct,Control,free text,5,happiness,"Stress, oro."
+R_3CHR7gv0IOivBct,Control,free text,6,attention,Uppmärksamhet
+R_3EMSvXAT1ZriJYe,Control,forced choice,1,love,love
+R_3EMSvXAT1ZriJYe,Control,forced choice,2,sadness,attention
+R_3EMSvXAT1ZriJYe,Control,forced choice,3,calming,calming
+R_3EMSvXAT1ZriJYe,Control,forced choice,4,gratitude,happiness
+R_3EMSvXAT1ZriJYe,Control,forced choice,5,happiness,happiness
+R_3EMSvXAT1ZriJYe,Control,forced choice,6,attention,attention
+R_2CB85AMCpgsbVWY,Control,forced choice,1,sadness,attention
+R_2CB85AMCpgsbVWY,Control,forced choice,2,calming,calming
+R_2CB85AMCpgsbVWY,Control,forced choice,3,love,love
+R_2CB85AMCpgsbVWY,Control,forced choice,4,happiness,happiness
+R_2CB85AMCpgsbVWY,Control,forced choice,5,attention,attention
+R_2CB85AMCpgsbVWY,Control,forced choice,6,gratitude,calming
+R_2xwMnj2MJDb09Ah,Control,free text,1,gratitude,Påkalla uppmärksamhet
+R_2xwMnj2MJDb09Ah,Control,free text,2,love,"Kärleksfull beröring, tillgivenhet"
+R_2xwMnj2MJDb09Ah,Control,free text,3,attention,Påkalla uppmärksamhet
+R_2xwMnj2MJDb09Ah,Control,free text,4,calming,"Tillgivenhet, eventuellt trösta"
+R_2xwMnj2MJDb09Ah,Control,free text,5,sadness,"Tillgivenhet, lugna"
+R_2xwMnj2MJDb09Ah,Control,free text,6,happiness,"Rastlöshet, reta"
+R_Z2hwxB0KG3pZycV,Control,forced choice,1,calming,calming
+R_Z2hwxB0KG3pZycV,Control,forced choice,2,attention,attention
+R_Z2hwxB0KG3pZycV,Control,forced choice,3,sadness,calming
+R_Z2hwxB0KG3pZycV,Control,forced choice,4,love,love
+R_Z2hwxB0KG3pZycV,Control,forced choice,5,gratitude,calming
+R_Z2hwxB0KG3pZycV,Control,forced choice,6,happiness,attention
+R_11ay77avichjVEe,ASD,free text,1,calming,Lugnade eller tröstande
+R_11ay77avichjVEe,ASD,free text,2,attention,Uppmärksamhet
+R_11ay77avichjVEe,ASD,free text,3,happiness,Tjittla eller lek
+R_11ay77avichjVEe,ASD,free text,4,gratitude,Uppmärksama att dom kommer att ta.
+R_11ay77avichjVEe,ASD,free text,5,love,Kärleksfull
+R_11ay77avichjVEe,ASD,free text,6,sadness,Vet ej
+R_DSOkAzM0gHFMbrb,Control,forced choice,1,love,love
+R_DSOkAzM0gHFMbrb,Control,forced choice,2,attention,attention
+R_DSOkAzM0gHFMbrb,Control,forced choice,3,calming,calming
+R_DSOkAzM0gHFMbrb,Control,forced choice,4,happiness,happiness
+R_DSOkAzM0gHFMbrb,Control,forced choice,5,gratitude,gratitude
+R_DSOkAzM0gHFMbrb,Control,forced choice,6,sadness,sadness
+R_332xQPQ4R0p6fDi,Control,free text,1,attention,Söker uppmärksamhet.
+R_332xQPQ4R0p6fDi,Control,free text,2,gratitude,"""Oj kolla!"" Pockar på uppmärksamhet först och sen hålla kvar för att rikta mottagarens fokus mot något spännande."
+R_332xQPQ4R0p6fDi,Control,free text,3,love,Mys. Kärlek.
+R_332xQPQ4R0p6fDi,Control,free text,4,calming,Lugn och stabilitet.
+R_332xQPQ4R0p6fDi,Control,free text,5,happiness,Bus och lek.
+R_332xQPQ4R0p6fDi,Control,free text,6,sadness,Rädsla eller aggression.
+R_12bWn129WCtDnR4,ASD,forced choice,1,attention,attention
+R_12bWn129WCtDnR4,ASD,forced choice,2,happiness,other
+R_12bWn129WCtDnR4,ASD,forced choice,3,sadness,calming
+R_12bWn129WCtDnR4,ASD,forced choice,4,gratitude,attention
+R_12bWn129WCtDnR4,ASD,forced choice,5,love,other
+R_12bWn129WCtDnR4,ASD,forced choice,6,calming,calming
+R_3j9D3GClAgCmMro,Control,free text,1,calming,Lugnande energi
+R_3j9D3GClAgCmMro,Control,free text,2,sadness,Vill ha uppmärksamhet
+R_3j9D3GClAgCmMro,Control,free text,3,love,Att personen gillar dig och vill göra det mysigt
+R_3j9D3GClAgCmMro,Control,free text,4,happiness,Nervöst
+R_3j9D3GClAgCmMro,Control,free text,5,gratitude,Vill något
+R_3j9D3GClAgCmMro,Control,free text,6,attention,Vill något
+R_Re5zGBlOqvLdX5D,Control,forced choice,1,happiness,attention
+R_Re5zGBlOqvLdX5D,Control,forced choice,2,attention,attention
+R_Re5zGBlOqvLdX5D,Control,forced choice,3,love,love
+R_Re5zGBlOqvLdX5D,Control,forced choice,4,calming,other
+R_Re5zGBlOqvLdX5D,Control,forced choice,5,sadness,other
+R_Re5zGBlOqvLdX5D,Control,forced choice,6,gratitude,gratitude
+R_2tfHWX6jKUCGfhU,Control,forced choice,1,love,love
+R_2tfHWX6jKUCGfhU,Control,forced choice,2,sadness,gratitude
+R_2tfHWX6jKUCGfhU,Control,forced choice,3,attention,attention
+R_2tfHWX6jKUCGfhU,Control,forced choice,4,gratitude,calming
+R_2tfHWX6jKUCGfhU,Control,forced choice,5,happiness,attention
+R_2tfHWX6jKUCGfhU,Control,forced choice,6,calming,love
+R_1jv6QYc5bKIV3TU,Control,free text,1,calming,Att armen är smutsig och måste bli ren.
+R_1jv6QYc5bKIV3TU,Control,free text,2,love,De kittlas/retas
+R_1jv6QYc5bKIV3TU,Control,free text,3,attention,De har en fråga att ställa
+R_1jv6QYc5bKIV3TU,Control,free text,4,sadness,Uppmuntrande närhet
+R_1jv6QYc5bKIV3TU,Control,free text,5,gratitude,Att de vill bråka/slåss
+R_1jv6QYc5bKIV3TU,Control,free text,6,happiness,"Att de vill retas, starta bråk"
+R_3lRiWXHGoht96yw,Control,free text,1,calming,trygghet och lugn
+R_3lRiWXHGoht96yw,Control,free text,2,sadness,smärtstillande
+R_3lRiWXHGoht96yw,Control,free text,3,love,sensualitet
+R_3lRiWXHGoht96yw,Control,free text,4,gratitude,"lekfullhet, trygghet"
+R_3lRiWXHGoht96yw,Control,free text,5,happiness,lekfullhet
+R_3lRiWXHGoht96yw,Control,free text,6,attention,uppmärksamhetskrävande
+R_1mz96W0RjzImNcM,Control,free text,1,gratitude,Söker uppmärksamhet för något
+R_1mz96W0RjzImNcM,Control,free text,2,love,Omtanke/ kärlek
+R_1mz96W0RjzImNcM,Control,free text,3,calming,Vet ej
+R_1mz96W0RjzImNcM,Control,free text,4,sadness,Lyssna då.
+R_1mz96W0RjzImNcM,Control,free text,5,happiness,Lekfullt
+R_1mz96W0RjzImNcM,Control,free text,6,attention,Hallå jag pratar med dig
+R_3g6PVaYmtBq0oZ3,Control,forced choice,1,sadness,attention
+R_3g6PVaYmtBq0oZ3,Control,forced choice,2,calming,calming
+R_3g6PVaYmtBq0oZ3,Control,forced choice,3,gratitude,attention
+R_3g6PVaYmtBq0oZ3,Control,forced choice,4,love,love
+R_3g6PVaYmtBq0oZ3,Control,forced choice,5,attention,attention
+R_3g6PVaYmtBq0oZ3,Control,forced choice,6,happiness,other
+R_294ghCYZa5fDh5p,Control,free text,1,calming,"""The hair on your arm is so long"" or just closeness"
+R_294ghCYZa5fDh5p,Control,free text,2,gratitude,"""Hallå, titta"""
+R_294ghCYZa5fDh5p,Control,free text,3,sadness,Stop/Listen/This is serious
+R_294ghCYZa5fDh5p,Control,free text,4,attention,Trying to get attention.
+R_294ghCYZa5fDh5p,Control,free text,5,happiness,Just bored/playing with someone
+R_294ghCYZa5fDh5p,Control,free text,6,love,Love
+R_3n6nxQ3KruWH8PX,Control,forced choice,1,gratitude,other
+R_3n6nxQ3KruWH8PX,Control,forced choice,2,sadness,sadness
+R_3n6nxQ3KruWH8PX,Control,forced choice,3,calming,calming
+R_3n6nxQ3KruWH8PX,Control,forced choice,4,happiness,attention
+R_3n6nxQ3KruWH8PX,Control,forced choice,5,attention,attention
+R_3n6nxQ3KruWH8PX,Control,forced choice,6,love,love
+R_YS37ZXqdSx3kKOJ,Control,forced choice,1,sadness,calming
+R_YS37ZXqdSx3kKOJ,Control,forced choice,2,calming,love
+R_YS37ZXqdSx3kKOJ,Control,forced choice,3,gratitude,attention
+R_YS37ZXqdSx3kKOJ,Control,forced choice,4,love,other
+R_YS37ZXqdSx3kKOJ,Control,forced choice,5,attention,attention
+R_YS37ZXqdSx3kKOJ,Control,forced choice,6,happiness,happiness
+R_ZEU7MICncl7ZxTP,Control,free text,1,love,"avslappning, lugn"
+R_ZEU7MICncl7ZxTP,Control,free text,2,attention,uppmärksamhet
+R_ZEU7MICncl7ZxTP,Control,free text,3,sadness,"oro, ängslan"
+R_ZEU7MICncl7ZxTP,Control,free text,4,gratitude,"feedback, positiv"
+R_ZEU7MICncl7ZxTP,Control,free text,5,calming,lugnande signaler
+R_ZEU7MICncl7ZxTP,Control,free text,6,happiness,?
+R_2CrFpwUVkj0e8I1,ASD,forced choice,1,calming,calming
+R_2CrFpwUVkj0e8I1,ASD,forced choice,2,sadness,attention
+R_2CrFpwUVkj0e8I1,ASD,forced choice,3,happiness,other
+R_2CrFpwUVkj0e8I1,ASD,forced choice,4,gratitude,attention
+R_2CrFpwUVkj0e8I1,ASD,forced choice,5,attention,other
+R_2CrFpwUVkj0e8I1,ASD,forced choice,6,love,other
+R_2who6Qy9Oo0roix,Control,forced choice,1,happiness,happiness
+R_2who6Qy9Oo0roix,Control,forced choice,2,love,love
+R_2who6Qy9Oo0roix,Control,forced choice,3,sadness,calming
+R_2who6Qy9Oo0roix,Control,forced choice,4,calming,other
+R_2who6Qy9Oo0roix,Control,forced choice,5,attention,attention
+R_2who6Qy9Oo0roix,Control,forced choice,6,gratitude,other
+R_3s6Mw0WTJvfUif3,Control,free text,1,happiness,Att hen är rastlös och vill ha uppmärksamhet
+R_3s6Mw0WTJvfUif3,Control,free text,2,attention,"Lyssna, jag vill säga något"
+R_3s6Mw0WTJvfUif3,Control,free text,3,gratitude,Att hen vill ha hjälp med något
+R_3s6Mw0WTJvfUif3,Control,free text,4,sadness,Att hen finns där..
+R_3s6Mw0WTJvfUif3,Control,free text,5,love,Att hen är avslappnad i sällskapet och vill vara nära
+R_3s6Mw0WTJvfUif3,Control,free text,6,calming,Det går över..
+R_3MiARCAT2fla3fL,ASD,free text,1,gratitude,"I would like your attention, please."
+R_3MiARCAT2fla3fL,ASD,free text,2,happiness,I'm feeling playful
+R_3MiARCAT2fla3fL,ASD,free text,3,sadness,I'm there for you
+R_3MiARCAT2fla3fL,ASD,free text,4,attention,I want your attention (more rudely)
+R_3MiARCAT2fla3fL,ASD,free text,5,calming,I'm trying to comfort you
+R_3MiARCAT2fla3fL,ASD,free text,6,love,I'm feeling flirty
+R_3JKrFdhzOXUQwvF,Control,forced choice,1,gratitude,calming
+R_3JKrFdhzOXUQwvF,Control,forced choice,2,love,love
+R_3JKrFdhzOXUQwvF,Control,forced choice,3,attention,attention
+R_3JKrFdhzOXUQwvF,Control,forced choice,4,calming,calming
+R_3JKrFdhzOXUQwvF,Control,forced choice,5,sadness,gratitude
+R_3JKrFdhzOXUQwvF,Control,forced choice,6,happiness,other
+R_6lEgY56GHrkimVX,Control,forced choice,1,happiness,attention
+R_6lEgY56GHrkimVX,Control,forced choice,2,love,calming
+R_6lEgY56GHrkimVX,Control,forced choice,3,calming,calming
+R_6lEgY56GHrkimVX,Control,forced choice,4,attention,attention
+R_6lEgY56GHrkimVX,Control,forced choice,5,gratitude,happiness
+R_6lEgY56GHrkimVX,Control,forced choice,6,sadness,love
+R_3oNsBk5aUKfbnD5,Control,free text,1,love,Ska vi ligga?
+R_3oNsBk5aUKfbnD5,Control,free text,2,gratitude,Hej jag behöver hjälp med ngt
+R_3oNsBk5aUKfbnD5,Control,free text,3,attention,Jag behöver din uppmärksamhet
+R_3oNsBk5aUKfbnD5,Control,free text,4,sadness,Nu har du gjort fel
+R_3oNsBk5aUKfbnD5,Control,free text,5,happiness,Lekfullt busig
+R_3oNsBk5aUKfbnD5,Control,free text,6,calming,Försöker lugna personen
+R_1hY9ENg6nnrnU1V,ASD,free text,1,calming,"Lugn, en lugnande rörelse"
+R_1hY9ENg6nnrnU1V,ASD,free text,2,sadness,Jag bryr mig om dig
+R_1hY9ENg6nnrnU1V,ASD,free text,3,gratitude,"Osäker på vad det kan vara, kanske ""är du vaken? Och att greppet är när man får kontakt"
+R_1hY9ENg6nnrnU1V,ASD,free text,4,attention,"Hallå, är du vaken?"
+R_1hY9ENg6nnrnU1V,ASD,free text,5,happiness,Kan du känna det här? Eller eventuellt en busig kommunikation
+R_1hY9ENg6nnrnU1V,ASD,free text,6,love,"Jag tycker om dig, du är fin"
+R_xbUqjuuyLVtTlL3,ASD,forced choice,1,calming,calming
+R_xbUqjuuyLVtTlL3,ASD,forced choice,2,attention,attention
+R_xbUqjuuyLVtTlL3,ASD,forced choice,3,love,love
+R_xbUqjuuyLVtTlL3,ASD,forced choice,4,sadness,calming
+R_xbUqjuuyLVtTlL3,ASD,forced choice,5,happiness,attention
+R_xbUqjuuyLVtTlL3,ASD,forced choice,6,gratitude,other
+R_sk7UrTZW67cdelH,Control,forced choice,1,calming,calming
+R_sk7UrTZW67cdelH,Control,forced choice,2,gratitude,attention
+R_sk7UrTZW67cdelH,Control,forced choice,3,attention,attention
+R_sk7UrTZW67cdelH,Control,forced choice,4,sadness,other
+R_sk7UrTZW67cdelH,Control,forced choice,5,love,love
+R_sk7UrTZW67cdelH,Control,forced choice,6,happiness,attention
+R_2EjdAOg24mBRiuC,Control,forced choice,1,love,love
+R_2EjdAOg24mBRiuC,Control,forced choice,2,sadness,calming
+R_2EjdAOg24mBRiuC,Control,forced choice,3,happiness,other
+R_2EjdAOg24mBRiuC,Control,forced choice,4,gratitude,attention
+R_2EjdAOg24mBRiuC,Control,forced choice,5,attention,attention
+R_2EjdAOg24mBRiuC,Control,forced choice,6,calming,love
+R_1DTrBel11vBXMIR,Control,free text,1,attention,Försöker få min uppmärksamhet/väcka mig
+R_1DTrBel11vBXMIR,Control,free text,2,love,Jag tycker om dig
+R_1DTrBel11vBXMIR,Control,free text,3,gratitude,Vet ej
+R_1DTrBel11vBXMIR,Control,free text,4,happiness,Lekfull
+R_1DTrBel11vBXMIR,Control,free text,5,calming,Vill lugna/trösta
+R_1DTrBel11vBXMIR,Control,free text,6,sadness,Vet ej
+R_3P628lU1KWxNmHJ,Control,forced choice,1,love,calming
+R_3P628lU1KWxNmHJ,Control,forced choice,2,calming,calming
+R_3P628lU1KWxNmHJ,Control,forced choice,3,happiness,happiness
+R_3P628lU1KWxNmHJ,Control,forced choice,4,attention,attention
+R_3P628lU1KWxNmHJ,Control,forced choice,5,gratitude,other
+R_3P628lU1KWxNmHJ,Control,forced choice,6,sadness,gratitude
+R_cvDAnSlEoWy4bXX,Control,free text,1,sadness,"I need you to stay here. Could be friendly, could be a show of force"
+R_cvDAnSlEoWy4bXX,Control,free text,2,happiness,I want to play with you
+R_cvDAnSlEoWy4bXX,Control,free text,3,love,"I like you / ""hi"" / acknowledging the presence of a person close to them"
+R_cvDAnSlEoWy4bXX,Control,free text,4,attention,Can i get your attention
+R_cvDAnSlEoWy4bXX,Control,free text,5,calming,Calm down / you are safe
+R_cvDAnSlEoWy4bXX,Control,free text,6,gratitude,"it's ok, slow down"
+R_u37vldfoBo3FYul,Control,forced choice,1,happiness,other
+R_u37vldfoBo3FYul,Control,forced choice,2,attention,attention
+R_u37vldfoBo3FYul,Control,forced choice,3,calming,calming
+R_u37vldfoBo3FYul,Control,forced choice,4,gratitude,other
+R_u37vldfoBo3FYul,Control,forced choice,5,love,love
+R_u37vldfoBo3FYul,Control,forced choice,6,sadness,gratitude
+R_SPK0B9AhhJYBTVf,Control,free text,1,calming,Tröst
+R_SPK0B9AhhJYBTVf,Control,free text,2,happiness,Lekfullhet
+R_SPK0B9AhhJYBTVf,Control,free text,3,gratitude,Manipulativt
+R_SPK0B9AhhJYBTVf,Control,free text,4,attention,Vill ha uppmärksamhet
+R_SPK0B9AhhJYBTVf,Control,free text,5,love,"Kärlek, du har min uppmärksamhet"
+R_SPK0B9AhhJYBTVf,Control,free text,6,sadness,Kontrollerande eller trygghet
+R_2czNL44C8dKDp6d,Control,forced choice,1,gratitude,calming
+R_2czNL44C8dKDp6d,Control,forced choice,2,attention,attention
+R_2czNL44C8dKDp6d,Control,forced choice,3,calming,love
+R_2czNL44C8dKDp6d,Control,forced choice,4,love,love
+R_2czNL44C8dKDp6d,Control,forced choice,5,sadness,gratitude
+R_2czNL44C8dKDp6d,Control,forced choice,6,happiness,happiness
+R_1GPpy6cRxlr9e9U,Control,forced choice,1,sadness,gratitude
+R_1GPpy6cRxlr9e9U,Control,forced choice,2,love,love
+R_1GPpy6cRxlr9e9U,Control,forced choice,3,happiness,attention
+R_1GPpy6cRxlr9e9U,Control,forced choice,4,calming,calming
+R_1GPpy6cRxlr9e9U,Control,forced choice,5,gratitude,calming
+R_1GPpy6cRxlr9e9U,Control,forced choice,6,attention,attention
+R_2fuDVwqkW4r2SRz,Control,free text,1,gratitude,Att jag inte är uppmärksam på något viktigt
+R_2fuDVwqkW4r2SRz,Control,free text,2,happiness,De vill ha uppmärksamhet
+R_2fuDVwqkW4r2SRz,Control,free text,3,sadness,Att jag ska lugna ner mig
+R_2fuDVwqkW4r2SRz,Control,free text,4,love,kärlek
+R_2fuDVwqkW4r2SRz,Control,free text,5,calming,"ser passivt aggressivt ut, så irritation dolt i kärlek."
+R_2fuDVwqkW4r2SRz,Control,free text,6,attention,de vill ha uppmärksamhet för något de är glada över
+R_3fW3964xF4PKPEL,Control,forced choice,1,attention,attention
+R_3fW3964xF4PKPEL,Control,forced choice,2,sadness,gratitude
+R_3fW3964xF4PKPEL,Control,forced choice,3,happiness,calming
+R_3fW3964xF4PKPEL,Control,forced choice,4,calming,other
+R_3fW3964xF4PKPEL,Control,forced choice,5,love,love
+R_3fW3964xF4PKPEL,Control,forced choice,6,gratitude,sadness
+R_1dymQ7DxQDWqNoX,Control,free text,1,gratitude,"Hallå, det är okej."
+R_1dymQ7DxQDWqNoX,Control,free text,2,sadness,Jag finns här för dig.
+R_1dymQ7DxQDWqNoX,Control,free text,3,calming,Nu kan du vara lugn.
+R_1dymQ7DxQDWqNoX,Control,free text,4,love,Jag gillar dig.
+R_1dymQ7DxQDWqNoX,Control,free text,5,attention,Hallå! Jag vill ha din uppmärksamhet!
+R_1dymQ7DxQDWqNoX,Control,free text,6,happiness,Lekfullt och retande
+R_3CVMl6UWTIqOjTn,ASD,free text,1,sadness,Tröst
+R_3CVMl6UWTIqOjTn,ASD,free text,2,gratitude,Allt löser sig. Det kommer bli bra.
+R_3CVMl6UWTIqOjTn,ASD,free text,3,calming,Jag tycker om dig.
+R_3CVMl6UWTIqOjTn,ASD,free text,4,attention,Fånga uppmärksamhet.
+R_3CVMl6UWTIqOjTn,ASD,free text,5,happiness,Lekfullhet.
+R_3CVMl6UWTIqOjTn,ASD,free text,6,love,"Tankspridd beröring, affektion."
+R_1JKKjVXfNpD1GT3,Control,forced choice,1,love,love
+R_1JKKjVXfNpD1GT3,Control,forced choice,2,happiness,happiness
+R_1JKKjVXfNpD1GT3,Control,forced choice,3,sadness,other
+R_1JKKjVXfNpD1GT3,Control,forced choice,4,calming,calming
+R_1JKKjVXfNpD1GT3,Control,forced choice,5,attention,attention
+R_1JKKjVXfNpD1GT3,Control,forced choice,6,gratitude,sadness
+R_8kbl8DKnsl4ErxD,Control,free text,1,happiness,"There was a spider on my arm, it moved like this."
+R_8kbl8DKnsl4ErxD,Control,free text,2,calming,Possibly soothing someone highly distressed or dissociating.
+R_8kbl8DKnsl4ErxD,Control,free text,3,gratitude,Trying to get a sleeping person's attention.
+R_8kbl8DKnsl4ErxD,Control,free text,4,love,Love and affection.
+R_8kbl8DKnsl4ErxD,Control,free text,5,attention,Trying to get someone's attention.
+R_8kbl8DKnsl4ErxD,Control,free text,6,sadness,It looks kind of aggressive to me but I don't think that's really what they mean.
+R_3luap9V1BDdFgrm,Control,forced choice,1,love,love
+R_3luap9V1BDdFgrm,Control,forced choice,2,sadness,calming
+R_3luap9V1BDdFgrm,Control,forced choice,3,attention,attention
+R_3luap9V1BDdFgrm,Control,forced choice,4,gratitude,gratitude
+R_3luap9V1BDdFgrm,Control,forced choice,5,calming,calming
+R_3luap9V1BDdFgrm,Control,forced choice,6,happiness,attention
+R_3m8ZjAPYN6HRn40,Control,forced choice,1,love,love
+R_3m8ZjAPYN6HRn40,Control,forced choice,2,attention,attention
+R_3m8ZjAPYN6HRn40,Control,forced choice,3,calming,calming
+R_3m8ZjAPYN6HRn40,Control,forced choice,4,happiness,other
+R_3m8ZjAPYN6HRn40,Control,forced choice,5,gratitude,calming
+R_3m8ZjAPYN6HRn40,Control,forced choice,6,sadness,calming
+R_2BwFkFVhfLlCKpX,Control,free text,1,sadness,They want attention
+R_2BwFkFVhfLlCKpX,Control,free text,2,happiness,Excitedness/happiness
+R_2BwFkFVhfLlCKpX,Control,free text,3,gratitude,Calm down
+R_2BwFkFVhfLlCKpX,Control,free text,4,love,sexual excitement/horniness
+R_2BwFkFVhfLlCKpX,Control,free text,5,calming,protection
+R_2BwFkFVhfLlCKpX,Control,free text,6,attention,that they want attention but in a lighthearted way
+R_31nhmzQcwGn8LLx,Control,forced choice,1,calming,calming
+R_31nhmzQcwGn8LLx,Control,forced choice,2,attention,attention
+R_31nhmzQcwGn8LLx,Control,forced choice,3,happiness,other
+R_31nhmzQcwGn8LLx,Control,forced choice,4,gratitude,other
+R_31nhmzQcwGn8LLx,Control,forced choice,5,love,love
+R_31nhmzQcwGn8LLx,Control,forced choice,6,sadness,gratitude
+R_YW6Q3MOEts5PpiV,Control,free text,1,love,Jag älskar dig
+R_YW6Q3MOEts5PpiV,Control,free text,2,sadness,massage?
+R_YW6Q3MOEts5PpiV,Control,free text,3,gratitude,Bra jobbat
+R_YW6Q3MOEts5PpiV,Control,free text,4,attention,Kolla här
+R_YW6Q3MOEts5PpiV,Control,free text,5,happiness,Vet inte
+R_YW6Q3MOEts5PpiV,Control,free text,6,calming,Massage
+R_77pOgTGViZANSLv,Control,free text,1,happiness,going somewhere
+R_77pOgTGViZANSLv,Control,free text,2,calming,calm down
+R_77pOgTGViZANSLv,Control,free text,3,gratitude,wake up
+R_77pOgTGViZANSLv,Control,free text,4,attention,I want your attention
+R_77pOgTGViZANSLv,Control,free text,5,love,I take care of you
+R_77pOgTGViZANSLv,Control,free text,6,sadness,stay here
+R_xbFC6lIVwANHazn,ASD,forced choice,1,calming,calming
+R_xbFC6lIVwANHazn,ASD,forced choice,2,attention,attention
+R_xbFC6lIVwANHazn,ASD,forced choice,3,happiness,other
+R_xbFC6lIVwANHazn,ASD,forced choice,4,gratitude,calming
+R_xbFC6lIVwANHazn,ASD,forced choice,5,love,calming
+R_xbFC6lIVwANHazn,ASD,forced choice,6,sadness,gratitude
+R_2Xbtllds1teaoV2,Control,forced choice,1,happiness,happiness
+R_2Xbtllds1teaoV2,Control,forced choice,2,sadness,calming
+R_2Xbtllds1teaoV2,Control,forced choice,3,gratitude,gratitude
+R_2Xbtllds1teaoV2,Control,forced choice,4,love,love
+R_2Xbtllds1teaoV2,Control,forced choice,5,attention,attention
+R_2Xbtllds1teaoV2,Control,forced choice,6,calming,calming
+R_1i2wuV9LFXVWL1l,Control,free text,1,love,Jag tycker om dig
+R_1i2wuV9LFXVWL1l,Control,free text,2,happiness,Jag är rastlös eller på bus/lekhumör
+R_1i2wuV9LFXVWL1l,Control,free text,3,gratitude,Får jag ta hand om dig lite?
+R_1i2wuV9LFXVWL1l,Control,free text,4,calming,-
+R_1i2wuV9LFXVWL1l,Control,free text,5,attention,"Hallå, jag vill nåt!"
+R_1i2wuV9LFXVWL1l,Control,free text,6,sadness,Jag är här.
+R_2chhF9ab3dr6AYV,ASD,free text,1,calming,"En del äldre kan stryka sådär när man pratar med dem, de har en annan beröringskultur. Men det ser ut som att handen trycker samtidigt som den stryker, det gör att jag blir osäker."
+R_2chhF9ab3dr6AYV,ASD,free text,2,happiness,Rastlöshet eller att retas.
+R_2chhF9ab3dr6AYV,ASD,free text,3,gratitude,Jag kan inte föreställa mig vad det kan betyda .
+R_2chhF9ab3dr6AYV,ASD,free text,4,love,Sånt smekande man kan göra på någon man gillar. En partner till exempel.
+R_2chhF9ab3dr6AYV,ASD,free text,5,attention,"Pockar på uppmärksamhet, men man brukar inte flytta på stället som man pockar på ."
+R_2chhF9ab3dr6AYV,ASD,free text,6,sadness,"Jag vet inte, men det ser sjukt obehagligt ut."
+R_28OpeuVvAZfRxx9,Control,forced choice,1,love,love
+R_28OpeuVvAZfRxx9,Control,forced choice,2,sadness,calming
+R_28OpeuVvAZfRxx9,Control,forced choice,3,gratitude,attention
+R_28OpeuVvAZfRxx9,Control,forced choice,4,happiness,happiness
+R_28OpeuVvAZfRxx9,Control,forced choice,5,attention,attention
+R_28OpeuVvAZfRxx9,Control,forced choice,6,calming,love
+R_31aA9K7L4GJnO8U,ASD,free text,1,happiness,"Lekfullhet, ”väcka liv”"
+R_31aA9K7L4GJnO8U,ASD,free text,2,attention,Uppmärksamhet
+R_31aA9K7L4GJnO8U,ASD,free text,3,gratitude,Vill förmedla något
+R_31aA9K7L4GJnO8U,ASD,free text,4,sadness,Lugn
+R_31aA9K7L4GJnO8U,ASD,free text,5,calming,Lugn
+R_31aA9K7L4GJnO8U,ASD,free text,6,love,"Lugn, personen tycker om mig"
+R_2yeEsimB8z0936F,Control,free text,1,love,Jag tycker om dig och att vara nära dig
+R_2yeEsimB8z0936F,Control,free text,2,gratitude,Jag vill ha uppmärksamhet
+R_2yeEsimB8z0936F,Control,free text,3,happiness,Ska vi hitta på något kul tillsammans
+R_2yeEsimB8z0936F,Control,free text,4,calming,Lugna ner dig
+R_2yeEsimB8z0936F,Control,free text,5,attention,Du jag vill säga något viktigt till dig
+R_2yeEsimB8z0936F,Control,free text,6,sadness,Något är viktigt
+R_Au4y6fN35wNha49,Control,forced choice,1,calming,calming
+R_Au4y6fN35wNha49,Control,forced choice,2,attention,attention
+R_Au4y6fN35wNha49,Control,forced choice,3,love,calming
+R_Au4y6fN35wNha49,Control,forced choice,4,sadness,sadness
+R_Au4y6fN35wNha49,Control,forced choice,5,happiness,other
+R_Au4y6fN35wNha49,Control,forced choice,6,gratitude,calming
+R_7977Ih6yT3QaETL,ASD,forced choice,1,gratitude,calming
+R_7977Ih6yT3QaETL,ASD,forced choice,2,sadness,calming
+R_7977Ih6yT3QaETL,ASD,forced choice,3,love,love
+R_7977Ih6yT3QaETL,ASD,forced choice,4,calming,calming
+R_7977Ih6yT3QaETL,ASD,forced choice,5,attention,attention
+R_7977Ih6yT3QaETL,ASD,forced choice,6,happiness,happiness
+R_1DHmn0mcKBgKfSA,Control,free text,1,sadness,Oklart
+R_1DHmn0mcKBgKfSA,Control,free text,2,happiness,En melodi
+R_1DHmn0mcKBgKfSA,Control,free text,3,gratitude,Vet ej
+R_1DHmn0mcKBgKfSA,Control,free text,4,attention,Vet ej
+R_1DHmn0mcKBgKfSA,Control,free text,5,calming,"Jag tycker om dig eller jag finns här, ta det lugnt"
+R_1DHmn0mcKBgKfSA,Control,free text,6,love,Kärlek
+R_2sSxvyyxlKyW2sM,ASD,forced choice,1,love,love
+R_2sSxvyyxlKyW2sM,ASD,forced choice,2,sadness,other
+R_2sSxvyyxlKyW2sM,ASD,forced choice,3,gratitude,other
+R_2sSxvyyxlKyW2sM,ASD,forced choice,4,calming,calming
+R_2sSxvyyxlKyW2sM,ASD,forced choice,5,happiness,happiness
+R_2sSxvyyxlKyW2sM,ASD,forced choice,6,attention,attention
+R_2e5zkwDswRyVhfS,Control,forced choice,1,gratitude,calming
+R_2e5zkwDswRyVhfS,Control,forced choice,2,love,love
+R_2e5zkwDswRyVhfS,Control,forced choice,3,sadness,calming
+R_2e5zkwDswRyVhfS,Control,forced choice,4,attention,attention
+R_2e5zkwDswRyVhfS,Control,forced choice,5,happiness,happiness
+R_2e5zkwDswRyVhfS,Control,forced choice,6,calming,calming
+R_2SrDrIWQKzzXNfM,ASD,free text,1,gratitude,Tröst
+R_2SrDrIWQKzzXNfM,ASD,free text,2,attention,Få uppmärksamhet
+R_2SrDrIWQKzzXNfM,ASD,free text,3,sadness,Stöd/styrka
+R_2SrDrIWQKzzXNfM,ASD,free text,4,happiness,Bus
+R_2SrDrIWQKzzXNfM,ASD,free text,5,love,Ömhet
+R_2SrDrIWQKzzXNfM,ASD,free text,6,calming,Vet ej
+R_0wD8SReVLQ58BJD,Control,forced choice,1,happiness,other
+R_0wD8SReVLQ58BJD,Control,forced choice,2,attention,attention
+R_0wD8SReVLQ58BJD,Control,forced choice,3,sadness,gratitude
+R_0wD8SReVLQ58BJD,Control,forced choice,4,calming,calming
+R_0wD8SReVLQ58BJD,Control,forced choice,5,love,love
+R_0wD8SReVLQ58BJD,Control,forced choice,6,gratitude,sadness
+R_2pWZnaTUvcw0QPE,Control,free text,1,love,Att personen söker närkontakt
+R_2pWZnaTUvcw0QPE,Control,free text,2,happiness,Känns som personen försöker dra upp stämningen lite
+R_2pWZnaTUvcw0QPE,Control,free text,3,calming,Det känns som ett försök till närkontakt
+R_2pWZnaTUvcw0QPE,Control,free text,4,gratitude,"Kollar till dig, försöker se hur du mår"
+R_2pWZnaTUvcw0QPE,Control,free text,5,sadness,"Känns som personen söker närkontakt, personen kanske vill hålla hand eller liknande"
+R_2pWZnaTUvcw0QPE,Control,free text,6,attention,Försöker fånga din uppmärksamhet
+R_1H8cF5KgS911jke,Control,free text,1,calming,Lugn
+R_1H8cF5KgS911jke,Control,free text,2,sadness,Tröst
+R_1H8cF5KgS911jke,Control,free text,3,love,Ömhetsbetygelser
+R_1H8cF5KgS911jke,Control,free text,4,gratitude,Oklart
+R_1H8cF5KgS911jke,Control,free text,5,attention,Uppmärksamhet
+R_1H8cF5KgS911jke,Control,free text,6,happiness,Uppmärksamhet/ uttråkad
+R_3sglr160uXp6Y4O,Control,forced choice,1,gratitude,attention
+R_3sglr160uXp6Y4O,Control,forced choice,2,sadness,calming
+R_3sglr160uXp6Y4O,Control,forced choice,3,happiness,happiness
+R_3sglr160uXp6Y4O,Control,forced choice,4,attention,attention
+R_3sglr160uXp6Y4O,Control,forced choice,5,calming,love
+R_3sglr160uXp6Y4O,Control,forced choice,6,love,love
+R_2D77AwJfkYhSDiF,Control,free text,1,gratitude,"Titta, titta, ser du?"
+R_2D77AwJfkYhSDiF,Control,free text,2,calming,"Ta det lugnt, jag är här"
+R_2D77AwJfkYhSDiF,Control,free text,3,sadness,"Du, jag behöver hjälp!"
+R_2D77AwJfkYhSDiF,Control,free text,4,happiness,Kom så går vi
+R_2D77AwJfkYhSDiF,Control,free text,5,attention,Hörru!
+R_2D77AwJfkYhSDiF,Control,free text,6,love,"Ömhet, lekfullhet, intimitet."
+R_2VEWR99Yc4DLKja,ASD,forced choice,1,love,love
+R_2VEWR99Yc4DLKja,ASD,forced choice,2,sadness,attention
+R_2VEWR99Yc4DLKja,ASD,forced choice,3,happiness,attention
+R_2VEWR99Yc4DLKja,ASD,forced choice,4,calming,calming
+R_2VEWR99Yc4DLKja,ASD,forced choice,5,gratitude,attention
+R_2VEWR99Yc4DLKja,ASD,forced choice,6,attention,attention
+R_sUmovrMvQRjslc5,ASD,free text,1,calming,Ta det lugnt. Slappna av.
+R_sUmovrMvQRjslc5,ASD,free text,2,sadness,Sluta? Lugna ner dig? Ingen aning...
+R_sUmovrMvQRjslc5,ASD,free text,3,gratitude,Retas? Busa? Jättekonstigt sätt att röra någon på.
+R_sUmovrMvQRjslc5,ASD,free text,4,attention,"Du, jag vill dig nåt! Kan jag få din uppmärksamhet?"
+R_sUmovrMvQRjslc5,ASD,free text,5,happiness,Lekfullhet. Samhörighet.
+R_sUmovrMvQRjslc5,ASD,free text,6,love,Tycker om dig.
+R_2SfqZhHs3bZqQUs,Control,forced choice,1,calming,calming
+R_2SfqZhHs3bZqQUs,Control,forced choice,2,love,love
+R_2SfqZhHs3bZqQUs,Control,forced choice,3,happiness,happiness
+R_2SfqZhHs3bZqQUs,Control,forced choice,4,attention,attention
+R_2SfqZhHs3bZqQUs,Control,forced choice,5,sadness,calming
+R_2SfqZhHs3bZqQUs,Control,forced choice,6,gratitude,other
+R_tR63rPSvmpW5j3j,Control,free text,1,happiness,"aktivitet, bus"
+R_tR63rPSvmpW5j3j,Control,free text,2,love,kärlek
+R_tR63rPSvmpW5j3j,Control,free text,3,gratitude,ingen aning
+R_tR63rPSvmpW5j3j,Control,free text,4,calming,massage
+R_tR63rPSvmpW5j3j,Control,free text,5,sadness,lugna ner dig
+R_tR63rPSvmpW5j3j,Control,free text,6,attention,"hallå, ge mig uppmärksamhet"
+R_2QAIdADZpftuTSQ,Control,forced choice,1,happiness,other
+R_2QAIdADZpftuTSQ,Control,forced choice,2,gratitude,attention
+R_2QAIdADZpftuTSQ,Control,forced choice,3,calming,calming
+R_2QAIdADZpftuTSQ,Control,forced choice,4,love,love
+R_2QAIdADZpftuTSQ,Control,forced choice,5,sadness,other
+R_2QAIdADZpftuTSQ,Control,forced choice,6,attention,attention
+R_AtFyyNf4D5QnXVf,Control,free text,1,sadness,Tröst
+R_AtFyyNf4D5QnXVf,Control,free text,2,gratitude,Tröst
+R_AtFyyNf4D5QnXVf,Control,free text,3,attention,Vill ha uppmärksamhet
+R_AtFyyNf4D5QnXVf,Control,free text,4,calming,Kåthet
+R_AtFyyNf4D5QnXVf,Control,free text,5,happiness,Glädje
+R_AtFyyNf4D5QnXVf,Control,free text,6,love,Ömhet
+R_3NPXiScGvRygq07,Control,forced choice,1,happiness,happiness
+R_3NPXiScGvRygq07,Control,forced choice,2,sadness,gratitude
+R_3NPXiScGvRygq07,Control,forced choice,3,love,love
+R_3NPXiScGvRygq07,Control,forced choice,4,attention,attention
+R_3NPXiScGvRygq07,Control,forced choice,5,gratitude,happiness
+R_3NPXiScGvRygq07,Control,forced choice,6,calming,calming
+R_WihbTOz3FY6TGRb,ASD,free text,1,gratitude,Omtanke
+R_WihbTOz3FY6TGRb,ASD,free text,2,attention,Söker uppmärksamhet
+R_WihbTOz3FY6TGRb,ASD,free text,3,calming,Tröst
+R_WihbTOz3FY6TGRb,ASD,free text,4,happiness,Skoj?
+R_WihbTOz3FY6TGRb,ASD,free text,5,sadness,Kärlek
+R_WihbTOz3FY6TGRb,ASD,free text,6,love,Kärlek
+R_R34zgNP0TlelQu5,Control,forced choice,1,attention,attention
+R_R34zgNP0TlelQu5,Control,forced choice,2,sadness,gratitude
+R_R34zgNP0TlelQu5,Control,forced choice,3,gratitude,other
+R_R34zgNP0TlelQu5,Control,forced choice,4,love,love
+R_R34zgNP0TlelQu5,Control,forced choice,5,happiness,happiness
+R_R34zgNP0TlelQu5,Control,forced choice,6,calming,calming
+R_246l8RFNXFuBfCo,Control,free text,1,happiness,Vet ej
+R_246l8RFNXFuBfCo,Control,free text,2,gratitude,Uppmärksamhet
+R_246l8RFNXFuBfCo,Control,free text,3,love,Kärlek
+R_246l8RFNXFuBfCo,Control,free text,4,calming,Ömhet
+R_246l8RFNXFuBfCo,Control,free text,5,sadness,Vet ej
+R_246l8RFNXFuBfCo,Control,free text,6,attention,Retas
+R_2QQicbswK20VFgy,ASD,forced choice,1,love,love
+R_2QQicbswK20VFgy,ASD,forced choice,2,attention,attention
+R_2QQicbswK20VFgy,ASD,forced choice,3,sadness,calming
+R_2QQicbswK20VFgy,ASD,forced choice,4,calming,calming
+R_2QQicbswK20VFgy,ASD,forced choice,5,gratitude,attention
+R_2QQicbswK20VFgy,ASD,forced choice,6,happiness,happiness
+R_3pirmIUSrsydYng,Control,forced choice,1,happiness,attention
+R_3pirmIUSrsydYng,Control,forced choice,2,gratitude,calming
+R_3pirmIUSrsydYng,Control,forced choice,3,sadness,attention
+R_3pirmIUSrsydYng,Control,forced choice,4,love,love
+R_3pirmIUSrsydYng,Control,forced choice,5,calming,love
+R_3pirmIUSrsydYng,Control,forced choice,6,attention,attention
+R_XttHg9kRXHX0rmx,Control,free text,1,calming,Vet ej
+R_XttHg9kRXHX0rmx,Control,free text,2,happiness,Vet ej
+R_XttHg9kRXHX0rmx,Control,free text,3,love,Vet ej
+R_XttHg9kRXHX0rmx,Control,free text,4,attention,"Vet ej, det går inte att säga utifrån de här videorna."
+R_XttHg9kRXHX0rmx,Control,free text,5,sadness,Vet ej
+R_XttHg9kRXHX0rmx,Control,free text,6,gratitude,Vet ej
+R_32WaPJUmL0nFSLK,ASD,forced choice,1,happiness,happiness
+R_32WaPJUmL0nFSLK,ASD,forced choice,2,love,love
+R_32WaPJUmL0nFSLK,ASD,forced choice,3,sadness,calming
+R_32WaPJUmL0nFSLK,ASD,forced choice,4,calming,calming
+R_32WaPJUmL0nFSLK,ASD,forced choice,5,attention,attention
+R_32WaPJUmL0nFSLK,ASD,forced choice,6,gratitude,attention
+R_1MSfdoNGyM0XpiS,ASD,free text,1,gratitude,Ingen aning
+R_1MSfdoNGyM0XpiS,ASD,free text,2,sadness,Lugn
+R_1MSfdoNGyM0XpiS,ASD,free text,3,happiness,Vet inte
+R_1MSfdoNGyM0XpiS,ASD,free text,4,attention,Vet inte
+R_1MSfdoNGyM0XpiS,ASD,free text,5,love,Sensuell närhet
+R_1MSfdoNGyM0XpiS,ASD,free text,6,calming,Lugn
+R_22x0EVAx1CCS8se,ASD,forced choice,1,calming,calming
+R_22x0EVAx1CCS8se,ASD,forced choice,2,happiness,happiness
+R_22x0EVAx1CCS8se,ASD,forced choice,3,sadness,attention
+R_22x0EVAx1CCS8se,ASD,forced choice,4,attention,attention
+R_22x0EVAx1CCS8se,ASD,forced choice,5,love,love
+R_22x0EVAx1CCS8se,ASD,forced choice,6,gratitude,calming
+R_1QGYqTgeSBrD04k,ASD,forced choice,1,happiness,happiness
+R_1QGYqTgeSBrD04k,ASD,forced choice,2,gratitude,calming
+R_1QGYqTgeSBrD04k,ASD,forced choice,3,love,love
+R_1QGYqTgeSBrD04k,ASD,forced choice,4,attention,attention
+R_1QGYqTgeSBrD04k,ASD,forced choice,5,calming,gratitude
+R_1QGYqTgeSBrD04k,ASD,forced choice,6,sadness,gratitude
+R_1HkIvEu8zfMWlhJ,ASD,free text,1,attention,Be om uppmärksamhet
+R_1HkIvEu8zfMWlhJ,ASD,free text,2,love,"Ömhet, försiktighet, inkännande"
+R_1HkIvEu8zfMWlhJ,ASD,free text,3,gratitude,Tröst
+R_1HkIvEu8zfMWlhJ,ASD,free text,4,calming,"Avslappning, välmening"
+R_1HkIvEu8zfMWlhJ,ASD,free text,5,sadness,"Trygghet, ""Jag finns här för dig"", grundande, självkärlek"
+R_1HkIvEu8zfMWlhJ,ASD,free text,6,happiness,"Lek, skoj, muntra upp"
+R_1LFjvwD4XZPV7q1,ASD,free text,1,calming,Det kommer att bli bra
+R_1LFjvwD4XZPV7q1,ASD,free text,2,love,Intimt
+R_1LFjvwD4XZPV7q1,ASD,free text,3,happiness,Lek
+R_1LFjvwD4XZPV7q1,ASD,free text,4,attention,Busig
+R_1LFjvwD4XZPV7q1,ASD,free text,5,sadness,Kärlek
+R_1LFjvwD4XZPV7q1,ASD,free text,6,gratitude,Värme
+R_a64UwqoKzL2SVGh,Control,free text,1,gratitude,Ömhet
+R_a64UwqoKzL2SVGh,Control,free text,2,love,Ömhet
+R_a64UwqoKzL2SVGh,Control,free text,3,attention,Uppmärksamhet
+R_a64UwqoKzL2SVGh,Control,free text,4,sadness,Tillit
+R_a64UwqoKzL2SVGh,Control,free text,5,happiness,Busighet
+R_a64UwqoKzL2SVGh,Control,free text,6,calming,Att jag ska slappna av
