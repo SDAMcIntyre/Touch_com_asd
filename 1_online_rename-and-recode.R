@@ -22,9 +22,6 @@ online_data <- read_csv(paste0(PRIMARY_DATA_FOLDER, "online_valid-anon-data.csv"
 
 # rename online data #### 
 
-#. get the names from qualtrics ####
-old_var_names <- names(online_data)
-
 #. define and apply new variable names ####
 new_var_names <- get_nice_var_names(online_data, q_idx = 36:161)
 names(online_data) <- new_var_names
