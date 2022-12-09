@@ -105,7 +105,16 @@ anon_indiv_data %>%
   select(
     -(starts_with("AQ") | starts_with("BAPQ") | starts_with("STQ") | starts_with("TAS") )
     ) %>% View
-  
+
+# check balance of age cohorts
+xtabs( ~ group + `Age Cohort`, data = anon_indiv_data)
+
+# check balance of task order
+xtabs( ~ group + Order, data = anon_indiv_data)
+
+# check balance of Experimenters
+xtabs( ~ group + Experimenter, data = anon_indiv_data)
+
 # save data files ####
 comm_data %>% 
   #. remove source file name with date information for privacy ####
