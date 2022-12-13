@@ -38,7 +38,7 @@ rsconnect/
 .Rproj.user
 
 # private data files
-data/reports/live_metadata_comparison.csv
+Data/reports/live_metadata_comparison.csv
 
 # figures
 figures/*
