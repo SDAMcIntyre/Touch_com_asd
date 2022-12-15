@@ -92,8 +92,7 @@ anon_indiv_data <- indiv_data %>%
     ),
     `Age Cohort` = case_when(
       between(Age, 16, 17) ~ "Youth (16 - 17)",
-      between(Age, 18, 40) ~ "Adult (18 - 40)",
-      PID == "asd01" ~ "Adult (18 - 40)" # age data missing for asd01 but files were saved in the "adult" folder
+      between(Age, 18, 40) ~ "Adult (18 - 40)"
     )
   ) %>% 
   
