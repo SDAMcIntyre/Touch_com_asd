@@ -19,15 +19,24 @@ PROCESSED_DATA_FOLDER <- "Data/processed/"
 
 # read in  primary data files ####
 online_data <- read_csv(paste0(PRIMARY_DATA_FOLDER, "online_valid-anon-data.csv")) 
+
 live_data_indiv <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_valid-anon-indiv-data.csv")) %>% 
-  mutate(experiment = "felt touch")
-live_data_comm <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_comm-data.csv")) %>% 
   mutate(
     experiment = "felt touch",
     task = "forced choice"
+  )
+
+live_data_comm <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_comm-data.csv")) %>% 
+  mutate(
+    experiment = "felt touch",
+    PID = str_replace(PID,"[0-9]+", str_pad(str_extract(PID,"[0-9]+"), 2, pad = "0"))
     )
+
 live_data_pleas <- read_csv(paste0(PRIMARY_DATA_FOLDER, "live_pleas-data.csv")) %>% 
-  mutate(experiment = "felt touch")
+  mutate(
+    experiment = "felt touch",
+    PID = str_replace(PID,"[0-9]+", str_pad(str_extract(PID,"[0-9]+"), 2, pad = "0"))
+    )
 
 # RENAME ONLINE DATA #### 
 
@@ -121,6 +130,11 @@ online_data_comm <- online_data %>%
     names_prefix = "CommunicationF. ",
     names_transform = list(cued = tolower),
     values_to = "response"
+  ) %>% 
+  
+  # add Experimenter code
+  mutate(
+    Experimenter = 3
   ) %>% 
   
   # remove NAs due to not being in the condition (FC/FT)
@@ -223,7 +237,8 @@ live_data_indep <- live_data_indiv %>%
     experiment,
     PID,
     group,
-    Experimenter
+    Experimenter,
+    task
     )
 
 #. demographics variables ####
@@ -335,10 +350,10 @@ full_join(
 
 ####. pleasantness data ####
 
-data_indep %>% 
-  full_join(data_pleas_trial_order) %>% 
-  full_join(data_pleas) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "online_pleas-data.csv")
+full_join(right_join(live_data_indep, live_data_pleas), 
+  full_join(online_data_indep, online_data_pleas)
+ ) %>% 
+  write_path_csv(PROCESSED_DATA_FOLDER, "pleas-data.csv")
 
 ####. individual data (demographics and questionnaires) ####
 
