@@ -108,6 +108,9 @@ anon_indiv_data %>%
 # check balance of age cohorts
 xtabs( ~ group + `Age Cohort`, data = anon_indiv_data)
 
+# check balance of age groups
+xtabs( ~ group + `Age Group`, data = anon_indiv_data)
+
 # check balance of task order
 xtabs( ~ group + Order, data = anon_indiv_data)
 
