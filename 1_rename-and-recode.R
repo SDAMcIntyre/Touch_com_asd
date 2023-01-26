@@ -346,7 +346,7 @@ full_join(
   right_join(live_data_indep, live_data_comm), 
   full_join(online_data_indep, online_data_comm)
   ) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm-data.csv")
+  write_path_csv(PROCESSED_DATA_FOLDER, "communication-data.csv")
 
 ####. pleasantness data ####
 
@@ -354,7 +354,7 @@ full_join(
   right_join(live_data_indep, live_data_pleas), 
   full_join(online_data_indep, online_data_pleas)
  ) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "pleas-data.csv")
+  write_path_csv(PROCESSED_DATA_FOLDER, "pleasantness-data.csv")
 
 ####. demographics data ####
 
@@ -362,7 +362,7 @@ full_join(
   full_join(live_data_indep, live_data_demog),
   full_join(online_data_indep, online_data_demog)
   ) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "demog-data.csv")
+  write_path_csv(PROCESSED_DATA_FOLDER, "demographics-data.csv")
 
 ####. questionnaire data ####
 
