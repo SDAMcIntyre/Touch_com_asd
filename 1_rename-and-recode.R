@@ -364,15 +364,20 @@ full_join(
   ) %>% 
   write_path_csv(PROCESSED_DATA_FOLDER, "demog-data.csv")
 
-full_join(online_data_aq, live_data_aq)
+####. questionnaire data ####
 
+live_questionnaire_data <- live_data_indep %>% 
+  full_join(live_data_aq) %>% 
+  full_join(live_data_bapq) %>% 
+  full_join(live_data_stq) %>% 
+  full_join(live_data_tas) 
 
-data_indep %>% 
-  full_join(data_qualtrics) %>% 
-  full_join(data_demog) %>% 
-  full_join(data_aq) %>% 
-  full_join(data_bapq) %>% 
-  full_join(data_stq) %>% 
-  full_join(data_tas) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "online_indiv-data.csv")
+online_questionnaire_data <- online_data_indep %>% 
+  full_join(online_data_aq) %>% 
+  full_join(online_data_bapq) %>% 
+  full_join(online_data_stq) %>% 
+  full_join(online_data_tas) 
+
+full_join(live_questionnaire_data, online_questionnaire_data) %>% 
+  write_path_csv(PROCESSED_DATA_FOLDER, "questionnaire-data.csv")
 
