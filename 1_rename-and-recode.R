@@ -92,7 +92,12 @@ online_data_indep <- online_data %>%
     PID,
     group,
     task
-  ))
+  )) %>% 
+  
+  # add Experimenter code
+  mutate(
+    Experimenter = 3
+  )
 
 
 ####. communication data ####
@@ -132,11 +137,6 @@ online_data_comm <- online_data %>%
     values_to = "response"
   ) %>% 
   
-  # add Experimenter code
-  mutate(
-    Experimenter = 3
-  ) %>% 
-  
   # remove NAs due to not being in the condition (FC/FT)
   na.omit() %>% 
   
@@ -173,24 +173,24 @@ online_data_pleas <- online_data %>%
   # combine with trial order
   full_join(online_data_pleas_trial_order)
 
-####. qualtrics variables   #### 
-online_data_qualtrics <- online_data %>% 
-  
-  # add minutes/hours duration data 
-  mutate(
-    `Duration (minutes)` = `Duration (in seconds)`/60,
-    `Duration (hours)` = `Duration (in seconds)`/(60*60)
-  ) %>% 
-  
-  # keep qualtrics variables
-  select(c(
-    PID,
-    `Start Date`,
-    `End Date`,
-    `Recorded Date`,
-    `Duration (minutes)`,
-    `Duration (hours)`
-  ))
+# ####. qualtrics variables   #### 
+# online_data_qualtrics <- online_data %>% 
+#   
+#   # add minutes/hours duration data 
+#   mutate(
+#     `Duration (minutes)` = `Duration (in seconds)`/60,
+#     `Duration (hours)` = `Duration (in seconds)`/(60*60)
+#   ) %>% 
+#   
+#   # keep qualtrics variables
+#   select(c(
+#     PID,
+#     `Start Date`,
+#     `End Date`,
+#     `Recorded Date`,
+#     `Duration (minutes)`,
+#     `Duration (hours)`
+#   ))
 
 ####. demographics variables   #### 
 online_data_demog <- online_data %>% 
@@ -350,15 +350,19 @@ full_join(
 
 ####. pleasantness data ####
 
-full_join(right_join(live_data_indep, live_data_pleas), 
+full_join(
+  right_join(live_data_indep, live_data_pleas), 
   full_join(online_data_indep, online_data_pleas)
  ) %>% 
   write_path_csv(PROCESSED_DATA_FOLDER, "pleas-data.csv")
 
-####. individual data (demographics and questionnaires) ####
+####. demographics data ####
 
-full_join(live_data_indep, online_data_indep)
-full_join(live_data_demog, online_data_demog)
+full_join(
+  full_join(live_data_indep, live_data_demog),
+  full_join(online_data_indep, online_data_demog)
+  ) %>% 
+  write_path_csv(PROCESSED_DATA_FOLDER, "demog-data.csv")
 
 full_join(online_data_aq, live_data_aq)
 
