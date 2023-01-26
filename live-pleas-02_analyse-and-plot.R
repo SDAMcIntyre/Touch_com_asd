@@ -7,7 +7,7 @@ library(stringr)
 # source all .R files in the Rfunctions directory
 sapply(list.files("Rfunctions", full.names = TRUE), source)
 
-live.pleas.data <- read_csv('data/primary/live-pleas_collated.csv', col_types = cols())
+pleas.data <- read_csv('Data/processed/pleas-data.csv', col_types = cols())
 
 if ( !dir.exists('Figures') ) { dir.create('Figures') }
 
@@ -16,12 +16,13 @@ theme_set(theme_light())
 quartz(width = 6.2, height = 3.6); plot(1:10)
 
 live.pleas.data %>% 
+  filter(experiment == "viewed touch") %>% 
   ggplot(aes(x = cued, y = response, colour = group)) +
   geom_hline(yintercept = 0) +
   stat_summary(geom = 'crossbar', fun.data = 'mean_cl_normal', 
                width = 0.4, fill = 'white', alpha = 0.5,
                position = position_dodge(0.5)) +
-  geom_point(aes(y = response), alpha = 0.7,
+  geom_point(aes(y = response), alpha = 0.3,
               fill='white', shape = 21,
               position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0, dodge.width = 0.5)) +
   scale_x_discrete(label = str_trunc(str_to_title(orderedCues),3,'right','')) +
@@ -30,5 +31,5 @@ live.pleas.data %>%
   theme_x45deg + 
   labs(y = 'Pleasantness rating (VAS)', x = NULL)
 
-ggsave('Figures/live-pleas_ASD-vs-Control-ratings.svg')
-ggsave('Figures/live-pleas_ASD-vs-Control-ratings.pdf')
+ggsave('Figures/online-pleas_ASD-vs-Control-ratings.svg')
+ggsave('Figures/online-pleas_ASD-vs-Control-ratings.pdf')
