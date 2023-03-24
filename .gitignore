@@ -40,8 +40,9 @@ rsconnect/
 # private data files
 Data/reports/live_metadata-comparison.csv
 
-# figures
+# figures and tables
 figures/*
+Tables/*
 
 # MacOS system files
 .DS_Store
