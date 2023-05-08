@@ -16,7 +16,7 @@ demog <- read_csv(paste0(PROCESSED_DATA_FOLDER, "demographics-data.csv"), col_ty
 # check that qualtrics assigned even numbers to different tasks ####
 
 print_prop_xtab(xtabs(~ group + task, filter(demog, experiment == "viewed touch")))
-# a bit uneven, perhaps due to dropouts for the free text task
+# a bit uneven, perhaps due to dropouts for the free text task?
 
 
 # forced choice task ####

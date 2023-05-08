@@ -88,3 +88,40 @@ tibble(
   qualtrics_description = get_label(valid_data)
 ) %>% 
   write_path_csv(REPORTS_FOLDER, "online_qualtrics-variable-names.csv")
+
+
+# old code to adapt: survey date / time data  #### 
+
+# min(ind_data$`Start Date`)
+# min(ind_data$`Recorded Date`)
+# 
+# max(ind_data$`Start Date`)
+# max(ind_data$`Recorded Date`)
+# 
+# ind_data %>% 
+#   filter(group == "ASD") %>% 
+#   pull(`Recorded Date`) %>% max()
+# 
+# ind_data %>% 
+#   mutate(`End Difference` = `Recorded Date` - `End Date`) %>% 
+#   ggplot(aes(x = `End Difference`)) + geom_histogram()
+# 
+# open_plot_window(width = 4.6, height = 3.9)
+# 
+# ind_data %>% 
+#   ggplot(aes(x = `Recorded Date`)) + 
+#   facet_wrap(~ group, ncol = 1) +
+#   geom_histogram() +
+#   labs(x = 'Completion Date') +
+#   theme_bw() 
+# 
+# ggsave_path(figure_folder,"online_completion-date.png")
+# 
+# ind_data  %>% 
+#   filter(`Duration (minutes)` <= 60) %>% 
+#   ggplot(aes(x = `Duration (minutes)`)) + geom_histogram()
+# 
+# ind_data %>% 
+#   filter(`Duration (minutes)` > 60) %>% 
+#   ggplot(aes(x = `Duration (hours)`)) + geom_histogram()
+# 
