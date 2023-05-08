@@ -1,10 +1,10 @@
 library(ggplot2)
 
 # order to display in plots
-orderedCues <- c('attention','love','happiness','calming','sadness','gratitude')
+ORDERED_CUES <- c('attention','love','happiness','calming','sadness','gratitude')
 
-colour.ASD <-  '#377EB8' #blue
-colour.Control <- "#E69F00" #yellow
+COLOUR_ASD <-  '#377EB8' #blue
+COLOUR_CONTROL <- "#E69F00" #yellow
 
 theme_x45deg <- theme(
   axis.text.x=element_text(angle=45, hjust = 1 ))
@@ -29,3 +29,24 @@ theme_nofacetbox <- theme(strip.background = element_blank(),
 # theme_bwstrip <- theme(strip.background = element_rect(fill = 'white',colour = 'grey',size = 1), 
 #                        strip.text = element_text(colour = 'black'))
 # 
+
+
+pleasantness_plot <- function(df) {
+  df %>% 
+    ggplot(aes(y = response, x = cued, colour = group, fill = group)) +
+    geom_hline(yintercept = 0, 
+               colour = 'grey', linetype = 'dashed', size = 1) +
+    stat_summary(geom = 'errorbar', fun.data = 'mean_cl_normal', 
+                 width = 0.4, size = 1.3,
+                 position = position_dodge(0.2)) +
+    stat_summary(geom = "point", fun= "mean",
+                 size = 6, shape = "\u2014", # unicode m-dash for horizontal line
+                 position = position_dodge(0.2)) +
+    scale_color_manual(values = c(COLOUR_ASD, COLOUR_CONTROL)) +
+    scale_fill_manual(values = c(COLOUR_ASD, COLOUR_CONTROL)) +
+    scale_x_discrete(label = str_trunc(str_to_title(ORDERED_CUES),3,'right','')) +
+    scale_y_continuous(breaks = c(-10,0,10), limits = c(-10,10), labels = c('unpleasant','','pleasant')) +
+    theme_x45deg + 
+    labs(y = 'Pleasantness rating (VAS)', x = NULL) +
+    theme_light(base_size = 14) + theme_x45deg + theme_insidelegend(0.87,0.87) 
+}
