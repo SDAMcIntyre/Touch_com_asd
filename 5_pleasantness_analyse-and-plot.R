@@ -17,7 +17,8 @@ if ( !dir.exists(FIGURES_FOLDER) ) { dir.create(FIGURES_FOLDER) }
 # read in the data ####
 pleas_data <- read_csv(paste0(PROCESSED_DATA_FOLDER, "pleasantness-data.csv"), col_types = "cccccccd")
 
-# Figures ####
+# Ns ####
+
 Ns <- pleas_data %>% 
   group_by(experiment, group,PID) %>% 
   tally() %>% tally()
@@ -26,6 +27,8 @@ N_felt_ASD <- Ns %>% filter(experiment == "felt touch" & group == 'ASD') %>% pul
 N_felt_Control <- Ns %>% filter(experiment == "felt touch" & group == 'Control') %>% pull(n)
 N_viewed_ASD <- Ns %>% filter(experiment == "viewed touch" & group == 'ASD') %>% pull(n)
 N_viewed_Control <- Ns %>% filter(experiment == "viewed touch" & group == 'Control') %>% pull(n)
+
+# Figures ####
 
 open_plot_window(width = 9, height = 6.5); plot(1:10)
 
