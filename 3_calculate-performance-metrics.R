@@ -14,16 +14,18 @@ comm_fc_data <- read_csv(paste0(PROCESSED_DATA_FOLDER,'communication-data.csv'),
 
 # calculate performance metrics ####
 
-## by individual ####
+## by individual, felt only ####
 comm_fc_data %>% 
-  group_by(experiment, group) %>% # just to preserve the variable labels
+  filter(experiment == "felt touch") %>% 
+  group_by(group) %>% # just to preserve the variable label
   do(calculate_performance_metrics(., cued, response, PID)) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-indiv.csv")
+  write_path_csv(PROCESSED_DATA_FOLDER, "comm-felt-touch_performance-indiv.csv")
 
 ## by group ####
 
 comm_fc_data %>% 
-  do(calculate_performance_metrics(., cued, response, experiment, group)) %>%  
+  group_by(experiment) %>% 
+  do(calculate_performance_metrics(., cued, response, group)) #%>%  
   write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group.csv")
 
 ## combined live and online by trial 1 -6 ####
