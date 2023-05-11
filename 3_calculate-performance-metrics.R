@@ -31,7 +31,7 @@ comm_fc_data %>%
   do(calculate_performance_metrics(., cued, response, group)) %>%  
   write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group.csv")
 
-## combined live and online by trial 1 -6 ####
+## combined live and online by trial 1 -6 (first presentation of each touch) ####
 
 comm_fc_data %>% 
   filter(trial <=6) %>% 
