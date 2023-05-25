@@ -23,3 +23,63 @@ calculate_performance_metrics <- function(.data, item, response, ...) {
            F1chance = 2*( (Present/Total) / ((Present/Total)+1) ) # always give same answer
     )
 }
+
+
+present <- function(label, item) {
+  sum(item == label)
+}
+
+selected <- function(label, response) {
+  sum(response == label)
+}
+
+hits <- function(label, item, response) {
+  sum(item == response & item == label)
+}
+
+misses <- function(label, item, response) {
+  present(label, item) - hits(label, item, response)
+}
+
+false_alarms <- function(label, item, response) {
+  selected(label, response) - hits(label, item, response)
+}
+
+correct_rejections <- function(label, item, response) {
+  length(item) - present(label, item) - false_alarms(label, item, response)
+}
+
+recall <- function(label, item, response) {
+  # p correct when item present
+  hits(label, item, response) / present(label, item)
+}
+
+precision <- function(label, item, response) {
+  # p correct with this response
+  precision <- hits(label, item, response) / selected(label, response) 
+  if ( is.na(precision) ) {
+    return(0)
+  } else {
+    return(precision)
+  }
+}
+
+f1  <- function(label, item, response) {
+  f1 <- 2 * (
+    ( precision(label, item, response) * recall(label, item, response) ) / 
+      (precision(label, item, response) + recall(label, item, response) )
+    )
+  if ( is.na(f1) ) {
+    return(0) 
+  } else {
+      return(f1)
+  }
+}
+
+f1_chance <- function(label, item, response) {
+  # predicted f1 score if just guessing
+  2 * ( 
+    ( present(label, item) / length(item) ) / 
+      ( (present(label, item) / length(item)) + 1 ) 
+    )
+}
