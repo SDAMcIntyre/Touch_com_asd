@@ -17,6 +17,38 @@ comm_fc_data <- read_csv(
 
 # calculate performance metrics ####
 
+# bootstrapping
+# https://bookdown.org/compfinezbook/introcompfinr/The-Nonparametric-Bootstrap.html
+# https://search.r-project.org/CRAN/refmans/boot/html/boot.html
+
+x <- comm_fc_data %>% 
+  filter(experiment == "felt touch")
+
+f1(label = "attention", x$cued, x$response)
+f1_chance("attention", x$cued, x$response)
+
+xdata <- tibble(
+  item = x$cued,
+  resp = x$response
+) 
+
+library(boot)
+
+f1_for_boot <- function(xdata, idx, label) {
+  f1(label, xdata[["item"]][idx], xdata[["resp"]][idx])
+}
+
+f1_for_boot(xdata, 1:4081, label = "happiness")
+
+f1_boot <- boot(xdata, f1_for_boot, R = 1000, label = "happiness")
+plot(f1_boot)
+boot.ci(f1_boot, conf = 0.95, type="perc")
+
+comm_fc_data %>% 
+  filter(experiment == "felt touch") %>% 
+  group_by(group) %>% # just to preserve the variable label
+  do(calculate_performance_metrics(., cued, response, PID))
+
 ## by individual, felt only ####
 comm_fc_data %>% 
   filter(experiment == "felt touch") %>% 

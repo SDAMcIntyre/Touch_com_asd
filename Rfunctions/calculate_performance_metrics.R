@@ -24,6 +24,9 @@ calculate_performance_metrics <- function(.data, item, response, ...) {
     )
 }
 
+# label: string, the particular item we are currently investigating 
+# item: string vector, the items presented in the experiment
+# response: string vector, the responses indicating how the items were labelled
 
 present <- function(label, item) {
   sum(item == label)
