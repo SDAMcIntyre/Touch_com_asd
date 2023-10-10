@@ -23,14 +23,25 @@ if ( !dir.exists(FIGURES_FOLDER) ) { dir.create(FIGURES_FOLDER) }
 comm_data <- read_csv(
   paste0(PROCESSED_DATA_FOLDER, 'communication-data.csv'),
   col_types = "cccccccccc"
-  )
+  ) %>% 
+  filter(task == 'forced choice') 
 
 # read performance metrics ####
 
-performance_data <- read_csv(
-  paste0(PROCESSED_DATA_FOLDER, 'comm_performance-indiv.csv'), 
+performance_felt <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER, 'comm-felt-touch_performance-indiv.csv'), 
   col_types = cols()
   ) 
+
+performance_group <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER, "comm_performance-group.csv"),
+  col_types = cols()
+)
+
+performance_first6 <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER, "comm_performance-group-first6.csv"),
+  col_types = cols()
+)
 
 # Ns ####
 
@@ -39,44 +50,89 @@ Ns <- comm_data %>%
   tally() %>% tally()
 
 # check it's the same
-performance_data %>% 
-  group_by(experiment, group, PID) %>% 
-  tally() %>% tally()
+# performance_felt %>%
+#   group_by(group, PID) %>%
+#   tally() %>% tally()
 
 N_felt_ASD <- Ns %>% filter(experiment == "felt touch" & group == 'ASD') %>% pull(n)
 N_felt_Control <- Ns %>% filter(experiment == "felt touch" & group == 'Control') %>% pull(n)
 N_viewed_ASD <- Ns %>% filter(experiment == "viewed touch" & group == 'ASD') %>% pull(n)
 N_viewed_Control <- Ns %>% filter(experiment == "viewed touch" & group == 'Control') %>% pull(n)
 
+# figures without stats ####
 
-# figure without stats ####
-
-Ns <- live_performance_data %>% 
-  group_by(group,PID) %>% 
-  tally() %>% tally()
-
-N.ASD <- Ns %>% filter(group == 'ASD') %>% pull(n)
-N.Control <- Ns %>% filter(group == 'Control') %>% pull(n)
-
-performance_data %>%
-  filter(experiment == 'felt touch') %>% 
+#. felt touch F1-individual ####
+performance_felt %>%
   mutate(
     group = recode(
       group,
-      ASD = paste0('ASD (n = ',N.ASD,')'),
-      Control = paste0('Control (n = ',N.Control,')') 
+      ASD = paste0('ASD (n = ',N_felt_ASD,')'),
+      Control = paste0('Control (n = ',N_felt_Control,')') 
       ) 
     ) %>% 
   mutate(
     group = as.factor(group),
-    cued = factor(cued, levels = ORDERED_CUES)
+    Label = factor(Label, levels = ORDERED_CUES)
     ) %>% 
-  f1_plot()
+  f1_indiv_plot()
+
+# #. felt touch F1 group ####
+# 
+# performance_group %>%
+#   filter(experiment == "felt touch") %>% 
+#   mutate(
+#     group = recode(
+#       group,
+#       ASD = paste0('ASD (n = ',N_felt_ASD,')'),
+#       Control = paste0('Control (n = ',N_felt_Control,')') 
+#     ) 
+#   ) %>% 
+#   mutate(
+#     group = as.factor(group),
+#     Label = factor(Label, levels = ORDERED_CUES)
+#   ) %>% 
+#   f1_group_plot()
+# 
+# 
+# #. viewed touch F1 ####
+# performance_group %>%
+#   filter(experiment == 'viewed touch') %>% 
+#   mutate(
+#     group = recode(
+#       group,
+#       ASD = paste0('ASD (n = ',N_viewed_ASD,')'),
+#       Control = paste0('Control (n = ',N_viewed_Control,')') 
+#     ) 
+#   ) %>% 
+#   mutate(
+#     group = as.factor(group),
+#     Label = factor(Label, levels = ORDERED_CUES)
+#   ) %>% 
+#   f1_group_plot()
 
 
-# mixed effects model ####
+#. felt vs. viewed touch F1 FIRST 6 ####
+performance_first6 %>%
+  mutate(
+    group_mode = recode(
+      paste(group, experiment),
+      `ASD felt touch` = paste0('Felt, Autistic (n = ',N_felt_ASD,')'),
+      `Control felt touch` = paste0('Felt, Control (n = ',N_felt_Control,')'),
+      `ASD viewed touch` = paste0('Viewed, Autistic (n = ',N_viewed_ASD,')'),
+      `Control viewed touch` = paste0('Viewed, Control (n = ',N_viewed_Control,')')
+    )
+  ) %>%
+  mutate(
+    group_mode = as.factor(group_mode),
+    Label = factor(Label, levels = ORDERED_CUES)
+  ) %>% 
+  f1_group_mode_plot()
+
+# models ####
 set_sum_contrasts()
 theme_set(theme_light())
+
+#. FELT TOUCH mixed effects ####
 
 # slow to run, so load from earlier; (~ 2 hours on MacBook Pro 2020 2.3 GHz Quad-Core Intel Core i7)
 
@@ -84,64 +140,152 @@ theme_set(theme_light())
 load(paste0(PROCESSED_DATA_FOLDER, "comm-felt-touch-F1_mm-pb.RData"))
 
 # ----- run model
+perf_data_felt <- performance_data %>% filter(experiment == 'felt touch')
 cl <- makeCluster(rep("localhost", detectCores()))
 set.seed(1409)
-mm <- mixed(
+mm_felt <- mixed(
   F1 ~ group*cued + (1|PID),
-  data = live_performance_data,
+  data = perf_data_felt,
   method = 'PB',
   args_test = list(nsim = 1000, cl = cl),
   family = binomial,
-  weights=live_performance_data$Total
+  weights=perf_data_felt$Total
   )
 # save so you can load next time
-save(mm, file = paste0(PROCESSED_DATA_FOLDER, "comm-felt-touch-F1_mm-pb.RData"))
+save(mm_felt, file = paste0(PROCESSED_DATA_FOLDER, "comm-felt-touch-F1_mm-pb.RData"))
 #----- end run model
 
+#.. effect of group ####
+emmeans(mm_felt, ~ group , type = "response")
+anova(mm_felt)[1,]
 
-#. effect of group ####
-emmeans(mm, ~ group , type = "response")
-anova(mm)[1,]
-
-#. effect of expression ####
-anova(mm)[2,]
+#.. effect of expression ####
+anova(mm_felt)[2,]
 # order of agreement (for presentation purposes)
-emmeans(mm, ~ cued) %>% as_tibble() %>% arrange(-emmean) %>% pull(cued)
+emmeans(mm_felt, ~ cued) %>% as_tibble() %>% arrange(-emmean) %>% pull(cued)
 
-#. group/cue interaction ####
-anova(mm)[3,]
+#.. group/cue interaction ####
+anova(mm_felt)[3,]
 
-#. vs. chance ####
+#.. vs. chance ####
 
-( vs.chance <- emmeans(mm, ~ group + cued) %>% 
+( vs.chance <- emmeans(mm_felt, ~ group + cued) %>% 
         as_tibble() %>% 
     mutate(
       emmean.p = logistic(emmean),
-      chance = live_performance_data$F1chance[1],
+      chance = perf_data_felt$F1chance[1],
       z.vs.chance = (emmean - logit(chance))/(emmean*SE),
       p.vs.chance = pt(abs(z.vs.chance), df = df, lower.tail = FALSE),
       p.holm = p.adjust(p.vs.chance, method = 'holm'),
       sig = if_else(p.holm < 0.05, "*", "")
       ) )
 
-# supplementary table
+#.. supplementary table
 formattable(vs.chance, digits = 2, format = "f")
 
-#. pairwise control vs ASD by cue
-emm <- emmeans(mm, ~ group + cued)
-pairs(emm, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
+#.. pairwise control vs ASD by cue
+emm_felt <- emmeans(mm_felt, ~ group + cued)
+pairs(emm_felt, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
 
 
-#. figure compare ####
+#.. figure compare ####
 
-emmeans(mm,  ~  group + cued, type = 'response') %>%
+emmeans(mm_felt,  ~  group + cued, type = 'response') %>%
   as_tibble() %>% 
   mutate(group = recode(group, 
                         ASD = paste0('ASD (n = ',N.ASD,')'), 
                         Control = paste0('Control (n = ',N.Control,')') ) ) %>% 
   mutate(group = as.factor(group),
          cued = factor(cued, levels = ORDERED_CUES)) %>% 
-  f1_emm_plot() -> compare.plot
+  f1_emm_felt_plot() -> plot_felt_ASD_vs_Control
+
+#. VIEWED TOUCH mixed model ####
+
+# slow to run, so load from earlier; (~ 2 hours on MacBook Pro 2020 2.3 GHz Quad-Core Intel Core i7)
+
+# ----- load from earlier
+#load(paste0(PROCESSED_DATA_FOLDER, "comm-viewed-touch-F1_mm-pb.RData"))
+
+# ----- run model
+perf_data_viewed <- performance_data %>% 
+  filter(experiment == 'viewed touch') %>% 
+  mutate(
+    group = as.factor(group),
+    cued = factor(cued, levels = ORDERED_CUES)
+  )
+
+set.seed(230510)
+mm_viewed <- mixed(
+  F1 ~ group*cued + (1|PID),
+  data = perf_data_viewed,
+  method = 'PB',
+  args_test = list(nsim = 1000, cl = cl),
+  family = binomial,
+  weights=perf_data_viewed$Total
+)
+
+# save so you can load next time
+save(mm_felt, file = paste0(PROCESSED_DATA_FOLDER, "comm-viewed-touch-F1_mm-pb.RData"))
+#----- end run model
+
+# glm model
+
+glm_viewed <- glm(
+  formula = F1 ~ group * cued, 
+  family = binomial, 
+  data = perf_data_viewed,
+  weights = perf_data_viewed$Total
+  )
+
+anova(glm_viewed)
+
+#.. effect of group ####
+emmeans(glm_viewed, ~ group , type = "response")
+anova(mm_viewed)[1,]
+
+#.. effect of expression ####
+anova(mm_viewed)[2,]
+# order of agreement (for presentation purposes)
+emmeans(mm_viewed, ~ cued) %>% as_tibble() %>% arrange(-emmean) %>% pull(cued)
+
+#.. group/cue interaction ####
+anova(mm_viewed)[3,]
+
+#.. vs. chance ####
+
+( vs.chance <- emmeans(mm_viewed, ~ group + cued) %>% 
+    as_tibble() %>% 
+    mutate(
+      emmean.p = logistic(emmean),
+      chance = perf_data_viewed$F1chance[1],
+      z.vs.chance = (emmean - logit(chance))/(emmean*SE),
+      p.vs.chance = pt(abs(z.vs.chance), df = df, lower.tail = FALSE),
+      p.holm = p.adjust(p.vs.chance, method = 'holm'),
+      sig = if_else(p.holm < 0.05, "*", "")
+    ) )
+
+#.. supplementary table
+formattable(vs.chance, digits = 2, format = "f")
+
+#.. pairwise control vs ASD by cue
+emm_viewed <- emmeans(mm_viewed, ~ group + cued)
+pairs(emm_viewed, simple = 'group', adjust = 'holm', type = 'response', infer = TRUE)
+
+
+#.. figure compare ####
+
+emmeans(mm_viewed,  ~  group + cued, type = 'response') %>%
+  as_tibble() %>% 
+  mutate(group = recode(group, 
+                        ASD = paste0('ASD (n = ',N.ASD,')'), 
+                        Control = paste0('Control (n = ',N.Control,')') ) ) %>% 
+  mutate(group = as.factor(group),
+         cued = factor(cued, levels = ORDERED_CUES)) %>% 
+  f1_emm_plot() -> plot_viewed_ASD_vs_Control
+
+
+
+
 
 # confusion matrices ####
 
@@ -189,7 +333,7 @@ AAAC
 '
 
 open_plot_window(width = 10.5, height = 5.7); plot(1:10)
-compare.plot + confmat.live.ASD + confmat.live.Control +
+plot_felt_ASD_vs_Control + confmat.live.ASD + confmat.live.Control +
   plot_annotation(tag_levels = 'A') +
   plot_layout(design = design.compare) 
 ggsave('Figures/comm-fc-live_Compare_ASD-vs-Control.svg')
