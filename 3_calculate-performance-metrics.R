@@ -23,6 +23,7 @@ strict_subsets <- read_csv(
 
 # calculate performance metrics ####
 
+set.seed(11102023)
 ## by individual, felt only ####
 comm_fc_data %>% 
   filter(experiment == "felt touch") %>% 
