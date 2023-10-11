@@ -18,7 +18,6 @@ felt touch,asd15,ASD,1,forced choice,26,0,109,37,34,38,0,47,0,61,24,15,22,0
 felt touch,asd16,ASD,1,forced choice,18,0,110,25,42,43,0,23,0,70,25,19,26,0
 felt touch,asd17,ASD,3,forced choice,22,0,113,28,37,48,0,32,0,65,24,13,28,0
 felt touch,asd18,ASD,3,forced choice,30,0,154,62,35,57,0,60,0,69,25,16,28,0
-felt touch,asd19,ASD,3,forced choice,24,0,124,41,45,38,0,29,0,83,29,23,31,0
 felt touch,asd20,ASD,3,forced choice,16,0,94,31,30,33,0,51,0,74,26,17,31,0
 felt touch,asd20a,ASD,1,forced choice,31,0,129,43,41,45,0,57,0,68,22,16,30,0
 felt touch,asd21,ASD,1,forced choice,23,0,114,36,36,42,0,40,0,76,31,17,28,0
@@ -48,7 +47,6 @@ felt touch,sub11,Control,3,forced choice,6,0,84,34,26,24,0,25,0,43,14,9,20,0
 felt touch,sub12,Control,3,forced choice,6,0,93,33,31,29,0,28,0,38,8,10,20,0
 felt touch,sub13,Control,3,forced choice,10,0,89,25,28,36,0,20,0,48,14,11,23,0
 felt touch,sub14,Control,3,forced choice,10,0,58,18,26,14,0,14,0,45,22,8,15,0
-felt touch,sub15,Control,3,forced choice,11,0,57,19,15,23,0,21,0,41,14,11,16,0
 felt touch,sub16,Control,3,forced choice,9,0,102,28,40,34,0,29,0,27,9,8,10,0
 felt touch,sub17,Control,3,forced choice,24,0,124,38,35,51,0,43,0,45,14,12,19,0
 felt touch,sub18,Control,3,forced choice,8,0,75,25,21,29,0,15,0,62,17,21,24,0

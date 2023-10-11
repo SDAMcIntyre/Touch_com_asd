@@ -78,6 +78,8 @@ indiv_data <- read_csv(paste0(RAW_DATA_FOLDER, "demographic-data_entered-and-che
 med_fam_data <- read_csv(paste0(RAW_DATA_FOLDER, "medication-family_entered-and-checked.csv"))
 
 anon_indiv_data <- indiv_data %>% 
+  #. remove excluded participants ####
+filter(!(PID %in% EXCLUDED_PIDS)) %>% 
   mutate(
     # anonymise experimenter ####
     Experimenter = Experimenter %>% as.factor() %>% as.numeric(),

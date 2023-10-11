@@ -8,7 +8,7 @@ felt touch,ASD,asd06,TRUE,FALSE,TRUE
 felt touch,ASD,asd07,TRUE,FALSE,TRUE
 felt touch,ASD,asd08,TRUE,FALSE,TRUE
 felt touch,ASD,asd09,TRUE,FALSE,TRUE
-felt touch,ASD,asd10,TRUE,FALSE,FALSE
+felt touch,ASD,asd10,TRUE,FALSE,TRUE
 felt touch,ASD,asd10a,TRUE,FALSE,FALSE
 felt touch,ASD,asd11,TRUE,FALSE,TRUE
 felt touch,ASD,asd12,TRUE,FALSE,TRUE
@@ -18,14 +18,13 @@ felt touch,ASD,asd15,FALSE,FALSE,FALSE
 felt touch,ASD,asd16,TRUE,FALSE,FALSE
 felt touch,ASD,asd17,TRUE,FALSE,FALSE
 felt touch,ASD,asd18,TRUE,FALSE,TRUE
-felt touch,ASD,asd19,TRUE,FALSE,TRUE
 felt touch,ASD,asd20,TRUE,FALSE,FALSE
-felt touch,ASD,asd20a,TRUE,FALSE,TRUE
+felt touch,ASD,asd20a,TRUE,FALSE,FALSE
 felt touch,ASD,asd21,TRUE,FALSE,FALSE
 felt touch,ASD,asd22,TRUE,FALSE,FALSE
 felt touch,ASD,asd23,FALSE,FALSE,FALSE
 felt touch,ASD,asd24,FALSE,FALSE,FALSE
-felt touch,ASD,asd25,TRUE,FALSE,FALSE
+felt touch,ASD,asd25,TRUE,FALSE,TRUE
 felt touch,ASD,asd26,TRUE,FALSE,FALSE
 felt touch,ASD,asd27,TRUE,FALSE,FALSE
 felt touch,ASD,asd28,TRUE,FALSE,FALSE
@@ -48,7 +47,6 @@ felt touch,Control,sub11,TRUE,FALSE,FALSE
 felt touch,Control,sub12,TRUE,FALSE,FALSE
 felt touch,Control,sub13,TRUE,FALSE,TRUE
 felt touch,Control,sub14,TRUE,FALSE,TRUE
-felt touch,Control,sub15,TRUE,FALSE,TRUE
 felt touch,Control,sub16,TRUE,FALSE,FALSE
 felt touch,Control,sub17,TRUE,FALSE,TRUE
 felt touch,Control,sub18,TRUE,FALSE,TRUE
