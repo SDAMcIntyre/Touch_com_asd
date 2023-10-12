@@ -151,7 +151,7 @@ demog_forced_strict %>%
 
 #.. save PIDs for strict subsets ####
 
-demog %>% 
+demog_forced %>% 
   select(experiment, group, PID) %>% 
   mutate(
     felt_touch = PID %in% demog_felt_strict$PID,
