@@ -111,6 +111,7 @@ calculate_metrics <- function(df, labels, true_class, predicted_class, R, ...) {
       summarise(
         Label = label,
         F1_chance = f1_chance(label, get(!!true_class), get(!!predicted_class)),
+        Total = n(),
         Present = present(label, get(!!true_class)),
         Selected = selected(label, get(!!predicted_class)),
         Hits = hits(label, get(!!true_class), get(!!predicted_class)),
