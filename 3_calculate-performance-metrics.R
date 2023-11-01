@@ -1,9 +1,21 @@
 library(readr)
 library(dplyr)
-library(boot)
+
+# from source files:
+# ggplot2
+# stringr
+# library(dplyr)
+# library(boot)
+# library(tidyr)
+# library(broom)
+# library(purrr)
 
 # source all .R files in the Rfunctions directory ####
-sapply(list.files("Rfunctions", full.names = TRUE), source)
+source_files <- list.files("Rfunctions", full.names = TRUE)
+sapply(source_files[grepl(
+  "(plot_appearance)|(performance_metrics)|(write_path_csv)", 
+  source_files
+  )], source)
 
 # folder paths ####
 PROCESSED_DATA_FOLDER <- "Data/processed/"
@@ -23,67 +35,126 @@ strict_subsets <- read_csv(
 
 # calculate performance metrics ####
 
-set.seed(11102023)
-## by individual, felt only ####
-comm_fc_data %>% 
-  filter(experiment == "felt touch") %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, group, PID) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm-felt-touch_performance-indiv.csv")
+Nreps <- 1000 # number of replicate samples for bootstrapping
+set.seed(01112023)
 
-# strict subset
-comm_fc_data %>% 
+## f1 average micro by individual ####
+
+comm_F1micro_indiv <- comm_fc_data %>% 
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+
+# save to file
+write_path_csv(comm_F1micro_indiv, PROCESSED_DATA_FOLDER, "comm_F1micro-indiv.csv")
+save(comm_F1micro_indiv, file = paste0(PROCESSED_DATA_FOLDER, "comm_F1micro-indiv.RData"))
+
+
+# strict subset (for comparison of felt vs viewed)
+comm_F1micro_indiv_strict <- comm_fc_data %>% 
   filter(
-    experiment == "felt touch" &
-      PID %in% filter(strict_subsets, felt_touch)[["PID"]]
-      ) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, group, PID) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm-felt-touch_performance-indiv_strict.csv")
+    PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
+  ) %>% 
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
 
-## by group ####
+# save to files
+write_path_csv(comm_F1micro_indiv_strict, PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_strict.csv")
+save(comm_F1micro_indiv_strict, file = paste0(PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_strict.RData"))
 
-comm_fc_data %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group.csv")
+
+# first 6 trials only (for comparison of felt vs viewed)
+comm_F1micro_indiv_first6 <- comm_fc_data %>% 
+  filter(trial <=6) %>% 
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+
+# save to files
+write_path_csv(comm_F1micro_indiv_first6, PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_first6.csv")
+save(comm_F1micro_indiv_first6, file = paste0(PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_first6.RData"))
+
+
+# strict subset with first 6 only (for comparison of felt vs viewed)
+comm_F1micro_indiv_first6_strict <- comm_fc_data %>% 
+  filter(
+    trial <=6 &
+      PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
+  ) %>% 
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+
+# save to files
+write_path_csv(comm_F1micro_indiv_first6_strict, PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_first6_strict.csv")
+save(comm_F1micro_indiv_first6_strict, file = paste0(PROCESSED_DATA_FOLDER, "comm_F1micro-indiv_first6_strict.RData"))
+
+
+## metrics by label (touch) and group ####
+
+comm_metrics <- comm_fc_data %>% 
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group) 
+
+# save to files
+write_path_csv(comm_metrics, PROCESSED_DATA_FOLDER, "comm_metrics-group.csv")
+save(comm_metrics, file = paste0(PROCESSED_DATA_FOLDER, "comm_metrics-group.RData"))
 
 # strict subset (for separate felt and viewed analyses)
 felt_strict <- comm_fc_data %>% 
   filter(
     experiment == "felt touch" &
-    PID %in% filter(strict_subsets, felt_touch)[["PID"]]
-  ) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) 
+      PID %in% filter(strict_subsets, felt_touch)[["PID"]]
+  ) 
 
 viewed_strict <- comm_fc_data %>% 
   filter(
     experiment == "viewed touch" &
       PID %in% filter(strict_subsets, viewed_touch)[["PID"]]
-  ) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) 
+  ) 
 
-rbind(felt_strict, viewed_strict) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group_strict-each.csv")
+comm_metrics_group_strict_each <- rbind(felt_strict, viewed_strict) %>% 
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group) 
+
+# save to files
+write_path_csv(comm_metrics_group_strict_each, PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-each.csv")
+save(comm_metrics_group_strict_each, file = paste0(PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-each.RData"))
 
 # strict subset (for comparision of felt vs viewed)
-comm_fc_data %>% 
+comm_metrics_group_strict_compare <- comm_fc_data %>% 
   filter(
-      PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
+    PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
   ) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group_strict-compare.csv")
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group) 
 
+# save to files
+write_path_csv(comm_metrics_group_strict_compare, PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-compare.csv")
+save(comm_metrics_group_strict_compare, file = paste0(PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-compare.RData"))
 
-## combined live and online by trial 1 -6 (first presentation of each touch) ####
-
-comm_fc_data %>% 
-  filter(trial <=6) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group-first6.csv")
-
-# strict subset
-comm_fc_data %>% 
+# strict subset with first 6 only (for comparison of felt vs viewed)
+comm_metrics_group_first6_strict <- comm_fc_data %>% 
   filter(
     trial <=6 &
       PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
   ) %>% 
-  calculate_metrics(ORDERED_CUES, "cued", "response", R = 1000, experiment, group) %>% 
-  write_path_csv(PROCESSED_DATA_FOLDER, "comm_performance-group-first6_strict-compare.csv")
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group)
+
+# save to files
+write_path_csv(comm_metrics_group_first6_strict, PROCESSED_DATA_FOLDER, "comm_metrics-group_first6_strict.csv")
+save(comm_metrics_group_first6_strict, file = paste0(PROCESSED_DATA_FOLDER, "comm_metrics-group_first6_strict.RData"))
+
+
+## metrics by label and individual, felt only ####
+
+felt_metrics_indiv <- comm_fc_data %>% 
+  filter(experiment == "felt touch") %>% 
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+
+# save to file
+write_path_csv(felt_metrics_indiv, PROCESSED_DATA_FOLDER, "comm-felt_metrics-indiv.csv")
+save(felt_metrics_indiv, file = paste0(PROCESSED_DATA_FOLDER, "comm-felt_metrics-indiv.RData"))
+
+# strict subset
+felt_metrics_indiv_strict <- comm_fc_data %>% 
+  filter(
+    experiment == "felt touch" &
+      PID %in% filter(strict_subsets, felt_touch)[["PID"]]
+  ) %>% 
+  metrics_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+
+# save to file 
+write_path_csv(felt_metrics_indiv_strict, PROCESSED_DATA_FOLDER, "comm-felt_metrics-indiv_strict.csv")
+save(felt_metrics_indiv_strict, file = paste0(PROCESSED_DATA_FOLDER, "comm-felt_metrics-indiv_strict.RData"))
+
