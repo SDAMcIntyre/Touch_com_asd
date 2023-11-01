@@ -145,30 +145,143 @@ f1_ave_micro <- function (true_class, predicted_class, labels = NULL) {
 
 #. "statistic" functions to pass to boot ####
 
-f1_for_boot <- function(xdata, idx, label) {
-  f1(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], label)
+# for testing:
+library(readr)
+PROCESSED_DATA_FOLDER <- "Data/processed/"
+comm_fc_data <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER,'communication-data.csv'), 
+  col_types = "cccccicc"
+) %>% 
+  filter(task == 'forced choice') %>% 
+  select(-task)
+
+source("Rfunctions/plot_appearance.R")
+gp1 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "ASD" & PID == "asd01")
+gp65 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "Control" & PID == "sub32")
+
+# working, f1 micro only
+f1_micro_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
+  if (is.null(labels)) {(labels <- unique(df[["true_class"]])); print(labels)}
+  
+  data_for_boot <- tibble(
+    true_class = df[[true_class]],
+    predicted_class = df[[predicted_class]]
+  ) 
+  
+  # f1 micro fn to pass to boot()
+  stat_fn_for_boot <- function(data_for_boot, idx, labels) {
+    f1_ave_micro(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], labels)
+  }
+  
+  # # do bootstrapping with above function
+  boot_out <- boot(data = data_for_boot, statistic = stat_fn_for_boot, R = R, parallel = "multicore", labels = labels)
+  
+  # get CIS, tidy
+  if (n_distinct(boot_out$t) == 1) {
+    # if all values are the same (e.g. participant got 100% correct), fill CIs with NA
+    tidy_cis <- boot_out %>% 
+      tidy(conf.int=FALSE, conf.method="perc") %>% 
+      mutate( conf.low = NA_real_, conf.high = NA_real_)
+  } else {
+    tidy_cis <- boot_out %>% 
+      tidy(conf.int=TRUE, conf.method="perc") 
+  }
+  
+  tidy_cis %>% rename(F1_micro = statistic)
+  
 }
 
-metrics_by_label_for_boot <- function(xdata, idx, labels = NULL) {
-  if (is.null(labels)) {(labels <- unique(xdata[["true_class"]])); print(labels)}
+# flexible dplyr functions ####
+# https://tidyr.tidyverse.org/articles/nest.html
 
-  # by label
-  for (lbl in labels) {
-    # Recall: Hits / positive cases [Hits + Misses]; prop. correct, positive predictive value (PPV), Sensitivity
-    Recall <- recall(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], lbl) 
-    # Precision: Hits / positive predictions [Hits + False Alarms]
-    Precision <- precision(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], lbl)
-    # Specificity: Correct Rejections / negative cases [CR + misses]
-    Specificity <- specificity(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], lbl)
-    # F1: 2 * (Precision * Recall) / (Precision + Recall); harmonic mean of Recall and Precision
-    F1 <- f1(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], lbl)
-    # F1_Chance: predicted f1 score if just guessing
-    F1_Chance <- f1_chance(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], lbl)
-    
-    metrics <- c(Recall, Precision, Specificity, F1, F1_Chance)
-    out <- c(out, metrics)
+f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels, R, ...) {
+  df %>% 
+    group_by(...) %>% 
+    nest() %>% 
+    mutate(boot_out = map(data, \(x) f1_micro_boot(x, true_class, predicted_class, labels, R = R))) %>% 
+    unnest(c(boot_out))
+}
+
+# working
+f1_micro_boot_dataset(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
+
+metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
+  if (is.null(labels)) {(labels <- unique(df[["true_class"]])); print(labels)}
+  
+  # so we can label the output later
+  metric_list <- c()
+  for (lbl in labels){
+    metric_list <- c(metric_list, paste(lbl, c("Recall", "Precision", "Specificity", "F1", "F1chance"), sep = "_"))
   }
-  out
+  
+  # put data in the format that boot() wants
+  data_for_boot <- tibble(
+      true_class = df[[true_class]],
+      predicted_class = df[[predicted_class]]
+  ) 
+    
+  # metrics fn to pass to boot()
+  stat_fn_for_boot <- function(data_for_boot, idx, labels) {
+    out <- c()
+    # by label
+    for (lbl in labels) {
+      # Recall: Hits / positive cases [Hits + Misses]; prop. correct, positive predictive value (PPV), Sensitivity
+      Recall <- recall(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl) 
+      # Precision: Hits / positive predictions [Hits + False Alarms]
+      Precision <- precision(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
+      # Specificity: Correct Rejections / negative cases [CR + misses]
+      Specificity <- specificity(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
+      # F1: 2 * (Precision * Recall) / (Precision + Recall); harmonic mean of Recall and Precision
+      F1 <- f1(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
+      # F1_Chance: predicted f1 score if just guessing
+      F1chance <- f1_chance(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
+      
+      metrics <- c(Recall, Precision, Specificity, F1, F1chance)
+      out <- c(out, metrics)
+    }
+    out
+    }
+
+
+  # # do bootstrapping with above function
+  boot_out <- boot(data = data_for_boot, statistic = stat_fn_for_boot, R = R, parallel = "multicore", labels = labels)
+  
+  # tidy up output and CIs
+  tidy_cis <- tibble()
+  for (m in seq_along(metric_list)) {
+    
+    # basic bootstrap output
+    tidy_m <- tibble(
+      statistic = boot_out$t0[m],
+      bias = mean(boot_out$t[,m])-boot_out$t0[m], 
+      std.error = sd(boot_out$t[,m])
+    )
+    
+    # 95% CIs, percentile
+    if (n_distinct(boot_out$t[,m]) == 1) {
+      # if all values are the same (e.g. participant got 100% correct), fill CIs with NA
+      tidy_m <- tidy_m %>% 
+        mutate( conf.low = NA_real_, conf.high = NA_real_)
+    } else {
+      m_ci <- boot.ci(boot_out, index = c(m), conf = 0.95, type = "perc")
+      tidy_m <- tidy_m %>% 
+        mutate(conf.low = m_ci$percent[4], conf.high = m_ci$percent[5])
+    }
+    
+    tidy_cis <- rbind(tidy_cis, tidy_m %>% mutate(metric = metric_list[m]))
+  }
+  
+  tidy_cis
+}
+
+# working
+metrics_boot(gp1, "cued", "response", ORDERED_CUES, R = 100) %>% 
+  separate(metric, c("Label", "Metric"))
+
+# old
+
+f1_for_boot <- function(xdata, idx, label) {
+  f1(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], label)
 }
 
 metrics_combined_for_boot <- function(xdata, idx, labels = NULL) {
@@ -197,22 +310,6 @@ metrics_combined_for_boot <- function(xdata, idx, labels = NULL) {
   out
 }
 
-# for testing:
-library(readr)
-PROCESSED_DATA_FOLDER <- "Data/processed/"
-comm_fc_data <- read_csv(
-  paste0(PROCESSED_DATA_FOLDER,'communication-data.csv'), 
-  col_types = "cccccicc"
-) %>% 
-  filter(task == 'forced choice') %>% 
-  select(-task)
-
-source("Rfunctions/plot_appearance.R")
-gp1 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "ASD" & PID == "asd01")
-gp65 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "Control" & PID == "sub32")
-
-
-# old
 boot_metrics <- function(df, true_class, predicted_class, labels = NULL, R) {
   if (is.null(labels)) {(labels <- unique(xdata[["true_class"]])); print(labels)}
 
@@ -259,58 +356,6 @@ boot_metrics <- function(df, true_class, predicted_class, labels = NULL, R) {
   list(overall, by_label)
 }
 
-# working, f1 micro only
-f1_micro_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
-  if (is.null(labels)) {(labels <- unique(xdata[["true_class"]])); print(labels)}
-  
-  xdata <- tibble(
-    true_class = df[[true_class]],
-    predicted_class = df[[predicted_class]]
-  ) 
-
-  # f1 micro fn to pass to boot()
-  statistic_for_boot <- function(xdata, idx, labels) {
-    f1_ave_micro(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], labels)
-  }
-  
-  # # do bootstrapping with above function
-  boot_out <- boot(data = xdata, statistic = statistic_for_boot, R = R, parallel = "multicore", labels = labels)
-
-  # get CIS, tidy
-  if (n_distinct(boot_out$t) == 1) {
-    # if all values are the same (e.g. participant got 100% correct), fill CIs with NA
-    tidy_cis <- boot_out %>% 
-      tidy(conf.int=FALSE, conf.method="perc") %>% 
-      mutate( conf.low = NA_real_, conf.high = NA_real_)
-  } else {
-    tidy_cis <- boot_out %>% 
-      tidy(conf.int=TRUE, conf.method="perc") 
-  }
-  
-  tidy_cis %>% rename(F1_micro = statistic)
-  
-}
-
-# flexible dplyr functions ####
-# https://tidyr.tidyverse.org/articles/nest.html
-
-# working
-comm_fc_data %>% 
-  group_by(experiment) %>% 
-  nest() %>% 
-  mutate(boot_out = map(data, \(x) f1_micro_boot(x, "cued", "response", ORDERED_CUES, R = 100))) %>% 
-  unnest(c(boot_out))
-
-f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels, R, ...) {
-  df %>% 
-    group_by(...) %>% 
-    nest() %>% 
-    mutate(boot_out = map(data, \(x) f1_micro_boot(x, true_class, predicted_class, labels, R = R))) %>% 
-    unnest(c(boot_out))
-}
-
-# working
-f1_micro_boot_dataset(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
 
 
 # old stuff not working ####
