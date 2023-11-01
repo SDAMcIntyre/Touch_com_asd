@@ -149,7 +149,6 @@ f1_for_boot <- function(xdata, idx, label) {
   f1(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], label)
 }
 
-
 metrics_by_label_for_boot <- function(xdata, idx, labels = NULL) {
   if (is.null(labels)) {(labels <- unique(xdata[["true_class"]])); print(labels)}
 
@@ -261,7 +260,7 @@ boot_metrics <- function(df, true_class, predicted_class, labels = NULL, R) {
 }
 
 # working, f1 micro only
-boot_metrics_overall <- function(df, true_class, predicted_class, labels = NULL, R) {
+f1_micro_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
   if (is.null(labels)) {(labels <- unique(xdata[["true_class"]])); print(labels)}
   
   xdata <- tibble(
@@ -270,25 +269,25 @@ boot_metrics_overall <- function(df, true_class, predicted_class, labels = NULL,
   ) 
 
   # f1 micro fn to pass to boot()
-  f1_micro_for_boot <- function(xdata, idx, labels) {
+  statistic_for_boot <- function(xdata, idx, labels) {
     f1_ave_micro(xdata[["true_class"]][idx], xdata[["predicted_class"]][idx], labels)
   }
   
-  # # do bootstrapping on f1 and other metrics
-  f1_micro_boot <- boot(data = xdata, statistic = f1_micro_for_boot, R = R, parallel = "multicore", labels = labels)
+  # # do bootstrapping with above function
+  boot_out <- boot(data = xdata, statistic = statistic_for_boot, R = R, parallel = "multicore", labels = labels)
 
   # get CIS, tidy
-  if (n_distinct(f1_micro_boot$t) == 1) {
+  if (n_distinct(boot_out$t) == 1) {
     # if all values are the same (e.g. participant got 100% correct), fill CIs with NA
-    tidy_cis <- f1_micro_boot %>% 
+    tidy_cis <- boot_out %>% 
       tidy(conf.int=FALSE, conf.method="perc") %>% 
       mutate( conf.low = NA_real_, conf.high = NA_real_)
   } else {
-    tidy_cis <- f1_micro_boot %>% 
+    tidy_cis <- boot_out %>% 
       tidy(conf.int=TRUE, conf.method="perc") 
   }
   
-  tidy_cis
+  tidy_cis %>% rename(F1_micro = statistic)
   
 }
 
@@ -299,19 +298,19 @@ boot_metrics_overall <- function(df, true_class, predicted_class, labels = NULL,
 comm_fc_data %>% 
   group_by(experiment) %>% 
   nest() %>% 
-  mutate(boot_out = map(data, \(x) boot_metrics_overall(x, "cued", "response", ORDERED_CUES, R = 100))) %>% 
+  mutate(boot_out = map(data, \(x) f1_micro_boot(x, "cued", "response", ORDERED_CUES, R = 100))) %>% 
   unnest(c(boot_out))
 
-boot_overall_for_dplyr <- function(df, true_class, predicted_class, labels, R, ...) {
+f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels, R, ...) {
   df %>% 
     group_by(...) %>% 
     nest() %>% 
-    mutate(boot_out = map(data, \(x) boot_metrics_overall(x, true_class, predicted_class, labels, R = R))) %>% 
+    mutate(boot_out = map(data, \(x) f1_micro_boot(x, true_class, predicted_class, labels, R = R))) %>% 
     unnest(c(boot_out))
 }
 
 # working
-boot_overall_for_dplyr(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
+f1_micro_boot_dataset(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
 
 
 # old stuff not working ####
