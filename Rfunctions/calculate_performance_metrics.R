@@ -210,6 +210,7 @@ comm_fc_data <- read_csv(
 
 source("Rfunctions/plot_appearance.R")
 gp1 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "ASD" & PID == "asd01")
+gp65 <- comm_fc_data %>% filter(experiment == "felt touch" & group == "Control" & PID == "sub32")
 
 
 # old
@@ -277,13 +278,19 @@ boot_metrics_overall <- function(df, true_class, predicted_class, labels = NULL,
   f1_micro_boot <- boot(data = xdata, statistic = f1_micro_for_boot, R = R, parallel = "multicore", labels = labels)
 
   # get CIS, tidy
-  f1_boot %>% 
-    tidy(conf.int=TRUE, conf.method="perc") 
+  if (n_distinct(f1_micro_boot$t) == 1) {
+    # if all values are the same (e.g. participant got 100% correct), fill CIs with NA
+    tidy_cis <- f1_micro_boot %>% 
+      tidy(conf.int=FALSE, conf.method="perc") %>% 
+      mutate( conf.low = NA_real_, conf.high = NA_real_)
+  } else {
+    tidy_cis <- f1_micro_boot %>% 
+      tidy(conf.int=TRUE, conf.method="perc") 
+  }
+  
+  tidy_cis
   
 }
-
-# working
-boot_metrics_overall(gp1, "cued", "response", ORDERED_CUES, R = 70)
 
 # flexible dplyr functions ####
 # https://tidyr.tidyverse.org/articles/nest.html
@@ -303,8 +310,8 @@ boot_overall_for_dplyr <- function(df, true_class, predicted_class, labels, R, .
     unnest(c(boot_out))
 }
 
-# same results repeated, suspicious BOOKMARK
-boot_overall_for_dplyr(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) #
+# working
+boot_overall_for_dplyr(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
 
 
 # old stuff not working ####
