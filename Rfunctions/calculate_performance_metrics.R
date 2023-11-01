@@ -194,6 +194,7 @@ f1_micro_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
 # flexible dplyr functions ####
 # https://tidyr.tidyverse.org/articles/nest.html
 
+# working
 f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels, R, ...) {
   df %>% 
     group_by(...) %>% 
@@ -205,6 +206,7 @@ f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels, R, ..
 # working
 f1_micro_boot_dataset(comm_fc_data, "cued", "response", ORDERED_CUES, R = 100, experiment, group, PID) 
 
+# working
 metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
   if (is.null(labels)) {(labels <- unique(df[["true_class"]])); print(labels)}
   
@@ -268,15 +270,16 @@ metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
         mutate(conf.low = m_ci$percent[4], conf.high = m_ci$percent[5])
     }
     
-    tidy_cis <- rbind(tidy_cis, tidy_m %>% mutate(metric = metric_list[m]))
+    tidy_cis <- rbind(tidy_cis, tidy_m %>% mutate(metric = metric_list[m])) 
   }
   
-  tidy_cis
+  tidy_cis %>% 
+    separate(metric, c("Label", "Metric")) %>% 
+    select(Label, Metric, everything())
 }
 
 # working
-metrics_boot(gp1, "cued", "response", ORDERED_CUES, R = 100) %>% 
-  separate(metric, c("Label", "Metric"))
+metrics_boot(gp1, "cued", "response", ORDERED_CUES, R = 100) 
 
 # old
 
