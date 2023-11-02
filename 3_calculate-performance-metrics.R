@@ -41,7 +41,7 @@ set.seed(01112023)
 ## f1 average micro by individual ####
 
 comm_F1micro_indiv <- comm_fc_data %>% 
-  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID)
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group, PID) 
 
 # save to file
 write_path_csv(comm_F1micro_indiv, PROCESSED_DATA_FOLDER, "comm_F1micro-indiv.csv")

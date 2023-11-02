@@ -180,7 +180,7 @@ metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
   # so we can label the output later
   metric_list <- c()
   for (lbl in labels){
-    metric_list <- c(metric_list, paste(lbl, c("Recall", "Precision", "Specificity", "F1", "F1chance"), sep = "_"))
+    metric_list <- c(metric_list, paste(lbl, c("Recall", "Precision", "Specificity", "F1"), sep = "_"))
   }
   
   # put data in the format that boot() wants
@@ -202,10 +202,8 @@ metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
       Specificity <- specificity(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
       # F1: 2 * (Precision * Recall) / (Precision + Recall); harmonic mean of Recall and Precision
       F1 <- f1(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
-      # F1_Chance: predicted f1 score if just guessing
-      F1chance <- f1_chance(data_for_boot[["true_class"]][idx], data_for_boot[["predicted_class"]][idx], lbl)
-      
-      metrics <- c(Recall, Precision, Specificity, F1, F1chance)
+
+      metrics <- c(Recall, Precision, Specificity, F1)
       out <- c(out, metrics)
     }
     out
@@ -247,6 +245,7 @@ metrics_boot <- function(df, true_class, predicted_class, labels = NULL, R) {
 
 # flexible dplyr functions ####
 # https://tidyr.tidyverse.org/articles/nest.html
+# https://broom.tidymodels.org/articles/broom_and_dplyr.html
 
 f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels = NULL, R, ...) {
   if (is.null(labels)) {(labels <- unique(df[["true_class"]])); print(labels)}
@@ -255,7 +254,12 @@ f1_micro_boot_dataset <- function(df, true_class, predicted_class, labels = NULL
     group_by(...) %>% 
     nest() %>% 
     mutate(boot_out = map(data, \(x) f1_micro_boot(x, true_class, predicted_class, labels, R = R))) %>% 
-    unnest(c(boot_out))
+    unnest(c(boot_out)) %>% 
+    ungroup() %>% 
+    mutate(
+      N = map(data, ~ nrow(.)),
+      F1_chance = f1_chance(data[[1]][["cued"]], data[[1]][["response"]], "attention") # it doesn't matter which label here
+      ) %>% unnest(c(N)) 
 }
 
 metrics_boot_dataset <- function(df, true_class, predicted_class, labels = NULL, R, ...) {
@@ -265,7 +269,12 @@ metrics_boot_dataset <- function(df, true_class, predicted_class, labels = NULL,
     group_by(...) %>% 
     nest() %>% 
     mutate(boot_out = map(data, \(x) metrics_boot(x, true_class, predicted_class, labels, R = R))) %>% 
-    unnest(c(boot_out))
+    unnest(c(boot_out)) %>% 
+    ungroup %>% 
+    mutate(
+      N = map(data, ~ nrow(.)),
+      F1_chance = f1_chance(data[[1]][["cued"]], data[[1]][["response"]], "attention") # it doesn't matter which label here
+    ) %>% unnest(c(N)) 
 }
 
 
