@@ -1,5 +1,7 @@
 library(tidyverse)
 library(summarytools)
+library(ggplot2)
+library(patchwork)
 
 # source all .R files in the Rfunctions directory
 sapply(list.files("Rfunctions", full.names = TRUE), source)
@@ -11,7 +13,15 @@ FIGURES_FOLDER <- "Figures/"
 REPORTS_FOLDER <- "Data/reports/"
 
 # read data ####
-demog <- read_csv(paste0(PROCESSED_DATA_FOLDER, "demographics-data.csv"), col_types = "cccccccccc") 
+demog <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER, "demographics-data.csv"), 
+  col_types = "cccccccccc"
+  )
+
+questionnaires <- read_csv(
+  paste0(PROCESSED_DATA_FOLDER, 'questionnaire-data.csv'),
+  col_types = "cccccnnnnnnnnnnnnnn" 
+) 
 
 # check that qualtrics assigned even numbers to different tasks ####
 
@@ -22,6 +32,7 @@ print_prop_xtab(xtabs(~ group + task, filter(demog, experiment == "viewed touch"
 # forced choice task ####
 
 demog_forced <- filter(demog, task == "forced choice")
+questionnaires_forced <- filter(questionnaires, task == "forced choice") 
 
 print_prop_xtab(xtabs(~ group + Language + experiment, demog_forced))
 
@@ -37,6 +48,32 @@ demog_forced %>%
   select(-c(PID, task, `Age Cohort`)) %>% 
   freq_table() %>% 
   view(file = paste0(TABLES_FOLDER,"table1_demographics_forced-choice.html"))
+
+
+#. autism grouping vs. questionnaires ####
+
+questionnaires_forced %>% 
+  group_by(experiment, group) %>% 
+  select(-c(PID, task, Experimenter)) %>% 
+  freq_table() %>% 
+  view(file = paste0(TABLES_FOLDER,"table1_questionnaires_forced-choice.html"))
+
+questionnaires %>% 
+  questionnaire_plot_combined("AQ_total", "AQ score")
+ggsave(paste0(FIGURES_FOLDER,"AQ by group.svg"), width = 6, height = 4)
+
+questionnaires %>% 
+  questionnaire_plot_combined("BAPQ_total", "BAPQ score")
+ggsave(paste0(FIGURES_FOLDER,"BAPQ by group.svg"), width = 6, height = 4)
+
+questionnaires %>% 
+  questionnaire_plot_combined("STQ_total", "STQ score")
+ggsave(paste0(FIGURES_FOLDER,"STQ by group.svg"), width = 6, height = 4)
+
+questionnaires %>% 
+  questionnaire_plot_combined("TAS_total", "TAS score")
+ggsave(paste0(FIGURES_FOLDER,"TAS by group.svg"), width = 6, height = 4)
+
 
 #. subset for comparable demographics ####
 
@@ -180,21 +217,21 @@ demog_free %>%
   view(file = paste0(TABLES_FOLDER,"tableS4_demographics_free-text.html"))
 
 
-#### missing questionnaire responses ####
+# missing questionnaire responses ####
 
-demog %>% 
+questionnaires %>% 
   group_by(group,AQ_n_missing) %>% tally()
 
-demog %>% 
+questionnaires %>% 
   group_by(group,BAPQ_n_missing) %>% tally()
 
-demog %>% 
+questionnaires %>% 
   group_by(group,STQ_n_missing) %>% tally()
 
-demog %>% 
+questionnaires %>% 
   group_by(group, TAS_n_missing) %>% tally()
 
-demog %>% 
+full_join(demog, questionnaires) %>% 
   select(PID, group,Language, `Country of Residence`, contains("n_missing")) %>% 
   rowwise() %>% 
   mutate(total_n_missing = sum(c_across(contains("n_missing")))) %>% 
