@@ -64,6 +64,10 @@ residuals(mdl, type = "response")
 plogis(coef(mdl)[1] + 22 * coef(mdl)[2] + 0*coef(mdl)[3] + 0*22*coef(mdl)[4])
 predict(mdl, tibble(AQ_total = 22, experiment = "felt touch"), type = "response")
 
+plogis(coef(mdl)[1] + 22 * coef(mdl)[2] + 1*coef(mdl)[3] + 1*22*coef(mdl)[4])
+predict(mdl, tibble(AQ_total = 22, experiment = "viewed touch"), type = "response")
+
+
 # model predictions to plot
 range_AQ <- min(indiv_data$AQ_total, na.rm = TRUE) : max(indiv_data$AQ_total, na.rm = TRUE)
 plot_model_data <- tibble(
