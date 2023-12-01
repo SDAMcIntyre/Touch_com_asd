@@ -41,7 +41,7 @@ get_coefs_per_unit_type <- function(unit, iff_df, ratings_df, total_iterations) 
       with(cor(mean.ratings,
                mean.iff,
                method = "spearman",
-               use = "pairwise.complete")) -> correlations[i]
+               use = "na.or.complete")) -> correlations[i]
     
   } # end iterations
   return(correlations)
