@@ -1,10 +1,9 @@
 library(readxl)
 library(openxlsx)
 library(dplyr)
-library(ggplot2)
 
 # total number of runs for bootstraping
-B = 999
+B = 9999
 
 
 # source all .R files in the Rfunctions directory ####
