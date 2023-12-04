@@ -10,6 +10,10 @@ n_sample_rows <- function(first_df, second_df) {
 get_coefs_per_unit_type <- function(unit, iff_df, ratings_df, total_iterations) {
   # create a vector that will hold all coefficient values
   correlations <- vector("numeric", total_iterations)
+  no <- length(unique((iff_df$Stimulus)))
+  print(paste(no, "unique stimuli"))
+  # count if some stimuli were not included
+  missing <- 0
   # repeat total_iterations times
   for(i in 1:total_iterations)
   {
@@ -21,6 +25,12 @@ get_coefs_per_unit_type <- function(unit, iff_df, ratings_df, total_iterations) 
     # select with replacement randomly n rows
     ratings_sample <- ratings_df[sample(nrow(ratings_df),size=total_sample_rows,replace=TRUE),]
     iff_unit_sample <- iff_unit_data[sample(nrow(iff_unit_data),size=total_sample_rows,replace=TRUE),]
+    
+    #TODO
+    # check if all stimuli were included
+    if (length(unique((ratings_sample$Stimulus))) < no || length(unique((iff_unit_sample$Stimulus))) < no) {
+      missing <- missing + 1
+    }
     
     # get mean ratings by stimulus (column called cued)
     ratings_sample |> 
@@ -44,5 +54,6 @@ get_coefs_per_unit_type <- function(unit, iff_df, ratings_df, total_iterations) 
                use = "na.or.complete")) -> correlations[i]
     
   } # end iterations
+  print(paste(missing, "times missed at least one stimuli"))
   return(correlations)
 } # end get_coefs_per_unit_type

@@ -3,7 +3,7 @@ library(openxlsx)
 library(dplyr)
 
 # total number of runs for bootstraping
-B = 9999
+B = 10000
 
 
 # source all .R files in the Rfunctions directory ####
@@ -142,4 +142,4 @@ hist(corr_df$HFA.asd, main = "HFA asd", xlab = "coef", ylab = "count")
 
 
 # Save data frame to an Excel file
-write.xlsx(corr_df, "Data/processed/corr_dataframe.xlsx")
+write.xlsx(corr_df, "Data/processed/corr_dataframe04_12_2023.xlsx")
