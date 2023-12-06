@@ -217,15 +217,16 @@ ggplot(plot_df_control, aes(mean.ratings, mean.iff, colour = Stimulus)) +
   theme(legend.position = "bottom", # legend at the bottom
         legend.text = element_text(size = 12, face = "bold"),
         plot.title = element_text(size = 16, face = "bold"),
-        strip.text = element_text(size = 12, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold", hjust = 0),
         strip.background = element_blank(),
+        panel.spacing.y = unit(2, "lines"),
         axis.title.x = element_text(size=12),
         axis.title.y = element_text(size=12)) +
   guides(colour = guide_legend(nrow = 1)) # legend in a single row
 ###############################################################################################
 # asd
 # create each plot lables with correlation coef
-my_asd_labels <- c(paste('CT\nR = ', round(ct_asd$R[1], digits=2)),
+my_asd_labels <- c(paste('CT\n\nR = ', round(ct_asd$R[1], digits=2)),
                        paste('FA-II\n\nR = ', round(faII_asd$R[1], digits=2)),
                        paste('Field\n\nR = ', round(field_asd$R[1], digits=2)),
                        paste('HFA\n\nR = ', round(hfa_asd$R[1], digits=2)),
@@ -253,8 +254,9 @@ ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) +
   theme(legend.position = "bottom", # legend at the bottom
         legend.text = element_text(size = 12, face = "bold"),
         plot.title = element_text(size = 16, face = "bold"),
-        strip.text = element_text(size = 12, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold", hjust = 0),
         strip.background = element_blank(),
+        panel.spacing.y = unit(2, "lines"),
         axis.title.x = element_text(size=12),
         axis.title.y = element_text(size=12)) +
   guides(colour = guide_legend(nrow = 1)) # legend in a single row
