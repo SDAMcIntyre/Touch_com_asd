@@ -7,7 +7,7 @@ library(ggthemes)
 # source all .R files in the Rfunctions directory ####
 source_files <- list.files("Rfunctions", full.names = TRUE)
 sapply(source_files[grepl(
-  "(get_unit_correlation)|(get_max_firing_rates)", 
+  "(get_unit_correlation)|(get_max_firing_rates)|(plot_appearance)", 
   source_files
 )], source)
 ###################################################################
@@ -185,6 +185,8 @@ final_df |>
   filter(Group == "ASD") -> plot_df_asd
 ###################################################################################
 # PLOT
+# colour palette for Stimuli
+my_colour_palette <- c(COLOUR_ATTENTION, COLOUR_CALMING, COLOUR_GRATITUDE, COLOUR_HAPPINESS, COLOUR_LOVE, COLOUR_SADNESS)
 ##################################################################################
 # control
 # create each plot lables with correlation coef
@@ -201,12 +203,13 @@ plot_df_control |>
   mutate(Stimulus = str_to_title(Stimulus)) -> plot_df_control
 
 ggplot(plot_df_control, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5) +
+  geom_point(size = 5) +
+  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "Control",
        x = "\nPleasantness",
        y = "Peak Firing Rate (Hz)\n",
        colour = "") +
+  scale_colour_manual(values = my_colour_palette) +
   xlim(min_rating, max_rating) +
   facet_wrap(~ UnitType, scales = "free") +
   theme_classic() +
@@ -236,21 +239,22 @@ plot_df_asd |>
   mutate(Stimulus = str_to_title(Stimulus)) -> plot_df_asd
 
 ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5) +
+  geom_point(size = 5) +
+  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "ASD",
-       x = "Pleasantness",
-       y = "Peak Firing Rate (Hz)",
+       x = "\nPleasantness",
+       y = "Peak Firing Rate (Hz)\n",
        colour = "") +
+  scale_colour_manual(values = my_colour_palette) +
   xlim(min_rating, max_rating) +
   facet_wrap(~ UnitType, scales = "free") +
   theme_classic() +
   # theme_tufte() + # no grid
   theme(legend.position = "bottom", # legend at the bottom
-        legend.text = element_text(size = 14),
+        legend.text = element_text(size = 12, face = "bold"),
         plot.title = element_text(size = 16, face = "bold"),
         strip.text = element_text(size = 12, face = "bold"),
         strip.background = element_blank(),
-        axis.title.x = element_text(size=16),
-        axis.title.y = element_text(size=16)) +
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12)) +
   guides(colour = guide_legend(nrow = 1)) # legend in a single row

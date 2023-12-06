@@ -4,6 +4,13 @@ library(stringr)
 # order to display in plots
 ORDERED_CUES <- c('attention','love','happiness','calming','sadness','gratitude')
 
+COLOUR_ATTENTION <- "#0A75AD"
+COLOUR_LOVE <- "#FF7F50"
+COLOUR_HAPPINESS <- "#2ACAEA"
+COLOUR_CALMING <- "#008000"
+COLOUR_SADNESS <- "#FF1493"
+COLOUR_GRATITUDE <- "#B30000"
+
 # RColorBrewer::brewer.pal(12, "Paired")
 # RColorBrewer::display.brewer.pal(12, "Paired")
 # library(unikn)
