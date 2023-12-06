@@ -7,7 +7,7 @@ library(ggplot2)
 library(ggthemes)
 
 # read correlation dataframe
-corr_file_path <- "Data/processed/corr_dataframe.xlsx"
+corr_file_path <- "Data/processed/corr_dataframe04_12_2023.xlsx"
 corr_df <- read_excel(corr_file_path)
 # create dataframe for box plot (requires group names in one column and matching coef values in the other)
 long_df <- corr_df |> gather(Group, coef)
