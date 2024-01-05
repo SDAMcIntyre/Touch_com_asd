@@ -172,9 +172,43 @@ hfa_asd |>
                    mean.iff,
                    method = "spearman",
                    use = "na.or.complete")) -> hfa_asd
-################################################################
+####################################################################
+unit_type <- "SA-II"
+# create dataframe with means for HFA
+# control
+saII_control <- get_joined_by_stimulus_df(unit_type, iff_data, ratings_data_control)
+# add column with unit type
+saII_control$UnitType <- rep(unit_type, nrow(saII_control)) 
+# add column with group
+saII_control$Group <- rep("Control", nrow(saII_control)) 
+# run correlation
+saII_control |>
+  mutate(R = cor(mean.ratings,
+                 mean.iff,
+                 method = "spearman",
+                 use = "na.or.complete")) -> saII_control
+# asd data
+saII_asd <- get_joined_by_stimulus_df(unit_type, iff_data, ratings_data_asd)
+# add column with unit type
+saII_asd$UnitType <- rep(unit_type, nrow(saII_asd)) 
+# add column with group
+saII_asd$Group <- rep("ASD", nrow(saII_asd)) 
+# run correlation
+saII_asd |>
+  mutate(R = cor(mean.ratings,
+                 mean.iff,
+                 method = "spearman",
+                 use = "na.or.complete")) -> saII_asd
+#######################################################
+#################################################################################
+# COMBINE DATA FROM ALL UNITS AND GROUPS
 # create final dataframe with all unit types and groups
-final_df <- bind_rows(list(ms_control,ms_asd,ct_control,ct_asd,faII_control,faII_asd,field_control,field_asd,hfa_control,hfa_asd))
+final_df <- bind_rows(list(ms_control,ms_asd,
+                           ct_control,ct_asd,
+                           faII_control,faII_asd,
+                           field_control,field_asd,
+                           hfa_control,hfa_asd,
+                           saII_control,saII_asd))
 # round correlation coef to 2 decimal places
 final_df$R <- round(final_df$R, digits = 2)
 
@@ -183,6 +217,7 @@ final_df |>
   filter(Group == "Control") -> plot_df_control
 final_df |> 
   filter(Group == "ASD") -> plot_df_asd
+########################################
 ###################################################################################
 # PLOT
 # colour palette for Stimuli
@@ -194,24 +229,28 @@ my_control_labels <- c(paste('CT\n\nR = ', round(ct_control$R[1], digits=2)),
                        paste('FA-II\n\nR = ', round(faII_control$R[1], digits=2)),
                        paste('Field\n\nR = ', round(field_control$R[1], digits=2)),
                        paste('HFA\n\nR = ', round(hfa_control$R[1], digits=2)),
-                       paste('MS\n\nR = ', round(ms_control$R[1], digits=2)))
+                       paste('MS\n\nR = ', round(ms_control$R[1], digits=2)),
+                       paste('SA-II\n\nR = ', round(saII_control$R[1], digits=2)))
 # replace them in df
-plot_df_control$UnitType <- factor(plot_df_control$UnitType, levels = c('CT', 'FA-II', 'Field', 'HFA','MS'), 
+plot_df_control$UnitType <- factor(plot_df_control$UnitType, levels = c('CT', 'FA-II', 'Field', 'HFA','MS','SA-II'), 
                    labels = my_control_labels)
 # change first letters of stimulus to upper case
 plot_df_control |> 
   mutate(Stimulus = str_to_title(Stimulus)) -> plot_df_control
 
+
 ggplot(plot_df_control, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
   geom_point(size = 5) +
+  # geom_point(shape = 17, size = 3) +
   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "Control",
        x = "\nPleasantness",
        y = "Peak Firing Rate (Hz)\n",
        colour = "") +
+  # scale_shape_manual(values=c(0, 1, 2, 5, 6, 9))+
   scale_colour_manual(values = my_colour_palette) +
   xlim(min_rating, max_rating) +
-  facet_wrap(~ UnitType, scales = "free") +
+  facet_wrap(~ UnitType, scales = "free_x") +
   theme_classic() +
   # theme_tufte() + # no grid
   theme(legend.position = "bottom", # legend at the bottom
@@ -230,9 +269,10 @@ my_asd_labels <- c(paste('CT\n\nR = ', round(ct_asd$R[1], digits=2)),
                        paste('FA-II\n\nR = ', round(faII_asd$R[1], digits=2)),
                        paste('Field\n\nR = ', round(field_asd$R[1], digits=2)),
                        paste('HFA\n\nR = ', round(hfa_asd$R[1], digits=2)),
-                       paste('MS\n\nR = ', round(ms_asd$R[1], digits=2)))
+                       paste('MS\n\nR = ', round(ms_asd$R[1], digits=2)),
+                      paste('SA-II\n\nR = ', round(saII_asd$R[1], digits=2)))
 # replace them in df
-plot_df_asd$UnitType <- factor(plot_df_asd$UnitType, levels = c('CT', 'FA-II', 'Field', 'HFA','MS'),
+plot_df_asd$UnitType <- factor(plot_df_asd$UnitType, levels = c('CT', 'FA-II', 'Field', 'HFA','MS','SA-II'),
                                    labels = my_asd_labels)
 
 # change first letters of stimulus to upper case
@@ -241,6 +281,7 @@ plot_df_asd |>
 
 ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
   geom_point(size = 5) +
+  # geom_point(shape = 17, size = 3) +
   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "ASD",
        x = "\nPleasantness",
@@ -248,7 +289,7 @@ ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) +
        colour = "") +
   scale_colour_manual(values = my_colour_palette) +
   xlim(min_rating, max_rating) +
-  facet_wrap(~ UnitType, scales = "free") +
+  facet_wrap(~ UnitType, scales = "free_x") +
   theme_classic() +
   # theme_tufte() + # no grid
   theme(legend.position = "bottom", # legend at the bottom
@@ -260,3 +301,61 @@ ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) +
         axis.title.x = element_text(size=12),
         axis.title.y = element_text(size=12)) +
   guides(colour = guide_legend(nrow = 1)) # legend in a single row
+#############################################################################################
+# shapes:
+############
+# CONTROL
+ggplot(plot_df_control, aes(x=mean.ratings, y=mean.iff)) + 
+  geom_point(aes(shape=Stimulus,size=Stimulus),color = COLOUR_CONTROL_FELT)+
+  # geom_point(size = 5) +
+  # geom_point(shape = 17, size = 3) +
+  scale_shape_manual(values=c(15, 0, 23, 24, 19, 8))+
+  scale_size_manual(values = c(3, 5, 5, 3, 3, 3)) +
+  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
+  labs(title = "Control",
+       x = "\nPleasantness",
+       y = "Peak Firing Rate (Hz)\n",
+       shape = "") +
+  xlim(min_rating, max_rating) +
+  facet_wrap(~ UnitType, scales = "free_x") +
+  theme_classic() +
+  # theme_tufte() + # no grid
+  theme(legend.position = "bottom", # legend at the bottom
+        legend.text = element_text(size = 12, face = "bold"),
+        plot.title = element_text(size = 16, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold", hjust = 0),
+        strip.background = element_blank(),
+        panel.spacing.y = unit(2, "lines"),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12)) +
+  guides(shape = guide_legend(nrow = 1), size="none") # legend in a single row
+
+############
+# ASD
+ggplot(plot_df_asd, aes(x=mean.ratings, y=mean.iff)) + 
+  geom_point(aes(shape=Stimulus,size=Stimulus),color = COLOUR_ASD_VIEWED)+
+  # geom_point(size = 5) +
+  # geom_point(shape = 17, size = 3) +
+  scale_shape_manual(values=c(15, 0, 23, 24, 19, 8))+
+  scale_size_manual(values = c(3, 5, 5, 3, 3, 3)) +
+  geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
+  labs(title = "ASD",
+       x = "\nPleasantness",
+       y = "Peak Firing Rate (Hz)\n",
+       shape = "") +
+  xlim(min_rating, max_rating) +
+  facet_wrap(~ UnitType, scales = "free_x") +
+  theme_classic() +
+  # theme_tufte() + # no grid
+  theme(legend.position = "bottom", # legend at the bottom
+        legend.text = element_text(size = 12, face = "bold"),
+        plot.title = element_text(size = 16, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold", hjust = 0),
+        strip.background = element_blank(),
+        panel.spacing.y = unit(2, "lines"),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12)) +
+  guides(shape = guide_legend(nrow = 1), size="none") # legend in a single row
+
+
+

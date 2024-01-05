@@ -44,8 +44,8 @@ correlations_ms_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_data
 # create dataframe that will hold all coef results
 corr_df$MS.asd <- correlations_ms_asd
 
-#########
-# PLOT
+####################################
+# PLOT distribution of coefficients
 # Set up a side-by-side layout
 par(mfrow = c(1, 2))
 # Create the first histogram
@@ -139,7 +139,28 @@ par(mfrow = c(1, 2))
 hist(corr_df$HFA.control, main = "HFA control", xlab = "coef", ylab = "count")
 # Create the second histogram
 hist(corr_df$HFA.asd, main = "HFA asd", xlab = "coef", ylab = "count")
+####################################################################
+unit_type <- "SA-II"
+
+# control data
+correlations_saII_control <- get_coefs_per_unit_type(unit_type, iff_data, ratings_data_control,B)
+# create dataframe that will hold all coef results
+corr_df$SAII.control <- correlations_saII_control
+
+# asd data
+correlations_saII_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_data_asd,B)
+# create dataframe that will hold all coef results
+corr_df$SAII.asd <- correlations_saII_asd
+
+#########
+# PLOT
+# Set up a side-by-side layout
+par(mfrow = c(1, 2))
+# Create the first histogram
+hist(corr_df$SAII.control, main = "SA-II control", xlab = "coef", ylab = "count")
+# Create the second histogram
+hist(corr_df$SAII.asd, main = "SA-II asd", xlab = "coef", ylab = "count")
 
 
 # Save data frame to an Excel file
-write.xlsx(corr_df, "Data/processed/corr_dataframe04_12_2023.xlsx")
+write.xlsx(corr_df, "Data/processed/corr_dataframe13_12_2023.xlsx")

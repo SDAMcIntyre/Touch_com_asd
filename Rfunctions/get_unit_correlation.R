@@ -50,7 +50,7 @@ get_coefs_per_unit_type <- function(unit, iff_df, ratings_df, total_iterations) 
     iff_unit_sample <- iff_unit_data[sample(nrow(iff_unit_data),size=total_sample_rows,replace=TRUE),]
 
     # check if all stimuli were included
-    if (length(unique((ratings_sample$Stimulus))) < no || length(unique((iff_unit_sample$Stimulus))) < no) {
+    if (length(unique((ratings_sample$Stimulus))) < no_stim || length(unique((iff_unit_sample$Stimulus))) < no_stim) {
       missing <- missing + 1
     }
 

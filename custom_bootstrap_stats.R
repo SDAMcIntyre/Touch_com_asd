@@ -7,7 +7,7 @@ library(ggplot2)
 library(ggthemes)
 
 # read correlation dataframe
-corr_file_path <- "Data/processed/corr_dataframe04_12_2023.xlsx"
+corr_file_path <- "Data/processed/corr_dataframe13_12_2023.xlsx"
 corr_df <- read_excel(corr_file_path)
 # create dataframe for box plot (requires group names in one column and matching coef values in the other)
 long_df <- corr_df |> gather(Group, coef)
@@ -111,6 +111,24 @@ long_df |>
   ggplot(aes(Group,coef)) +
   geom_boxplot() +
   labs(title = "HFA",
+       x="",
+       y="coef") +
+  theme_tufte() # no grid
+############################
+# SA-II
+quantile(corr_df$SAII.control, c(0.025, 0.975))
+median(corr_df$SAII.control)
+summary(corr_df$SAII.control)
+quantile(corr_df$SAII.asd, c(0.025, 0.975))
+median(corr_df$SAII.asd)
+summary(corr_df$SAII.asd)
+
+# PLOT
+long_df |> 
+  filter(Group == "SAII.control" | Group == "SAII.asd") |> 
+  ggplot(aes(Group,coef)) +
+  geom_boxplot() +
+  labs(title = "SA-II",
        x="",
        y="coef") +
   theme_tufte() # no grid
