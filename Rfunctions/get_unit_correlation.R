@@ -5,7 +5,7 @@ n_sample_rows <- function(first_df, second_df) {
   min(nrow(first_df), nrow(second_df))
 }
 
-# function to get means or rarings and iff by unit for each stimulus
+# function to get means or ratings and iff by unit for each stimulus
 get_joined_by_stimulus_df <- function(unit, iff_df, ratings_df) {
   # select only one unit type data
   iff_df |> 
