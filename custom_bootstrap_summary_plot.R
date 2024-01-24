@@ -8,7 +8,7 @@ library(ggrepel) # for labels
 # source all .R files in the Rfunctions directory ####
 source_files <- list.files("Rfunctions", full.names = TRUE)
 sapply(source_files[grepl(
-  "(get_unit_correlation)|(get_max_firing_rates)|(plot_appearance)", 
+  "(get_unit_correlation)|(get_mean_firing_rates)|(plot_appearance)", 
   source_files
 )], source)
 ###################################################################
@@ -36,8 +36,7 @@ ratings_data_all |>
 
 # read excel file with isi data and calculate max iff data
 iff_data_file_path <- "Data/primary/ALL_ISIs_after_exclusions.xlsx"
-iff_data <- get_max_firing_rates(iff_data_file_path)
-all_unit_types <- unique(iff_data$UnitType)
+iff_data <- get_mean_firing_rates(iff_data_file_path)
 ###################################################################
 unit_type <- "MS"
 
@@ -275,11 +274,11 @@ control_only_p <- ggplot(plot_df_control, aes(x=mean.ratings, y=mean.iff)) +
   # geom_point(size = 5) +
   # geom_point(shape = 17, size = 3) +
   scale_shape_manual(values=c(15, 0, 6, 17, 19, 8))+
-  scale_size_manual(values = c(5, 8, 4, 5, 5, 3)) +
+  scale_size_manual(values = c(5, 5, 4, 5, 5, 3)) +
   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "Control",
        x = "\nPleasantness",
-       y = "Peak Firing Rate (Hz)\n",
+       y = "Mean Firing Rate (Hz)\n",
        shape = "") +
   xlim(min_plot_rating, max_plot_rating) +
   facet_wrap(~ UnitType, scales = "free") +
@@ -301,8 +300,17 @@ control_only_p <- ggplot(plot_df_control, aes(x=mean.ratings, y=mean.iff)) +
     shape = guide_legend(title ="", nrow = 1)
   ) # legend in a single row, showing shapes in the correct sizes
 # show plot
-open_plot_window(width = 1237, height = 867)
+open_plot_window(width = 12, height = 8)
 control_only_p
+
+# save svg file
+svglite(
+  filename = "Data/processed/corr_control_meaniff.svg",
+  width = 12,
+  height = 8
+)
+control_only_p
+dev.off()
 ############
 # ASD
 asd_only_p <- ggplot(plot_df_asd, aes(x=mean.ratings, y=mean.iff)) + 
@@ -310,11 +318,11 @@ asd_only_p <- ggplot(plot_df_asd, aes(x=mean.ratings, y=mean.iff)) +
   # geom_point(color = COLOUR_ASD_FELT) +
   # geom_point(shape = 17, size = 3) +
   scale_shape_manual(values=c(15, 0, 6, 17, 19, 8))+
-  scale_size_manual(values = c(5, 8, 4, 5, 5, 3)) +
+  scale_size_manual(values = c(5, 5, 4, 5, 5, 3)) +
   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
   labs(title = "ASD",
        x = "\nPleasantness",
-       y = "Peak Firing Rate (Hz)\n",
+       y = "Mean Firing Rate (Hz)\n",
        shape = "") +
   xlim(min_plot_rating, max_plot_rating) +
   facet_wrap(~ UnitType, scales = "free") +
@@ -338,8 +346,17 @@ asd_only_p <- ggplot(plot_df_asd, aes(x=mean.ratings, y=mean.iff)) +
     shape = guide_legend(title ="", nrow = 1)
   ) # legend in a single row, showing shapes in the correct sizes
 # show plot
-open_plot_window(width = 1237, height = 867)
+open_plot_window(width = 12, height = 8)
 asd_only_p
+
+# save svg file
+svglite(
+  filename = "Data/processed/corr_asd_meaniff.svg",
+  width = 12,
+  height = 8
+)
+asd_only_p
+dev.off()
 ################################################################################
 # TOGETHER
 
@@ -379,10 +396,10 @@ p1 <- ggplot(final_df, aes(x=mean.ratings, y=mean.iff)) +
   geom_smooth(mapping = aes(group = Group, color=Group),method = "lm", formula = y ~ poly(x,1),  se = F, linewidth = 0.5, linetype = "dashed",show.legend = FALSE) +
   scale_color_manual(values=c(COLOUR_ASD_FELT,COLOUR_CONTROL_FELT)) +
   scale_shape_manual(values=c(15, 0, 6, 17, 19, 8))+
-  scale_size_manual(values = c(5, 8, 4, 5, 5, 3)) +
+  scale_size_manual(values = c(5, 5, 4, 5, 5, 3)) +
   labs(title = "",
        x = "\nPleasantness",
-       y = "Peak Firing Rate (Hz)\n") +
+       y = "Mean Firing Rate (Hz)\n") +
   xlim(min_plot_rating, max_plot_rating) +
   # change to the user defined unit order
   facet_wrap(~factor(UnitType, levels=c('CT', 'Field', 'MS', 'HFA','FA-II','SA-II')),scales = "free") +
@@ -475,7 +492,7 @@ p2 <- ggplot(final_df, aes(x=mean.ratings, y=mean.iff)) +
   geom_smooth(mapping = aes(group = Group, color = Group),method = "lm", formula = y ~ poly(x,1),  se = F, linewidth = 0.5, linetype = "dashed",show.legend = FALSE) +
   scale_color_manual(values=c(COLOUR_ASD_FELT,COLOUR_CONTROL_FELT)) +
   scale_shape_manual(values=c(15, 0, 6, 17, 19, 8))+
-  scale_size_manual(values = c(5, 8, 4, 5, 5, 3)) +
+  scale_size_manual(values = c(5, 5, 4, 5, 5, 3)) +
   labs(title = "",
        x = "\nPleasantness",
        y = "Peak Firing Rate (Hz)\n") +
@@ -517,103 +534,17 @@ together_p <- plot_grid(leg,
                         rel_heights = c(.08, .92)
                         )
 # show plot
-open_plot_window(width = 1237, height = 867)
+open_plot_window(width = 12, height = 8)
 together_p
+
+# save svg file
+svglite(
+  filename = "Data/processed/corr_asd_control_meaniff.svg",
+  width = 12,
+  height = 8
+)
+together_p
+dev.off()
 ##########################################################################
-#############################
-# Colors:
-# colour palette for Stimuli
-# my_colour_palette <- c(COLOUR_ATTENTION, COLOUR_CALMING, COLOUR_GRATITUDE, COLOUR_HAPPINESS, COLOUR_LOVE, COLOUR_SADNESS)
-# ggplot(plot_df_control, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
-#   geom_point(size = 5) +
-#   # geom_point(shape = 17, size = 3) +
-#   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
-#   labs(title = "Control",
-#        x = "\nPleasantness",
-#        y = "Peak Firing Rate (Hz)\n",
-#        colour = "") +
-#   # scale_shape_manual(values=c(0, 1, 2, 5, 6, 9))+
-#   scale_colour_manual(values = my_colour_palette) +
-#   xlim(min_rating, max_rating) +
-#   facet_wrap(~ UnitType, scales = "free_x") +
-#   theme_classic() +
-#   # theme_tufte() + # no grid
-#   theme(legend.position = "bottom", # legend at the bottom
-#         legend.text = element_text(size = 12, face = "bold"),
-#         plot.title = element_text(size = 16, face = "bold"),
-#         strip.text = element_text(size = 12, face = "bold", hjust = 0),
-#         strip.background = element_blank(),
-#         panel.spacing.y = unit(2, "lines"),
-#         axis.title.x = element_text(size=12),
-#         axis.title.y = element_text(size=12)) +
-#   guides(colour = guide_legend(nrow = 1)) # legend in a single row
-
-# ggplot(plot_df_asd, aes(mean.ratings, mean.iff, colour = Stimulus)) + 
-#   geom_point(size = 5) +
-#   # geom_point(shape = 17, size = 3) +
-#   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
-#   labs(title = "ASD",
-#        x = "\nPleasantness",
-#        y = "Peak Firing Rate (Hz)\n",
-#        colour = "") +
-#   scale_colour_manual(values = my_colour_palette) +
-#   xlim(min_rating, max_rating) +
-#   facet_wrap(~ UnitType, scales = "free_x") +
-#   theme_classic() +
-#   # theme_tufte() + # no grid
-#   theme(legend.position = "bottom", # legend at the bottom
-#         legend.text = element_text(size = 12, face = "bold"),
-#         plot.title = element_text(size = 16, face = "bold"),
-#         strip.text = element_text(size = 12, face = "bold", hjust = 0),
-#         strip.background = element_blank(),
-#         panel.spacing.y = unit(2, "lines"),
-#         axis.title.x = element_text(size=12),
-#         axis.title.y = element_text(size=12)) +
-#   guides(colour = guide_legend(nrow = 1)) # legend in a single row
-#############################################################################################
-
-
-# Sarah's modification:
-
-# # ASD
-# ggplot(
-#   data = plot_df_asd, 
-#   mapping = aes(x=mean.ratings, y=mean.iff)) + 
-#   geom_point(
-#     mapping = aes(shape=Stimulus), 
-#     color = COLOUR_ASD_FELT,
-#     size = 5) +
-#   # geom_label_repel(aes(label = Stimulus),
-#   #                  label.size = NA, # no box frame
-#   #                  max.overlaps=Inf, # no label dissapearing due to overlap
-#   #                  box.padding   = 0.5, 
-#   #                  point.padding = 0.55,
-#   #                  segment.color = 'grey50',
-#   #                  segment.size = 0.2,
-#   #                  nudge_y = 500
-#   # ) +
-#   scale_shape_manual(values=c(15, 0, 23, 17, 19, 8))+
-#   # scale_shape_manual(values=c(3, 0, 23, 24, 4, 8))+
-#   # scale_shape_manual(values=c(65, 67, 71, 72, 76, 83)) +
-#   geom_smooth(method = "lm", formula = y ~ poly(x,1),  se = F, color = "black", linewidth = 0.5, linetype = "dashed") +
-#   labs(title = "ASD",
-#        x = "\nPleasantness",
-#        y = "Peak Firing Rate (Hz)\n",
-#        shape = "") +
-#   # xlim(min_rating, max_rating) +
-#   # facet_wrap(~ UnitType, scales = "free_x") +
-#   facet_wrap(~ UnitType, scales = "free") +
-#   theme_classic() +
-#   # theme_tufte() + # no grid
-#   theme(legend.position = "bottom", # legend at the bottom
-#         legend.text = element_text(size = 12, face = "bold"),
-#         plot.title = element_text(size = 16, face = "bold"),
-#         strip.text = element_text(size = 12, face = "bold", hjust = 0),
-#         strip.background = element_blank(),
-#         panel.spacing.y = unit(2, "lines"),
-#         axis.title.x = element_text(size=12),
-#         axis.title.y = element_text(size=12)) +
-#   guides(shape = guide_legend(nrow = 1), size="none") # legend in a single row
-
 
 

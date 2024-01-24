@@ -9,7 +9,7 @@ B = 10000
 # source all .R files in the Rfunctions directory ####
 source_files <- list.files("Rfunctions", full.names = TRUE)
 sapply(source_files[grepl(
-  "(get_unit_correlation)|(get_max_firing_rates)", 
+  "(get_unit_correlation)|(get_mean_firing_rates)", 
   source_files
 )], source)
 ###################################################################
@@ -29,7 +29,7 @@ ratings_data_all |>
 
 # read excel file with isi data and calculate max iff data
 iff_data_file_path <- "Data/primary/ALL_ISIs_after_exclusions.xlsx"
-iff_data <- get_max_firing_rates(iff_data_file_path)
+iff_data <- get_mean_firing_rates(iff_data_file_path)
 all_unit_types <- unique(iff_data$UnitType)
 ###################################################################
 unit_type <- "MS"
@@ -44,14 +44,14 @@ correlations_ms_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_data
 # create dataframe that will hold all coef results
 corr_df$MS.asd <- correlations_ms_asd
 
-####################################
-# PLOT distribution of coefficients
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$MS.control, main = "MS control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$MS.asd, main = "MS asd", xlab = "coef", ylab = "count")
+# ####################################
+# # PLOT distribution of coefficients
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$MS.control, main = "MS control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$MS.asd, main = "MS asd", xlab = "coef", ylab = "count")
 
 #####################################################################
 unit_type <- "CT"
@@ -66,14 +66,14 @@ correlations_ct_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_data
 # create dataframe that will hold all coef results
 corr_df$CT.asd <- correlations_ct_asd
 
-#########
-# PLOT
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$CT.control, main = "CT control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$CT.asd, main = "CT asd", xlab = "coef", ylab = "count")
+# #########
+# # PLOT
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$CT.control, main = "CT control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$CT.asd, main = "CT asd", xlab = "coef", ylab = "count")
 
 #####################################################################
 unit_type <- "FA-II"
@@ -87,14 +87,14 @@ correlations_faII_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_da
 # create dataframe that will hold all coef results
 corr_df$FAII.asd <- correlations_faII_asd
 
-#########
-# PLOT
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$FAII.control, main = "FA-II control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$FAII.asd, main = "FA-II asd", xlab = "coef", ylab = "count")
+# #########
+# # PLOT
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$FAII.control, main = "FA-II control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$FAII.asd, main = "FA-II asd", xlab = "coef", ylab = "count")
 
 ####################################################################
 unit_type <- "Field"
@@ -109,14 +109,14 @@ correlations_field_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_d
 # create dataframe that will hold all coef results
 corr_df$Field.asd <- correlations_field_asd
 
-#########
-# PLOT
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$Field.control, main = "Field control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$Field.asd, main = "Field asd", xlab = "coef", ylab = "count")
+# #########
+# # PLOT
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$Field.control, main = "Field control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$Field.asd, main = "Field asd", xlab = "coef", ylab = "count")
 
 ####################################################################
 unit_type <- "HFA"
@@ -131,14 +131,15 @@ correlations_hfa_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_dat
 # create dataframe that will hold all coef results
 corr_df$HFA.asd <- correlations_hfa_asd
 
-#########
-# PLOT
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$HFA.control, main = "HFA control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$HFA.asd, main = "HFA asd", xlab = "coef", ylab = "count")
+# #########
+# # PLOT
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$HFA.control, main = "HFA control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$HFA.asd, main = "HFA asd", xlab = "coef", ylab = "count")
+
 ####################################################################
 unit_type <- "SA-II"
 
@@ -152,15 +153,15 @@ correlations_saII_asd <- get_coefs_per_unit_type(unit_type, iff_data, ratings_da
 # create dataframe that will hold all coef results
 corr_df$SAII.asd <- correlations_saII_asd
 
-#########
-# PLOT
-# Set up a side-by-side layout
-par(mfrow = c(1, 2))
-# Create the first histogram
-hist(corr_df$SAII.control, main = "SA-II control", xlab = "coef", ylab = "count")
-# Create the second histogram
-hist(corr_df$SAII.asd, main = "SA-II asd", xlab = "coef", ylab = "count")
+# #########
+# # PLOT
+# # Set up a side-by-side layout
+# par(mfrow = c(1, 2))
+# # Create the first histogram
+# hist(corr_df$SAII.control, main = "SA-II control", xlab = "coef", ylab = "count")
+# # Create the second histogram
+# hist(corr_df$SAII.asd, main = "SA-II asd", xlab = "coef", ylab = "count")
 
 
 # Save data frame to an Excel file
-write.xlsx(corr_df, "Data/processed/corr_dataframe13_12_2023.xlsx")
+write.xlsx(corr_df, "Data/processed/corr_mean_dataframe24_01_2024.xlsx")

@@ -5,18 +5,18 @@ library(gtsummary)
 library(flextable)
 library(ggplot2)
 library(ggthemes)
-
+library(svglite)
 
 
 # source all .R files in the Rfunctions directory ####
 source_files <- list.files("Rfunctions", full.names = TRUE)
 sapply(source_files[grepl(
-  "(get_unit_correlation)|(get_max_firing_rates)|(plot_appearance)", 
+  "(get_unit_correlation)|(get_mean_firing_rates)|(plot_appearance)", 
   source_files
 )], source)
 
 # read correlation dataframe
-corr_file_path <- "Data/processed/corr_dataframe13_12_2023.xlsx"
+corr_file_path <- "Data/processed/corr_mean_dataframe24_01_2024.xlsx"
 corr_df <- read_excel(corr_file_path)
 # create dataframe for box plot (requires group names in one column and matching coef values in the other)
 long_df <- corr_df |> gather(Group, coef)
@@ -32,7 +32,7 @@ percentile_97.5 <- function(x) { quantile(x, c(0.025, 0.975))[2] }
 corr_df |>
   tbl_summary(statistic = list(all_continuous() ~ "{median} ({percentile_2.5}, {percentile_97.5})")) |>
   as_flex_table() |> # Convert the table to a format that can be exported
-  save_as_docx(path = "Data/processed/coef_median_summary_table.docx")
+  save_as_docx(path = "Data/processed/corr_coef_median_summary_table.docx")
 ############################################################################
 # MS
 # start creating rows for data frame for summary plot
@@ -206,7 +206,9 @@ open_plot_window <- function(width = 7, height = 7, ...) {
 
 corr_p <- ggplot(data = summary_df) +
   geom_point(aes(x=UnitType,y=Median,color=Group), size = 5, position = position_dodge(width = 0.4)) +
-  geom_errorbar(aes(x=UnitType, y=Median, color=Group, ymin=LowCI, ymax=HighCI), 
+  geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
+  geom_errorbar(aes(x=UnitType, y=Median, color=Group, ymin=LowCI, ymax=HighCI),
+                width = 0.3,
                 show.legend = FALSE,
                 position = position_dodge(width = 0.4)) +
   scale_color_manual(values=c(COLOUR_ASD_FELT,COLOUR_CONTROL_FELT)) +
@@ -226,8 +228,15 @@ corr_p <- ggplot(data = summary_df) +
   guides(
     color = guide_legend(title ="", nrow = 1)
   ) # legend in a single row, showing shapes in the correct sizes
-
 # show plot
-open_plot_window(width = 1406, height = 717)
+open_plot_window(width = 17, height = 8)
 corr_p
 
+# save svg file
+svglite(
+  filename = "Data/processed/corr_median_withCI.svg",
+  width = 17,
+  height = 8
+)
+corr_p
+dev.off()
