@@ -1,8 +1,8 @@
 recode_STQ <- function(df) {
   
   #item coding
-  STQ_VARS_REVERSED <- c(1,4,6,9,11,12,14,15,18,20)
-  STQ_VARS_REGULAR  <- setdiff(1:20, STQ_VARS_REVERSED)
+  STQ_VARS_REGULAR <- c(1,4,6,9,11,12,14,15,18,20)
+  STQ_VARS_REVERSED <- setdiff(1:20, STQ_VARS_REGULAR)
   
   # sum function to get total
   sum_STQ <- function(x, reversed = FALSE) {
