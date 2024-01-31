@@ -112,7 +112,7 @@ comm_metrics_group_strict_each <- rbind(felt_strict, viewed_strict) %>%
 write_path_csv(comm_metrics_group_strict_each, PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-each.csv")
 save(comm_metrics_group_strict_each, file = paste0(PROCESSED_DATA_FOLDER, "comm_metrics-group_strict-each.RData"))
 
-# strict subset (for comparision of felt vs viewed)
+# strict subset (for comparison of felt vs viewed)
 comm_metrics_group_strict_compare <- comm_fc_data %>% 
   filter(
     PID %in% filter(strict_subsets, felt_vs_viewed)[["PID"]]
