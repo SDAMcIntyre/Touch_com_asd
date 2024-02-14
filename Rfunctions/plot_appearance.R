@@ -19,11 +19,11 @@ COLOUR_ASD_FELT <- "#008ECE"
 COLOUR_ASD_VIEWED <- "#59C7EB"
 COLOUR_CONTROL_FELT <- "#E0607E" 
 COLOUR_CONTROL_VIEWED <- "#ECA0B2"
-DODGE_WIDTH <- position_dodge(0.2)
-ERRORBAR_WIDTH <- 0.4
-ERRORBAR_SIZE <- 1.3
-POINT_SIZE <- 6
-POINT_SHAPE <- "\u2014" # unicode m-dash for horizontal line
+DODGE_WIDTH <- position_dodge(0.4)
+ERRORBAR_WIDTH <- 0
+ERRORBAR_SIZE <- 1
+POINT_SIZE <- 2
+# POINT_SHAPE <- "\u2014" # unicode m-dash for horizontal line
 HLINE_COLOUR <- 'grey'
 HLINE_LINETYPE <- 'dashed'
 HLINE_SIZE <- 1
@@ -52,6 +52,11 @@ theme_touch_comm_asd <- theme_light(base_size = 14) +
 exp_group_scales <- list(
   scale_color_manual(name = NULL, values = c(COLOUR_ASD_FELT, COLOUR_CONTROL_FELT, COLOUR_ASD_VIEWED, COLOUR_CONTROL_VIEWED)),
   scale_fill_manual(name = NULL, values = c(COLOUR_ASD_FELT, COLOUR_CONTROL_FELT, COLOUR_ASD_VIEWED, COLOUR_CONTROL_VIEWED))
+)
+
+felt_only_scales <- list(
+  scale_color_manual(name = NULL, values = c(COLOUR_ASD_FELT, COLOUR_CONTROL_FELT)),
+  scale_fill_manual(name = NULL, values = c(COLOUR_ASD_FELT, COLOUR_CONTROL_FELT))
 )
 
 viewed_only_scales <- list(
