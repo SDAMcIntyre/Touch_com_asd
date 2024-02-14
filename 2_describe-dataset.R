@@ -23,6 +23,14 @@ questionnaires <- read_csv(
   col_types = "cccccnnnnnnnnnnnnnn" 
 ) 
 
+#. summary table ####
+demog %>% 
+  select(-c(PID, `Age Cohort`)) %>% 
+  dfSummary(varnumbers = FALSE, valid.col = FALSE, na.col = FALSE) %>% 
+  # freq_table() %>% 
+  view(file = paste0(TABLES_FOLDER,"table1_demographics.html"))
+
+
 # check that qualtrics assigned even numbers to different tasks ####
 
 print_prop_xtab(xtabs(~ group + task, filter(demog, experiment == "viewed touch")))
