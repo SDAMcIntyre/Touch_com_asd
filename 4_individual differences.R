@@ -107,7 +107,7 @@ indiv_data %>%
   theme(legend.position = "none") +
   labs(x = "Autism Quotient (AQ)", y = "Message agreement\n(F1 micro)") 
 
-ggsave(paste0(FIGURES_FOLDER,"Agreement_from_AQ.svg"), width = 8, height = 4)
+ggsave(paste0(FIGURES_FOLDER,"Agreement_AQ.svg"), width = 8, height = 4)
 
 
 #. stats agreement from AQ ####
