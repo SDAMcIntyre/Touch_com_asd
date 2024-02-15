@@ -38,6 +38,16 @@ strict_subsets <- read_csv(
 Nreps <- 1000 # number of replicate samples for bootstrapping
 set.seed(01112023)
 
+## f1 average micro overall ####
+
+comm_F1micro <- comm_fc_data %>% 
+  f1_micro_boot_dataset("cued", "response", ORDERED_CUES, R = Nreps, experiment, group)
+
+# save to file
+write_path_csv(comm_F1micro, PROCESSED_DATA_FOLDER, "comm_F1micro-overall.csv")
+save(comm_F1micro, file = paste0(PROCESSED_DATA_FOLDER, "comm_F1micro-overall.RData"))
+
+
 ## f1 average micro by individual ####
 
 comm_F1micro_indiv <- comm_fc_data %>% 

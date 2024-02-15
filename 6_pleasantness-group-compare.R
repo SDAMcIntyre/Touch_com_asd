@@ -21,7 +21,7 @@ pleas_data <- read_csv(paste0(PROCESSED_DATA_FOLDER, "pleasantness-data.csv"), c
 # Ns ####
 
 Ns <- pleas_data %>% 
-  group_by(experiment, group,PID) %>% 
+  group_by(experiment, group, PID) %>% 
   tally() %>% tally()
 
 N_felt_ASD <- Ns %>% filter(experiment == "felt touch" & group == 'ASD') %>% pull(n)
@@ -119,5 +119,18 @@ plot_pleas_felt + plot_pleas_viewed
 
 ggsave(paste0(FIGURES_FOLDER, 'Pleasantness_by_Label.svg'), width = 7.9, height = 3.6)
 
+# stats ####
+afex::set_sum_contrasts()
 
-  
+mdl_pleas <- lm(
+  formula = response ~ experiment * group * cued, 
+  data = pleas_data
+)
+
+# plot(mdl_pleas)  # https://library.virginia.edu/data/articles/diagnostic-plots
+
+(mdl_pleas.aov <- car::Anova(mdl_pleas))
+# https://cran.r-project.org/web/packages/effectsize/vignettes/anovaES.html
+effectsize::eta_squared(mdl_pleas.aov)
+
+emmeans::emmeans(mdl_pleas, c("group", "experiment"))  

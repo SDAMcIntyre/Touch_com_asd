@@ -13,6 +13,8 @@ PROCESSED_DATA_FOLDER <- "Data/processed/"
 FIGURES_FOLDER <- "Figures/"
 if ( !dir.exists(FIGURES_FOLDER) ) { dir.create(FIGURES_FOLDER) }
 
+TABLES_FOLDER <- "Tables/"
+
 # read group performance metrics by touch label ####
 
 load(paste0(PROCESSED_DATA_FOLDER, 'comm_metrics-group.RData'))
@@ -29,6 +31,16 @@ f1_data <- comm_metrics %>%
   mutate(Label = factor(Label, levels = ORDERED_CUES))
 
 # felt touch ####
+
+# CIs
+f1_data %>% 
+  filter(experiment == "felt touch") %>% 
+  select(c(group, Label, F1, conf.low, conf.high)) %>% 
+  arrange(Label, group) %>% 
+  knitr::kable("html", digits = 2) %>% 
+  cat(., file = paste0(TABLES_FOLDER, 'f1_felt_by_label.html'))
+
+# plots
 
 plot_f1_felt <- f1_data %>% 
   filter(experiment == "felt touch") %>% 
